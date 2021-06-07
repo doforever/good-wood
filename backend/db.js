@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
-const { dbUri } = require('./config');
-
 const loadInitialData = require('./initialData');
 
-const connectToDB = () => {
+const connectToDB = (dbUri) => {
   console.log('Trying to connect to ', dbUri );
   mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
   const db = mongoose.connection;

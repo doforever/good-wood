@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const { Photo } = require('./photo.model.js');
+const { Photo } = require('../photo.model.js');
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 

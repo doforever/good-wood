@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectToDB = require('./db');
+const { dbUri } = require('./config');
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use('*', (req, res) => {
 });
 
 /* CONNECT TO DB */
-connectToDB();
+connectToDB(dbUri);
 
 /* START SERVER */
 const port = process.env.PORT || 8000;

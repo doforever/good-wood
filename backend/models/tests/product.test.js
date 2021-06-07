@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const Product = require('./product.model.js');
+const Product = require('../product.model.js');
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 
