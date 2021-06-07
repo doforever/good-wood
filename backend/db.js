@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const { dbUri } = require('./config');
 
 const loadInitialData = require('./initialData');
 
 const connectToDB = () => {
-
-  mongoose.connect('mongodb://localhost:27017/goodWood', { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log('Trying to connect to ', dbUri );
+  mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
   const db = mongoose.connection;
 
   db.once('open', () => {

@@ -92,11 +92,19 @@ const loadInitialData = async () => {
     },
   ];
 
+  const multiplyData = (data, factor) => {
+    const result = [];
+    for (let i=1; i <= factor; i++) {
+      result.push(...(data.map(item => ({...item, name: item.name + ' ' + i}))));
+    }
+    return result;
+  };
+
   try {
     let counter = await Product.countDocuments();
     if (counter === 0) {
       console.log('No products. Loading example data...');
-      await Product.create(data);
+      await Product.create(multiplyData(data, 5));
       console.log('Test data has been successfully loaded');
     }
   } catch (err) {
