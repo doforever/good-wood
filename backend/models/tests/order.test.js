@@ -55,9 +55,9 @@ describe('Order', () => {
   it('should throw an error if "firstName" is not a string', () => {
 
     const cases = [{}, []];
-    for (let firstname of cases) {
+    for (let firstName of cases) {
       const order = new Order({
-        firstname,
+        firstName,
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         lastName: 'Doe',
         email: 'john@gmail.com',
@@ -65,7 +65,7 @@ describe('Order', () => {
       });
 
       order.validate(err => {
-        expect(err.errors.firstname).to.exist;
+        expect(err.errors.firstName).to.exist;
       });
     }
   });
@@ -73,9 +73,9 @@ describe('Order', () => {
   it('should throw an error if "lastName" is not a string', () => {
 
     const cases = [{}, []];
-    for (let lastname of cases) {
+    for (let lastName of cases) {
       const order = new Order({
-        lastname,
+        lastName,
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         email: 'john@gmail.com',
@@ -83,7 +83,7 @@ describe('Order', () => {
       });
 
       order.validate(err => {
-        expect(err.errors.lastname).to.exist;
+        expect(err.errors.lastName).to.exist;
       });
     }
   });

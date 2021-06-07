@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const { orderItemSchema } = require('./orderItem.model');
 
-const productSchema = new Schema({
+const orderSchema = new Schema({
   products: {
     type: [orderItemSchema],
     validate: {
@@ -19,4 +19,4 @@ const productSchema = new Schema({
   address: { type: String, required: true },
 });
 
-module.exports = model('Product', productSchema);
+module.exports = model('Order', orderSchema);
