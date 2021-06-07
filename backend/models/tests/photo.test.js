@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { Photo } = require('../photo.model.js');
 const expect = require('chai').expect;
-const mongoose = require('mongoose');
 
 describe('Photo', () => {
   it('should throw an error if any arg is missing', () => {

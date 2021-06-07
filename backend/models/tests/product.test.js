@@ -3,13 +3,8 @@
 
 const Product = require('../product.model.js');
 const expect = require('chai').expect;
-const mongoose = require('mongoose');
 
 describe('Product', () => {
-  after(() => {
-    mongoose.models = {};
-  });
-
   it('should throw an error if any required arg is missing', () => {
     const cases = [
       {
