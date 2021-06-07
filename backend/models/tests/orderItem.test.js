@@ -1,8 +1,16 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
+
 const { OrderItem } = require('../orderItem.model.js');
 const expect = require('chai').expect;
+const mongoose = require('mongoose');
+
 
 describe('OrderItem', () => {
+  after(() => {
+    mongoose.models = {};
+  });
+
   it('should throw an error if product is missing', () => {
     const orderItem = new OrderItem({amount: 1, comment: 'test comment'});
     orderItem.validate(err => {

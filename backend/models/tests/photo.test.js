@@ -1,8 +1,14 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
+
 const { Photo } = require('../photo.model.js');
 const expect = require('chai').expect;
+const mongoose = require('mongoose');
 
 describe('Photo', () => {
+  after(() => {
+    mongoose.models = {};
+  });
   it('should throw an error if any arg is missing', () => {
     const cases = [
       {
