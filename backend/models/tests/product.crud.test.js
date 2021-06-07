@@ -17,6 +17,10 @@ describe('Product', () => {
 
   });
 
+  after(async () => {
+    await mongoose.disconnect();
+  });
+
   describe('Reading data', () => {
     before(async () => {
       const testProduct1 = new Product({
