@@ -9,8 +9,18 @@ const orderSchema = new Schema({
     },
     required: true,
   },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  firstName: {
+    type: String,
+    required: true,
+    minLength: 3,
+    maxLength: 15,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    minLength: 3,
+    maxLength: 30,
+  },
   email: {
     type: String,
     required: true,
