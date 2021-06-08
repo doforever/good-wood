@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const connectToDB = require('./db');
 const { dbUri } = require('./config');
+const productsRoutes = require('./routes/products.routes');
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 /* API ENDPOINTS */
-// app.use('/api', postsRoutes);
+app.use('/api', productsRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
