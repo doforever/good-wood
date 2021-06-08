@@ -2,8 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectToDB = require('./db');
-const { dbUri } = require('./config');
+const { dbURI } = require('./config');
 const productsRoutes = require('./routes/products.routes');
+const ordersRoutes = require('./routes/orders.routes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 /* API ENDPOINTS */
 app.use('/api', productsRoutes);
+app.use('/api', ordersRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
@@ -27,10 +29,12 @@ app.use('*', (req, res) => {
 });
 
 /* CONNECT TO DB */
-connectToDB(dbUri);
+connectToDB(dbURI);
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('Server is running on port: ' + port);
 });
+
+module.exports = server;
