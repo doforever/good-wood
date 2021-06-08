@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const helmet = require('helmet');
 const connectToDB = require('./db');
 const { dbURI } = require('./config');
 const productsRoutes = require('./routes/products.routes');
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(helmet());
 
 /* API ENDPOINTS */
 app.use('/api', productsRoutes);

@@ -1,5 +1,6 @@
 const express = require('express');
 const Order = require('../models/order.model');
+const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
 
@@ -23,11 +24,11 @@ router.post('/orders', async (req, res) => {
   if (firstName && lastName && email && address && products && products.length > 0 ) {
     try {
       const newOrder = new Order({
-        firstName,
-        lastName,
+        firstName: sanitize(firstName),
+        lastName: sanitize(lastName),
         email,
-        address,
-        products,
+        address: sanitize(address),
+        products: sanitize(products),
       });
       const saved = await newOrder.save();
       res.status(201).json(saved);
