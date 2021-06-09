@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { initialState } from './initialState';
-// import { reducer as productsReducer } from './productsRedux';
+import { reducer as productsReducer } from './productsRedux';
 // import { reducer as ordersReducer } from './ordersRedux';
 
 // define reducers
 const reducers = {
-  // products: productsReducer,
+  products: productsReducer,
   // orders: ordersReducer,
 };
 
