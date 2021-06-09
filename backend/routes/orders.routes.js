@@ -18,6 +18,18 @@ router.get('/orders', async (req, res) => {
   }
 });
 
+router.get('/orders/:id', async (req, res) => {
+  try {
+    const result = await Order.findById(req.params.id).populate('products.product');
+    if (!result) res.status(404).json({ product: 'Not found' });
+    else res.json(result);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.post('/orders', async (req, res) => {
   const { firstName, lastName, email, address, products, status} = req.body;
 
