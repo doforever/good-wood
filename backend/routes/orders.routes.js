@@ -19,9 +19,9 @@ router.get('/orders', async (req, res) => {
 });
 
 router.post('/orders', async (req, res) => {
-  const { firstName, lastName, email, address, products} = req.body;
+  const { firstName, lastName, email, address, products, status} = req.body;
 
-  if (firstName && lastName && email && address && products && products.length > 0 ) {
+  if (firstName && lastName && email && address && products && products.length > 0 && status) {
     try {
       const newOrder = new Order({
         firstName: sanitize(firstName),
@@ -29,6 +29,7 @@ router.post('/orders', async (req, res) => {
         email,
         address: sanitize(address),
         products: sanitize(products),
+        status,
       });
       const saved = await newOrder.save();
       res.status(201).json(saved);

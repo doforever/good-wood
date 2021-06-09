@@ -26,7 +26,17 @@ const orderSchema = new Schema({
     required: true,
     match: new RegExp(/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z]{1,6}))$/i),
   },
-  address: { type: String, required: true },
+  address: {
+    type: String,
+    required: true,
+    minLength: 5,
+    maxLength: 60,
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: ['ordered', 'new'],
+  },
 });
 
 module.exports = model('Order', orderSchema);

@@ -33,8 +33,9 @@ describe('Order', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5',
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        status: 'ordered',
       });
       await order.save();
       expect(order.isNew).to.be.false;

@@ -15,31 +15,43 @@ describe('Order', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5 5',
+        status: 'ordered',
       },
       {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         lastName: 'Doe',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5 5',
+        status: 'ordered',
       },
       {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5 5',
+        status: 'ordered',
       },
       {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         lastName: 'Doe',
-        address: 'Home',
+        address: 'Home 5 5',
+        status: 'ordered',
       },
       {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
+        status: 'ordered',
+      },
+      {
+        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@gmail.com',
+        address: 'Home 5 5',
       },
     ];
 
@@ -61,7 +73,8 @@ describe('Order', () => {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         lastName: 'Doe',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5',
+        status: 'ordered',
       });
 
       order.validate(err => {
@@ -79,7 +92,8 @@ describe('Order', () => {
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5',
+        status: 'ordered',
       });
 
       order.validate(err => {
@@ -98,6 +112,7 @@ describe('Order', () => {
         firstName: 'John',
         email: 'john@gmail.com',
         lastName: 'Doe',
+        status: 'ordered',
       });
 
       order.validate(err => {
@@ -111,11 +126,12 @@ describe('Order', () => {
     const cases = ['doro', '@mgaa.d', 'fdsfd@'];
     for (let email of cases) {
       const order = new Order({
-        address: 'Home',
+        address: 'Home 5',
         products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
         firstName: 'John',
         email,
         lastName: 'Doe',
+        status: 'ordered',
       });
 
       order.validate(err => {
@@ -132,12 +148,32 @@ describe('Order', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
-        address: 'Home',
+        address: 'Home 5',
         products,
+        status: 'ordered',
       });
 
       order.validate(err => {
         expect(err.errors.products).to.exist;
+      });
+    }
+  });
+
+  it('should throw an error if "status" is not an allowed string', () => {
+
+    const cases = ['test', 6, [], {}];
+    for (let status of cases) {
+      const order = new Order({
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@gmail.com',
+        address: 'Home 5',
+        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        status,
+      });
+
+      order.validate(err => {
+        expect(err.errors.status).to.exist;
       });
     }
   });
@@ -147,8 +183,9 @@ describe('Order', () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'john@gmail.com',
-      address: 'Home',
+      address: 'Home 5 5',
       products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+      status: 'ordered',
     });
 
     order.validate(err => {
