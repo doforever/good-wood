@@ -8,7 +8,7 @@ router.get('/products', async (req, res) => {
     await Product.find({}, (err, products) => {
       if(err) res.status(500).json(err);
       if (products) {
-        res.json(products.map(({_id, name, defaultPrice, photos}) => (
+        res.header('Cache-Control', 'max-age=7200').json(products.map(({_id, name, defaultPrice, photos}) => (
           {
             _id,
             name,
