@@ -78,7 +78,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
-    "husky": "4.2",
+    "husky": "^3.1.0",
     "lint-staged": "^11.0.0",
     "redux-devtools-extension": "^2.13.9"
   }
