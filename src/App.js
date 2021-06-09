@@ -9,6 +9,9 @@ import { store } from './redux/store';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Home from './components/views/Home/Home';
+import Product from './components/views/Product/Product';
+import Cart from './components/views/Cart/Cart';
+import Order from './components/views/Order/Order';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,6 +28,9 @@ const App = () => (
           <MainLayout>
             <Switch>
               <Route exact path='/' component={Home} />
+              <Route exact path='/cart' component={Cart} />
+              <Route exact path='/order' component={Order} />
+              <Route exact path='/products/:id' component={Product} />
             </Switch>
           </MainLayout>
         </ThemeProvider>
