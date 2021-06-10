@@ -6,6 +6,7 @@ describe('Component Home', () => {
   beforeAll(() => {
     const ReactRedux = jest.requireActual('react-redux');
     ReactRedux.useDispatch = jest.fn(() => null);
+    ReactRedux.useSelector = jest.fn(() => []);
   });
 
   it('should render without crashing', () => {
