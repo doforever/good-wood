@@ -8,17 +8,16 @@ describe('Component Product', () => {
     const ReactRedux = jest.requireActual('react-redux');
     ReactRedux.useDispatch = jest.fn(() => null);
     ReactRedux.useSelector = jest.fn(() => []);
-
-
   });
 
   it('should render without crashing', () => {
 
-    const component = shallow(<MemoryRouter initialEntries={['products/123']}>
-      <Route path='products/:id'>
-        <Product />
-      </Route>
-    </MemoryRouter>
+    const component = shallow(
+      <MemoryRouter initialEntries={['products/123']}>
+        <Route path='products/:id'>
+          <Product />
+        </Route>
+      </MemoryRouter>
     );
     expect(component).toBeTruthy();
   });

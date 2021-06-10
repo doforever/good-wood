@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, fetchOne } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
+import { addProduct } from '../../../redux/cartRedux';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -22,8 +23,11 @@ const Product = () => {
   }, [dispatch, id]);
 
   if (!product) return <LinearProgress />;
+  const {name, description, defaultPrice, photos} = product;
 
-  const {name, description, photos, defaultPrice} = product;
+  const handleAdd = () => {
+    dispatch(addProduct({id, name, defaultPrice, amount: 1}));
+  };
 
   return (
     <Paper component='article' className={styles.root}>
@@ -44,7 +48,7 @@ const Product = () => {
             Price starting from ${defaultPrice}.
             To get individual offer, please make an enquiry.
           </Typography>
-          <Button variant='outlined'>Add to cart</Button>
+          <Button variant='outlined' onClick={handleAdd}>Add to cart</Button>
         </Grid>
       </Grid>
     </Paper>
