@@ -10,8 +10,8 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   return (
-    <div className={styles.root}>
-      <AppBar position="fixed">
+    <header className={styles.root}>
+      <AppBar component='div' position="fixed">
         <Toolbar className={styles.toolbar}>
           <Link
             component={RouterLink}
@@ -27,7 +27,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <Toolbar />
-    </div>
+    </header>
   );
 };
 

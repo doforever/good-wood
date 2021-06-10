@@ -5,11 +5,11 @@ import Container from '@material-ui/core/Container';
 import styles from './Footer.module.scss';
 
 const Footer = () => (
-  <div className={styles.root}>
+  <footer className={styles.root}>
     <Container>
       <h1>Footer</h1>
     </Container>
-  </div>
+  </footer>
 );
 
 export default Footer;
