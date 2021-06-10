@@ -1,5 +1,23 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  height: 65vh;
+  .currentPhoto {
+    overflow: hidden;
+    border-radius: $radius;
+    margin: $base-size/2;
 
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .thumbnail {
+    height: 100px;
+    width: calc(100% - 16px);
+    object-fit: cover;
+    border-radius: $radius;
+    margin: $base-size/2;
+  }
 }

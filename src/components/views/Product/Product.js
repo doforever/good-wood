@@ -31,9 +31,9 @@ const Product = () => {
 
   return (
     <Paper component='article' className={styles.root}>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant='h4' component='h1' align='center' paragraph>
+          <Typography variant='h4' component='h1' align='center'>
             { name }
           </Typography>
         </Grid>
