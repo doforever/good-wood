@@ -11,5 +11,7 @@
   .button {
     display: block;
     margin-left: auto;
+    max-width: $button-width;
+    text-align: center;
   }
 }

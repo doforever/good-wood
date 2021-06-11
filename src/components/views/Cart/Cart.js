@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import Container from '@material-ui/core/Container';
+import {Link as RouterLink} from 'react-router-dom';
 
 import styles from './Cart.module.scss';
 
@@ -51,7 +52,15 @@ const Cart = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Button variant='outlined' size='large' className={styles.button}>Order</Button>
+          <Button
+            variant='outlined'
+            size='large'
+            className={styles.button}
+            component={RouterLink}
+            to='/order'
+          >
+            Order
+          </Button>
         </div>}
       </Container>
     </Paper>
