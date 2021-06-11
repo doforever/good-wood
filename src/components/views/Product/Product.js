@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, fetchOne } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
@@ -18,6 +18,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
   const product = useSelector(state => getCurrent(state, id));
+  const [amount, setAmount] = useState(1);
 
   useEffect(() => {
     dispatch(fetchOne(id));
@@ -27,7 +28,7 @@ const Product = () => {
   const {name, description, defaultPrice, photos} = product;
 
   const handleAdd = () => {
-    dispatch(addProduct({id, name, defaultPrice, amount: 1}));
+    dispatch(addProduct({id, name, defaultPrice, amount}));
   };
 
   return (
@@ -55,7 +56,15 @@ const Product = () => {
           </Grid>
           <Grid item container alignItems='stretch' spacing={2}>
             <Grid item>
-              <TextField variant='outlined' type='number' size='small' className={styles.input}/>
+              <TextField
+                variant='outlined'
+                type='number'
+                size='small'
+                className={styles.input}
+                value={amount}
+                onChange={({target}) => setAmount(parseInt(target.value))}
+                inputProps={{min: 1, max: 10}}
+              />
             </Grid>
             <Grid item>
               <Button variant='outlined' onClick={handleAdd} size='large'>Add to cart</Button>
