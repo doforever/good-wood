@@ -1,5 +1,15 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  padding: $base-size;
+  min-height: 65vh;
 
+  .table {
+    margin-bottom: $base-size;
+  }
+
+  .button {
+    display: block;
+    margin-left: auto;
+  }
 }

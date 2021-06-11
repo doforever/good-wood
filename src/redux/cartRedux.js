@@ -1,5 +1,6 @@
 /* selectors */
 export const getCart = ({ cart }) => cart;
+export const getProducts = ({ cart }) => cart.products;
 
 /* action name creator */
 const reducerName = 'cart';
