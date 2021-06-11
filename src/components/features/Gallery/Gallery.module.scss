@@ -5,7 +5,7 @@
   .currentPhoto {
     overflow: hidden;
     border-radius: $radius;
-    margin: $base-size/2;
+    margin-bottom: $base-size;
 
     img {
       width: 100%;
@@ -15,9 +15,8 @@
   }
   .thumbnail {
     height: 100px;
-    width: calc(100% - 16px);
+    width: 100%;
     object-fit: cover;
     border-radius: $radius;
-    margin: $base-size/2;
   }
 }

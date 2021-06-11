@@ -19,7 +19,7 @@ const Gallery = ({ pictures }) => {
       <Grid item xs className={styles.currentPhoto}>
         <img src={current.src} alt={current.name} />
       </Grid>
-      { pictures.length > 0 && <Grid item container direction='row'>
+      { pictures.length > 0 && <Grid item container direction='row' spacing={2}>
         {thumbnails}
       </Grid>}
     </Grid>

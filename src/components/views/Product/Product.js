@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Gallery from '../../features/Gallery/Gallery';
+import TextField from '@material-ui/core/TextField';
 
 import styles from './Product.module.scss';
 
@@ -40,15 +41,26 @@ const Product = () => {
         <Grid item xs={12} md={6}>
           <Gallery pictures={photos}></Gallery>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Typography paragraph>
-            { description }
-          </Typography>
-          <Typography paragraph>
-            Price starting from ${defaultPrice}.
-            To get individual offer, please make an enquiry.
-          </Typography>
-          <Button variant='outlined' onClick={handleAdd}>Add to cart</Button>
+        <Grid item xs={12} md={6} container spacing={2} direction='column' justify='flex-end'>
+          <Grid item xs>
+            <Typography paragraph>
+              { description }
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant='h5' component='h2'>
+              Price starting from <strong>${defaultPrice}</strong>.
+            </Typography>
+            <Typography paragraph>To get individual offer, please make an enquiry.</Typography>
+          </Grid>
+          <Grid item container alignItems='stretch' spacing={2}>
+            <Grid item>
+              <TextField variant='outlined' type='number' size='small' className={styles.input}/>
+            </Grid>
+            <Grid item>
+              <Button variant='outlined' onClick={handleAdd} size='large'>Add to cart</Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Paper>
