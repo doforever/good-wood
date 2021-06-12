@@ -20,6 +20,7 @@ const theme = createMuiTheme({
     primary: { main: '#595959', contrastText: '#F9F6F0'},
     secondary: { main: '#91C499'},
     info: { main: '#808F85'},
+    success: { main: '#91C499'},
     background: { paper: '#F9F6F0', default: '#F3EDE2' },
   },
 });

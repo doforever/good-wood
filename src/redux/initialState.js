@@ -8,7 +8,7 @@ export const initialState = {
       error: false,
     },
   },
-  cart: {
+  order: {
     products: [],
     firstName: '',
     lastName: '',

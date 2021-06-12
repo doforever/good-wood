@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, fetchOne } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
-import { addProduct } from '../../../redux/cartRedux';
+import { addProduct } from '../../../redux/orderRedux';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';

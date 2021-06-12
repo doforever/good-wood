@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getCart } from '../../../redux/cartRedux';
+import { getOrder } from '../../../redux/orderRedux';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -13,7 +13,7 @@ import styles from './ShoppingStepper.module.scss';
 
 const ShoppingStepper = ({children}) => {
   let location = useLocation();
-  const cart = useSelector(getCart);
+  const order = useSelector(getOrder);
   const [completed, setCompleted] = useState();
 
   const steps = [
@@ -23,11 +23,11 @@ const ShoppingStepper = ({children}) => {
   ];
 
   useEffect(() => {
-    if (cart.products.length > 0 ) {
+    if (order.products.length > 0 ) {
       if (location.pathname === '/cart') setCompleted(0);
       else setCompleted(1);
     } else setCompleted(-1);
-  }, [location, cart]);
+  }, [location, order]);
 
   const getPosition = () => {
     if (location.pathname ==='/order') return 2;
