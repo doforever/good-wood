@@ -24,48 +24,46 @@ const Cart = () => {
   </Alert>;
 
   return (
-    <div>
-      <Paper className={styles.root}>
-        <Container maxWidth='md'>
-          <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
-          {!products || products.length === 0 ? emptyCart : <div>
-            <TableContainer className={styles.table}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Product</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price</TableCell>
-                    <TableCell align="right">Actions</TableCell>
+    <Paper className={styles.root}>
+      <Container maxWidth='md'>
+        <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
+        {!products || products.length === 0 ? emptyCart : <div>
+          <TableContainer className={styles.table}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Product</TableCell>
+                  <TableCell align="right">Amount</TableCell>
+                  <TableCell align="right">Total price</TableCell>
+                  <TableCell align="right">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products.map(({id, name, defaultPrice, amount}) => (
+                  <TableRow key={id}>
+                    <TableCell component="th" scope="row">
+                      {name}
+                    </TableCell>
+                    <TableCell align="right">{amount}</TableCell>
+                    <TableCell align="right">{amount*defaultPrice}</TableCell>
+                    <TableCell align="right"> </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {products.map(({id, name, defaultPrice, amount}) => (
-                    <TableRow key={id}>
-                      <TableCell component="th" scope="row">
-                        {name}
-                      </TableCell>
-                      <TableCell align="right">{amount}</TableCell>
-                      <TableCell align="right">{amount*defaultPrice}</TableCell>
-                      <TableCell align="right"> </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Button
-              variant='outlined'
-              size='large'
-              className={styles.button}
-              component={RouterLink}
-              to='/order'
-            >
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Button
+            variant='outlined'
+            size='large'
+            className={styles.button}
+            component={RouterLink}
+            to='/order'
+          >
               Order
-            </Button>
-          </div>}
-        </Container>
-      </Paper>
-    </div>
+          </Button>
+        </div>}
+      </Container>
+    </Paper>
   );
 };
 

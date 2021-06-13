@@ -35,8 +35,8 @@ const ShoppingStepper = ({children}) => {
   };
 
   return (
-    <div>
-      <Stepper nonLinear activeStep={getPosition()} className={styles.root}>
+    <div className={styles.root}>
+      <Stepper nonLinear activeStep={getPosition()} className={styles.stepper}>
         {steps.map(({label, to}, index) => {
           return (
             <Step key={index}>
