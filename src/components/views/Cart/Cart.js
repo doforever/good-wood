@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProducts, plusOne, minusOne, removeProduct } from '../../../redux/orderRedux';
+import { getProducts, plusOne, minusOne, removeProduct, commentProduct } from '../../../redux/orderRedux';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -57,7 +57,7 @@ const Cart = () => {
                   <TableCell align="center">Actions</TableCell>
                 </TableRow>
               </TableHead>
-              {products.map(({id, name, defaultPrice, amount}) => (
+              {products.map(({id, name, defaultPrice, amount, comment}) => (
                 <TableBody key={id}>
                   <TableRow className={styles.row}>
                     <TableCell>
@@ -92,6 +92,8 @@ const Cart = () => {
                           label='Add comment'
                           fullWidth
                           variant='outlined'
+                          value={comment}
+                          onChange={e => dispatch(commentProduct({ id, comment: e.target.value }))}
                         >
                         </TextField>
                       </Collapse>

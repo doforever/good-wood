@@ -28,7 +28,7 @@ const Product = () => {
   const {name, description, defaultPrice, photos} = product;
 
   const handleAdd = () => {
-    dispatch(addProduct({id, name, defaultPrice, amount}));
+    dispatch(addProduct({id, name, defaultPrice, amount, comment: ''}));
   };
 
   return (

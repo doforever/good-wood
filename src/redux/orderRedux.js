@@ -19,6 +19,7 @@ const START_REQUEST = createActionName('START_REQUEST');
 const REQUEST_ERROR = createActionName('REQUEST_ERROR');
 const STORE_INPUT = createActionName('STORE_INPUT');
 const SAVED = createActionName('SAVED');
+const COMMENT = createActionName('COMMENT');
 
 /* action creators */
 export const addProduct = payload => ({ payload, type: ADD });
@@ -29,6 +30,7 @@ export const storeInput = payload => ({ payload, type: STORE_INPUT });
 export const startRequest = payload => ({ payload, type: START_REQUEST });
 export const requestError = payload => ({ payload, type: REQUEST_ERROR });
 export const orderSaved = payload => ({ payload, type: SAVED });
+export const commentProduct = payload => ({ payload, type: COMMENT });
 
 /* thunk creators */
 export const sendOrder = (orderData) => {
@@ -142,6 +144,17 @@ export const reducer = (statePart = [], action = {}) => {
           ...statePart.request,
           active: false,
           error: false,
+        },
+      };
+    }
+    case COMMENT: {
+      const newProducts = statePart.data.products
+        .map(p => p.id === action.payload.id ? {...p, comment: action.payload.comment } : p );
+      return {
+        ...statePart,
+        data: {
+          ...statePart.data,
+          products: newProducts,
         },
       };
     }
