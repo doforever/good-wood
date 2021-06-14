@@ -13,6 +13,8 @@ const createActionName = name => `app/${reducerName}/${name}`;
 /* action types */
 const ADD = createActionName('ADD');
 const REMOVE = createActionName('REMOVE');
+const PLUS = createActionName('PLUS');
+const MINUS = createActionName('MINUS');
 const START_REQUEST = createActionName('START_REQUEST');
 const REQUEST_ERROR = createActionName('REQUEST_ERROR');
 const STORE_INPUT = createActionName('STORE_INPUT');
@@ -21,6 +23,8 @@ const SAVED = createActionName('SAVED');
 /* action creators */
 export const addProduct = payload => ({ payload, type: ADD });
 export const removeProduct = payload => ({ payload, type: REMOVE });
+export const plusOne = payload => ({ payload, type: PLUS });
+export const minusOne = payload => ({ payload, type: MINUS });
 export const storeInput = payload => ({ payload, type: STORE_INPUT });
 export const startRequest = payload => ({ payload, type: START_REQUEST });
 export const requestError = payload => ({ payload, type: REQUEST_ERROR });
@@ -64,9 +68,36 @@ export const reducer = (statePart = [], action = {}) => {
         };
       }
     }
-    case REMOVE: {
+    case PLUS: {
+      const newProducts = statePart.data.products
+        .map(p => p.id === action.payload && p.amount < 10 ? ({ ...p, amount: p.amount + 1 }) : p);
       return {
         ...statePart,
+        data: {
+          ...statePart.data,
+          products: newProducts,
+        },
+      };
+    }
+    case MINUS: {
+      const newProducts = statePart.data.products
+        .map(p => p.id === action.payload && p.amount > 1 ? ({ ...p, amount: p.amount - 1 }) : p);
+      return {
+        ...statePart,
+        data: {
+          ...statePart.data,
+          products: newProducts,
+        },
+      };
+    }
+    case REMOVE: {
+      const newProducts = statePart.data.products.filter( p => p.id !== action.payload );
+      return {
+        ...statePart,
+        data: {
+          ...statePart.data,
+          products: newProducts,
+        },
       };
     }
     case STORE_INPUT: {
