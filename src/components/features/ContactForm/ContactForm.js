@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import styles from './ContactForm.module.scss';
 
@@ -21,6 +23,8 @@ const ContactForm = () =>{
     email: '',
     address: '',
   });
+
+  const [open, setOpen] = useState(false);
 
   const validators = {
     firstName: {
@@ -54,9 +58,24 @@ const ContactForm = () =>{
     dispatch(storeInput({[name]: value }));
   };
 
+  const validateOrder = () => {
+    let hasErrors = false;
+    for (let error in errors) {
+      if (errors[error]) hasErrors = true;
+    }
+    return !hasErrors && order.products.length > 0;
+  };
+
   const submit = () => {
-    console.log('submit');
-    dispatch(sendOrder(order));
+    if (validateOrder()) {
+      console.log('sending', order);
+      const orderProducts = order.products.map(p => ({
+        product: p.id,
+        amount: p.amount,
+      }));
+      dispatch(sendOrder({ ...order, status: 'ordered', products: orderProducts}));
+      setOpen(false);
+    } else setOpen(true);
   };
 
   return (
@@ -134,6 +153,13 @@ const ContactForm = () =>{
           </Button>
         </Grid>
       </form>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert severity="warning" variant='filled'>Some fields are missing or incorrect</Alert>
+      </Snackbar>
     </Paper>
   );
 };
