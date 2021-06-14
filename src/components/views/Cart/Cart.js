@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts, plusOne, minusOne, removeProduct } from '../../../redux/orderRedux';
 
@@ -10,8 +10,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCommentIcon from '@material-ui/icons/AddComment';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import Collapse from '@material-ui/core/Collapse';
+import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -24,6 +28,7 @@ import styles from './Cart.module.scss';
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
+  const [open, setOpen] = useState(false);
 
   const emptyCart = <Alert severity='info' variant='outlined'>
     <strong>Your cart is empty!</strong> You must do something about it ;-)
@@ -35,7 +40,7 @@ const Cart = () => {
         <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
         {!products || products.length === 0 ? emptyCart : <div>
           <TableContainer className={styles.table}>
-            <Table>
+            <Table size='small'>
               <TableHead>
                 <TableRow>
                   <TableCell>Product</TableCell>
@@ -44,10 +49,10 @@ const Cart = () => {
                   <TableCell align="center">Actions</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {products.map(({id, name, defaultPrice, amount}) => (
-                  <TableRow key={id}>
-                    <TableCell component="th" scope="row">
+              {products.map(({id, name, defaultPrice, amount}) => (
+                <TableBody key={id}>
+                  <TableRow className={styles.row}>
+                    <TableCell>
                       {name}
                     </TableCell>
                     <TableCell align="center">
@@ -61,13 +66,30 @@ const Cart = () => {
                     </TableCell>
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
                     <TableCell align="center">
+                      <IconButton aria-label="expand row" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
+                      </IconButton>
                       <IconButton onClick={() => dispatch(removeProduct(id))}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
+                  <TableRow >
+                    <TableCell className={styles.collapsible} colSpan={4}>
+                      <Collapse in={open} timeout="auto">
+                        <TextField
+                          id={`${id}-comment`}
+                          name={`${id}-comment`}
+                          label='Add comment'
+                          fullWidth
+                          variant='outlined'
+                        >
+                        </TextField>
+                      </Collapse>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              ))}
             </Table>
           </TableContainer>
           <Button

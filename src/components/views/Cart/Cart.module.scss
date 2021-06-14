@@ -9,6 +9,17 @@
     margin-bottom: $base-size*2;
   }
 
+  .row {
+    td {
+      border: none;
+      padding-bottom: 0;
+    }
+  }
+
+  .collapsible {
+    padding-top: 0;
+  }
+
   .button {
     display: block;
     margin-left: auto;
