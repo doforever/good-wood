@@ -53,7 +53,8 @@ const Cart = () => {
             </Table>
           </TableContainer>
           <Button
-            variant='outlined'
+            variant='contained'
+            color='secondary'
             size='large'
             className={styles.button}
             component={RouterLink}
