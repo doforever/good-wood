@@ -13,10 +13,10 @@ const Order = () => {
 
   return (
     <Grid container spacing={2} className={styles.root}>
-      <Grid item xs={12} md={5}>
+      <Grid item component='section' xs={12} md={5}>
         <OrderSummary products={order.products}/>
       </Grid>
-      <Grid item xs={12} md={7}>
+      <Grid item component='section' xs={12} md={7}>
         <ContactForm order={order}/>
       </Grid>
     </Grid>

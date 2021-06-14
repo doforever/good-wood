@@ -1,6 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  padding: $base-size;
   min-height: 65vh;
+  margin: 0;
+  max-width: 100%;
 }

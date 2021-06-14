@@ -24,7 +24,7 @@ const Cart = () => {
   </Alert>;
 
   return (
-    <Paper className={styles.root}>
+    <Paper component='section' className={styles.root}>
       <Container maxWidth='md'>
         <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
         {!products || products.length === 0 ? emptyCart : <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Paper from '@material-ui/core/Paper';
@@ -11,6 +11,16 @@ import styles from './ContactForm.module.scss';
 
 const ContactForm = () =>{
   const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+  });
+
+  const handleChange = ({target: {name, value}}) => {
+    setFormData({...formData, [name]: value });
+  };
 
   return (
     <Paper className={styles.root}>
@@ -25,6 +35,8 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              value={formData.firstName}
+              onChange={handleChange}
             />
             <TextField
               id='lastName'
@@ -33,6 +45,8 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              value={formData.lastName}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item container xs={12} sm={6} direction='column' justify='flex-start'>
@@ -43,6 +57,8 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              value={formData.email}
+              onChange={handleChange}
             />
             <TextField
               id='address'
@@ -52,6 +68,8 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              value={formData.address}
+              onChange={handleChange}
             />
           </Grid>
         </Grid>
