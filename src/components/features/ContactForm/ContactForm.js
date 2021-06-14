@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOrder, storeInput, getOrder, getRequest } from '../../../redux/orderRedux';
 
@@ -24,7 +24,16 @@ const ContactForm = () =>{
     address: '',
   });
 
-  const [open, setOpen] = useState(false);
+  const [isWarning, setIsWarning] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    if (isSending && request.type === 'POST' && !request.error && !request.active) {
+      setIsSuccess(true);
+      setIsSending(false);
+    }
+  }, [request]);
 
   const validators = {
     firstName: {
@@ -68,14 +77,14 @@ const ContactForm = () =>{
 
   const submit = () => {
     if (validateOrder()) {
-      console.log('sending', order);
+      setIsWarning(false);
+      setIsSending(true);
       const orderProducts = order.products.map(p => ({
         product: p.id,
         amount: p.amount,
       }));
       dispatch(sendOrder({ ...order, status: 'ordered', products: orderProducts}));
-      setOpen(false);
-    } else setOpen(true);
+    } else setIsWarning(true);
   };
 
   return (
@@ -154,11 +163,18 @@ const ContactForm = () =>{
         </Grid>
       </form>
       <Snackbar
-        open={open}
+        open={isWarning}
         autoHideDuration={3000}
-        onClose={() => setOpen(false)}
+        onClose={() => setIsWarning(false)}
       >
         <Alert severity="warning" variant='filled'>Some fields are missing or incorrect</Alert>
+      </Snackbar>
+      <Snackbar
+        open={isSuccess}
+        autoHideDuration={3000}
+        onClose={() => setIsSuccess(false)}
+      >
+        <Alert severity="success" variant='filled'><strong>Congratulations!</strong> Your order has been send</Alert>
       </Snackbar>
     </Paper>
   );

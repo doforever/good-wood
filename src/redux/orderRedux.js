@@ -100,7 +100,13 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case SAVED: {
       return {
-        ...statePart,
+        data: {
+          products: [],
+          firstName: '',
+          lastName: '',
+          email: '',
+          address: '',
+        },
         request: {
           ...statePart.request,
           active: false,
