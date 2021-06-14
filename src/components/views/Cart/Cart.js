@@ -28,7 +28,15 @@ import styles from './Cart.module.scss';
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState([]);
+
+  const toggleOpen = id => {
+    if (open.includes(id)) {
+      setOpen(open.filter(item => item !== id ));
+    } else {
+      setOpen([...open, id]);
+    }
+  };
 
   const emptyCart = <Alert severity='info' variant='outlined'>
     <strong>Your cart is empty!</strong> You must do something about it ;-)
@@ -40,7 +48,7 @@ const Cart = () => {
         <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
         {!products || products.length === 0 ? emptyCart : <div>
           <TableContainer className={styles.table}>
-            <Table size='small'>
+            <Table >
               <TableHead>
                 <TableRow>
                   <TableCell>Product</TableCell>
@@ -53,7 +61,7 @@ const Cart = () => {
                 <TableBody key={id}>
                   <TableRow className={styles.row}>
                     <TableCell>
-                      {name}
+                      <Typography variant='h6' component='h2'>{name}</Typography>
                     </TableCell>
                     <TableCell align="center">
                       <IconButton size='small' onClick={() => dispatch(minusOne(id))}>
@@ -66,8 +74,8 @@ const Cart = () => {
                     </TableCell>
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
                     <TableCell align="center">
-                      <IconButton aria-label="expand row" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
+                      <IconButton aria-label="expand row" onClick={() => toggleOpen(id)}>
+                        {open.includes(id) ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
                       </IconButton>
                       <IconButton onClick={() => dispatch(removeProduct(id))}>
                         <DeleteIcon />
@@ -76,8 +84,9 @@ const Cart = () => {
                   </TableRow>
                   <TableRow >
                     <TableCell className={styles.collapsible} colSpan={4}>
-                      <Collapse in={open} timeout="auto">
+                      <Collapse in={open.includes(id)} timeout="auto">
                         <TextField
+                          autoComplete='off'
                           id={`${id}-comment`}
                           name={`${id}-comment`}
                           label='Add comment'
