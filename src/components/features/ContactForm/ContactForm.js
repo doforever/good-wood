@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendOrder, storeInput, getOrder, getRequest } from '../../../redux/orderRedux';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -11,12 +12,8 @@ import styles from './ContactForm.module.scss';
 
 const ContactForm = () =>{
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-  });
+  const order = useSelector(getOrder);
+  const request = useSelector(getRequest);
 
   const [errors, setErrors] = useState({
     firstName: '',
@@ -54,7 +51,12 @@ const ContactForm = () =>{
 
   const handleChange = ({target: {name, value}}) => {
     validate(name, value);
-    setFormData({...formData, [name]: value });
+    dispatch(storeInput({[name]: value }));
+  };
+
+  const submit = () => {
+    console.log('submit');
+    dispatch(sendOrder(order));
   };
 
   return (
@@ -70,7 +72,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              value={formData.firstName}
+              value={order.firstName}
               onChange={handleChange}
               error={!!errors.firstName}
               helperText={errors.firstName}
@@ -83,7 +85,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              value={formData.lastName}
+              value={order.lastName}
               onChange={handleChange}
               error={!!errors.lastName}
               helperText={errors.lastName}
@@ -98,7 +100,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              value={formData.email}
+              value={order.email}
               onChange={handleChange}
               error={!!errors.email}
               helperText={errors.email}
@@ -112,7 +114,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              value={formData.address}
+              value={order.address}
               onChange={handleChange}
               error={!!errors.address}
               helperText={errors.address}
@@ -126,6 +128,7 @@ const ContactForm = () =>{
             size='large'
             className={styles.button}
             color='secondary'
+            onClick={submit}
           >
             Send
           </Button>

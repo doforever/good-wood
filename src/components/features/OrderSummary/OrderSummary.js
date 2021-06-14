@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import styles from './OrderSummary.module.scss';
 
 const OrderSummary = ({products}) => {
-  const noProducts = <Alert severity="info">
+  const noProducts = <Alert severity='warning' variant='outlined'>
     There are <strong>no products</strong> in your cart
   </Alert>;
 

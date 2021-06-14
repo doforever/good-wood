@@ -19,7 +19,7 @@ import styles from './Cart.module.scss';
 
 const Cart = () => {
   const products = useSelector(getProducts);
-  const emptyCart = <Alert severity="info">
+  const emptyCart = <Alert severity='info' variant='outlined'>
     <strong>Your cart is empty!</strong> You must do something about it ;-)
   </Alert>;
 
