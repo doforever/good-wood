@@ -32,17 +32,18 @@ const OrderSummary = ({products}) => {
         <TableContainer className={styles.table}>
           <Table>
             <TableBody>
-              {products.map(({ id, name, defaultPrice, amount }) => (
+              {products.map(({ id, name, defaultPrice, amount, comment }) => (
                 <TableRow key={id}>
                   <TableCell component="th" scope="row">
                     {name}
                   </TableCell>
+                  <TableCell> {comment} </TableCell>
                   <TableCell align="right">x {amount}</TableCell>
                   <TableCell align="right">$ {amount * defaultPrice}</TableCell>
                 </TableRow>
               ))}
               <TableRow >
-                <TableCell align="right" colSpan={2} className={styles.total}>Total</TableCell>
+                <TableCell align="right" colSpan={3} className={styles.total}>Total</TableCell>
                 <TableCell align="right" className={styles.total}>$ {totalPrice(products)}</TableCell>
               </TableRow>
             </TableBody>

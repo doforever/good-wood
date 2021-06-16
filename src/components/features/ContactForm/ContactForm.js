@@ -68,21 +68,26 @@ const ContactForm = () =>{
   };
 
   const validateOrder = () => {
+    let isComplete = true;
     let hasErrors = false;
-    for (let error in errors) {
-      if (errors[error]) hasErrors = true;
+
+    for (let key in order) {
+      if (!order[key]) isComplete = false;
     }
-    return !hasErrors && order.products.length > 0;
+    if (isComplete) {
+      for (let error in errors) {
+        if (errors[error]) hasErrors = true;
+      }
+    }
+    return isComplete && !hasErrors && order.products.length > 0;
   };
 
   const submit = () => {
     if (validateOrder()) {
       setIsWarning(false);
       setIsSending(true);
-      const orderProducts = order.products.map(p => ({
-        product: p.id,
-        amount: p.amount,
-      }));
+      const orderProducts = order.products
+        .map(({id, amount, comment}) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
       dispatch(sendOrder({ ...order, status: 'ordered', products: orderProducts}));
     } else setIsWarning(true);
   };
