@@ -4,6 +4,10 @@
   height: 100%;
   padding: $base-size;
 
+  .comment {
+    max-width: 100px;
+  }
+
   .total {
     font-weight: bold;
     border: none;

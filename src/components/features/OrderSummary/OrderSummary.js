@@ -37,7 +37,9 @@ const OrderSummary = ({products}) => {
                   <TableCell component="th" scope="row">
                     {name}
                   </TableCell>
-                  <TableCell> {comment} </TableCell>
+                  <TableCell>
+                    <Typography noWrap className={styles.comment}>{comment}</Typography>
+                  </TableCell>
                   <TableCell align="right">x {amount}</TableCell>
                   <TableCell align="right">$ {amount * defaultPrice}</TableCell>
                 </TableRow>
