@@ -66,7 +66,14 @@ const Cart = () => {
                 <TableBody key={id}>
                   <TableRow className={styles.product_row}>
                     <TableCell>
-                      <Typography variant='subtitle2' component='h2' className={styles.product_name}>{name}</Typography>
+                      <Typography
+                        variant='subtitle2'
+                        component={RouterLink}
+                        to={`/products/${id}`}
+                        className={styles.product_name}
+                      >
+                        {name}
+                      </Typography>
                     </TableCell>
                     <TableCell align="center" >
                       <div className={styles.amount}>
