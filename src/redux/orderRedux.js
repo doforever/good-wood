@@ -5,6 +5,13 @@ import { API_URL } from '../config.js';
 export const getOrder = ({ order }) => order.data;
 export const getProducts = ({ order }) => order.data.products;
 export const getRequest = ({ order }) => order.request;
+export const getCount = ({order}) => {
+  let count = 0;
+  for (let p of order.data.products) {
+    count += p.amount;
+  }
+  return count;
+};
 
 /* action name creator */
 const reducerName = 'order';
