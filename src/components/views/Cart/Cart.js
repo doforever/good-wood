@@ -28,14 +28,19 @@ import styles from './Cart.module.scss';
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
-  const [open, setOpen] = useState([]);
+  const [visibleComments, setVisibleComments] = useState([]);
 
-  const toggleOpen = id => {
-    if (open.includes(id)) {
-      setOpen(open.filter(item => item !== id ));
+  const toggleVisibility = id => {
+    if (visibleComments.includes(id)) {
+      setVisibleComments(visibleComments.filter(item => item !== id ));
     } else {
-      setOpen([...open, id]);
+      setVisibleComments([...visibleComments, id]);
     }
+  };
+
+  const handleCommentChange = (e) => {
+    const {value: comment, id} = e.target;
+    dispatch(commentProduct({ id, comment }));
   };
 
   const emptyCart = <Alert severity='info' variant='outlined'>
@@ -73,10 +78,10 @@ const Cart = () => {
                       </IconButton>
                     </TableCell>
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
-                    <TableCell align="center">
-                      <IconButton aria-label="expand row" onClick={() => toggleOpen(id)}>
-                        {open.includes(id) ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
-                      </IconButton>
+                    <TableCell align="right">
+                      {!comment && <IconButton aria-label="expand row" onClick={() => toggleVisibility(id)}>
+                        {visibleComments.includes(id) ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
+                      </IconButton>}
                       <IconButton onClick={() => dispatch(removeProduct(id))}>
                         <DeleteIcon />
                       </IconButton>
@@ -84,16 +89,18 @@ const Cart = () => {
                   </TableRow>
                   <TableRow >
                     <TableCell className={styles.collapsible} colSpan={4}>
-                      <Collapse in={open.includes(id)} timeout="auto">
+                      <Collapse in={comment || visibleComments.includes(id)} timeout="auto">
                         <TextField
                           autoComplete='off'
-                          id={`${id}-comment`}
+                          id={id}
                           name={`${id}-comment`}
-                          label='Add comment'
+                          placeholder='Add comment'
                           fullWidth
+                          multiline
                           variant='outlined'
+                          inputProps={{ maxlength: 200 }}
                           value={comment}
-                          onChange={e => dispatch(commentProduct({ id, comment: e.target.value }))}
+                          onChange={handleCommentChange}
                         >
                         </TextField>
                       </Collapse>

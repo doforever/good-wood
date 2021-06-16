@@ -10,7 +10,6 @@ const orderItemSchema = new Schema({
   },
   comment: {
     type: String,
-    minLength: 3,
     maxLength: 200,
   },
 });
