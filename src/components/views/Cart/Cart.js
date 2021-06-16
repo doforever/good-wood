@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts, plusOne, minusOne, removeProduct, commentProduct } from '../../../redux/orderRedux';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -29,6 +30,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
   const [visibleComments, setVisibleComments] = useState([]);
+  const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
   const toggleVisibility = id => {
     if (visibleComments.includes(id)) {
@@ -54,18 +56,29 @@ const Cart = () => {
         {!products || products.length === 0 ? emptyCart : <div>
           <TableContainer >
             <Table className={styles.table}>
-              <TableHead>
+              {matchesSm && <TableHead>
                 <TableRow>
                   <TableCell >Product</TableCell>
                   <TableCell align="center" >Amount</TableCell>
                   <TableCell align="center" >Total price</TableCell>
                   <TableCell align="center" >Actions</TableCell>
                 </TableRow>
-              </TableHead>
+              </TableHead>}
               {products.map(({id, name, defaultPrice, amount, comment}) => (
                 <TableBody key={id}>
+                  { !matchesSm && <TableRow className={styles.name_row}>
+                    <TableCell colSpan={4}>
+                      <Typography
+                        variant='h6'
+                        component={RouterLink}
+                        to={`/products/${id}`}
+                        className={styles.product_name}
+                      >
+                        {name}
+                      </Typography></TableCell>
+                  </TableRow> }
                   <TableRow className={styles.product_row}>
-                    <TableCell>
+                    { matchesSm && <TableCell>
                       <Typography
                         variant='subtitle2'
                         component={RouterLink}
@@ -73,9 +86,8 @@ const Cart = () => {
                         className={styles.product_name}
                       >
                         {name}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="center" >
+                      </Typography></TableCell>}
+                    <TableCell align="center" colSpan={matchesSm ? 1 : 2}>
                       <div className={styles.amount}>
                         <IconButton size='small' onClick={() => dispatch(minusOne(id))}>
                           <RemoveIcon />
