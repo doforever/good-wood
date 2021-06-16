@@ -13,6 +13,7 @@ import Gallery from '../../features/Gallery/Gallery';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import { Link as RouterLink } from 'react-router-dom';
 
 import styles from './Product.module.scss';
 
@@ -78,10 +79,23 @@ const Product = () => {
       </Grid>
       <Snackbar
         open={isAdded}
-        autoHideDuration={1000}
+        autoHideDuration={3000}
         onClose={() => setIsAdded(false)}
       >
-        <Alert severity='success' variant='filled'>Added to cart</Alert>
+        <Alert
+          severity='success'
+          variant='filled'
+          action={
+            <Button
+              component={RouterLink}
+              to='/cart'
+              color="inherit"
+              size="small"
+            >
+              VIEW CART
+            </Button>
+          }
+        >Added to cart</Alert>
       </Snackbar>
     </Paper>
   );
