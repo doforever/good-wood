@@ -29,7 +29,7 @@ const OrderSummary = ({products}) => {
     <Paper className={styles.root}>
       <Typography component='h2' variant='h4' paragraph>Your order</Typography>
       {!products || products.length === 0 ? noProducts :
-        <TableContainer className={styles.table}>
+        <TableContainer >
           <Table>
             <TableBody>
               {products.map(({ id, name, defaultPrice, amount, comment }) => (
@@ -40,8 +40,8 @@ const OrderSummary = ({products}) => {
                   <TableCell>
                     <Typography noWrap className={styles.comment}>{comment}</Typography>
                   </TableCell>
-                  <TableCell align="right">x {amount}</TableCell>
-                  <TableCell align="right">$ {amount * defaultPrice}</TableCell>
+                  <TableCell align="right" className={styles.amount}>x {amount}</TableCell>
+                  <TableCell align="right" className={styles.price}>$ {amount * defaultPrice}</TableCell>
                 </TableRow>
               ))}
               <TableRow >

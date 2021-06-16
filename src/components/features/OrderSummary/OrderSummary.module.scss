@@ -5,7 +5,15 @@
   padding: $base-size;
 
   .comment {
-    max-width: 100px;
+    max-width: 80px;
+  }
+
+  .amount {
+    min-width: 60px;
+  }
+
+  .price {
+    min-width: 80px;
   }
 
   .total {
