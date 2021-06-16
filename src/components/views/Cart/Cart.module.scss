@@ -7,16 +7,28 @@
 
   .table {
     margin-bottom: $base-size*2;
+
+    td, th {
+      padding: $base-size/2;
+    }
   }
 
-  .row {
+  .product_row {
     td {
       border: none;
       padding-bottom: 0;
     }
+
+    .product_name {
+      min-width: 84px;
+    }
+
+    .amount {
+      min-width: 92px;
+    }
   }
 
-  .collapsible {
+  .collapsible_cell {
     padding-top: 0;
   }
 

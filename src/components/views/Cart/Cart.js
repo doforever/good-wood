@@ -52,30 +52,32 @@ const Cart = () => {
       <Container maxWidth='md'>
         <Typography component='h1' variant='h4' align='center' paragraph>Cart</Typography>
         {!products || products.length === 0 ? emptyCart : <div>
-          <TableContainer className={styles.table}>
-            <Table >
+          <TableContainer >
+            <Table className={styles.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Product</TableCell>
-                  <TableCell align="center">Amount</TableCell>
-                  <TableCell align="center">Total price</TableCell>
-                  <TableCell align="center">Actions</TableCell>
+                  <TableCell >Product</TableCell>
+                  <TableCell align="center" >Amount</TableCell>
+                  <TableCell align="center" >Total price</TableCell>
+                  <TableCell align="center" >Actions</TableCell>
                 </TableRow>
               </TableHead>
               {products.map(({id, name, defaultPrice, amount, comment}) => (
                 <TableBody key={id}>
-                  <TableRow className={styles.row}>
+                  <TableRow className={styles.product_row}>
                     <TableCell>
-                      <Typography variant='h6' component='h2'>{name}</Typography>
+                      <Typography variant='subtitle2' component='h2' className={styles.product_name}>{name}</Typography>
                     </TableCell>
-                    <TableCell align="center">
-                      <IconButton size='small' onClick={() => dispatch(minusOne(id))}>
-                        <RemoveIcon />
-                      </IconButton>
-                      {` ${amount} `}
-                      <IconButton size='small' onClick={() => dispatch(plusOne(id))}>
-                        <AddIcon />
-                      </IconButton>
+                    <TableCell align="center" >
+                      <div className={styles.amount}>
+                        <IconButton size='small' onClick={() => dispatch(minusOne(id))}>
+                          <RemoveIcon />
+                        </IconButton>
+                        {` ${amount} `}
+                        <IconButton size='small' onClick={() => dispatch(plusOne(id))}>
+                          <AddIcon />
+                        </IconButton>
+                      </div>
                     </TableCell>
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
                     <TableCell align="right">
@@ -88,7 +90,7 @@ const Cart = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow >
-                    <TableCell className={styles.collapsible} colSpan={4}>
+                    <TableCell className={styles.collapsible_cell} colSpan={4}>
                       <Collapse in={comment || visibleComments.includes(id)} timeout="auto">
                         <TextField
                           autoComplete='off'
