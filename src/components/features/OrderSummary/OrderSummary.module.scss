@@ -4,8 +4,8 @@
   height: 100%;
   padding: $base-size;
 
-  .comment {
-    max-width: 80px;
+  td, th {
+    padding: $base-size/2;
   }
 
   .amount {
