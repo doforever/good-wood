@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Gallery from '../../features/Gallery/Gallery';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import styles from './Product.module.scss';
 
@@ -19,6 +21,7 @@ const Product = () => {
   const {id} = useParams();
   const product = useSelector(state => getCurrent(state, id));
   const [amount, setAmount] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
     dispatch(fetchOne(id));
@@ -28,6 +31,7 @@ const Product = () => {
   const {name, description, defaultPrice, photos} = product;
 
   const handleAdd = () => {
+    setIsAdded(true);
     dispatch(addProduct({id, name, defaultPrice, amount, comment: ''}));
   };
 
@@ -72,6 +76,13 @@ const Product = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar
+        open={isAdded}
+        autoHideDuration={1000}
+        onClose={() => setIsAdded(false)}
+      >
+        <Alert severity='success' variant='filled'>Added to cart</Alert>
+      </Snackbar>
     </Paper>
   );
 };
