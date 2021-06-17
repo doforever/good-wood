@@ -52,6 +52,7 @@ const ShoppingStepper = ({children}) => {
                 component={RouterLink}
                 to={to}
                 completed={index <= completed}
+                disabled={index-2 > completed}
               >{label}</StepButton>
             </Step>
           );
