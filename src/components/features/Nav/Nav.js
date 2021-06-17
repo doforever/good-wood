@@ -19,10 +19,9 @@ const Nav = ({className}) => {
       <IconButton
         component={NavLink}
         to='/cart'
-        aria-label="add to shopping cart"
         color='inherit'
       >
-        <Badge badgeContent={count} color="secondary">
+        <Badge badgeContent={count} color='primary'>
           <ShoppingCartIcon />
         </Badge>
       </IconButton>

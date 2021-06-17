@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clxs from 'clsx';
 
 import Grid from '@material-ui/core/Grid';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 import styles from './Gallery.module.scss';
 
@@ -15,8 +17,10 @@ const Gallery = ({ pictures }) => {
   const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
   const thumbnails = pictures.map(({src, name}, i) => i < 5 && (
-    <Grid key={i} item xs className={styles.thumbnail}>
-      <img src={src} alt={name}/>
+    <Grid key={i} item xs className={clxs(styles.thumbnail, i === current && styles.active)}>
+      <ButtonBase onClick={() => setCurrent(i)}>
+        <img src={src} alt={name}/>
+      </ButtonBase>
     </Grid>)
   );
 
@@ -55,7 +59,7 @@ const Gallery = ({ pictures }) => {
       <Grid item xs className={styles.currentPhoto}>
         <img src={pictures[current].src} alt={pictures[current].name} />
       </Grid>
-      { pictures.length > 0 && <Grid item container direction='row' spacing={2}>
+      { pictures.length > 0 && <Grid item container direction='row'>
         {controls}
       </Grid>}
     </Grid>

@@ -163,7 +163,7 @@ const ContactForm = () =>{
             variant='contained'
             size='large'
             className={styles.button}
-            color='secondary'
+            color='primary'
             onClick={submit}
           >
             Send

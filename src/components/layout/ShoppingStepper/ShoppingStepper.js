@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getOrder } from '../../../redux/orderRedux';
-import { ThemeProvider, createMuiTheme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Stepper from '@material-ui/core/Stepper';
@@ -18,14 +17,6 @@ const ShoppingStepper = ({children}) => {
   const order = useSelector(getOrder);
   const [completed, setCompleted] = useState();
   const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
-  const mainTheme = useTheme();
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: mainTheme.palette.secondary,
-      secondary: mainTheme.palette.primary,
-    },
-  });
 
   const steps = [
     {label: 'Shopping', to: '/'},
@@ -47,27 +38,25 @@ const ShoppingStepper = ({children}) => {
 
   return (
     <div className={styles.root}>
-      <ThemeProvider theme={theme}>
-        <Stepper
-          component='nav'
-          nonLinear
-          activeStep={getPosition()}
-          className={styles.stepper}
-          alternativeLabel={!matchesSm}
-        >
-          {steps.map(({label, to}, index) => {
-            return (
-              <Step key={index}>
-                <StepButton
-                  component={RouterLink}
-                  to={to}
-                  completed={index <= completed}
-                >{label}</StepButton>
-              </Step>
-            );
-          })}
-        </Stepper>
-      </ThemeProvider>
+      <Stepper
+        component='nav'
+        nonLinear
+        activeStep={getPosition()}
+        className={styles.stepper}
+        alternativeLabel={!matchesSm}
+      >
+        {steps.map(({label, to}, index) => {
+          return (
+            <Step key={index}>
+              <StepButton
+                component={RouterLink}
+                to={to}
+                completed={index <= completed}
+              >{label}</StepButton>
+            </Step>
+          );
+        })}
+      </Stepper>
       { children }
     </div>
   );
