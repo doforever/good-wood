@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getOrder } from '../../../redux/orderRedux';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -15,6 +17,14 @@ const ShoppingStepper = ({children}) => {
   let location = useLocation();
   const order = useSelector(getOrder);
   const [completed, setCompleted] = useState();
+  const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: { main: '#91C499' },
+      secondary: { main: '#595959'},
+    },
+  });
 
   const steps = [
     {label: 'Shopping', to: '/'},
@@ -36,15 +46,27 @@ const ShoppingStepper = ({children}) => {
 
   return (
     <div className={styles.root}>
-      <Stepper  component='nav' nonLinear activeStep={getPosition()} className={styles.stepper}>
-        {steps.map(({label, to}, index) => {
-          return (
-            <Step key={index}>
-              <StepButton component={RouterLink} to={to} completed={index <= completed}>{label}</StepButton>
-            </Step>
-          );
-        })}
-      </Stepper>
+      <ThemeProvider theme={theme}>
+        <Stepper
+          component='nav'
+          nonLinear
+          activeStep={getPosition()}
+          className={styles.stepper}
+          alternativeLabel={!matchesSm}
+        >
+          {steps.map(({label, to}, index) => {
+            return (
+              <Step key={index}>
+                <StepButton
+                  component={RouterLink}
+                  to={to}
+                  completed={index <= completed}
+                >{label}</StepButton>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </ThemeProvider>
       { children }
     </div>
   );
