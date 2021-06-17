@@ -1,26 +1,62 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Grid from '@material-ui/core/Grid';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 import styles from './Gallery.module.scss';
 
 const Gallery = ({ pictures }) => {
-  const [current, setCurrent] = useState(pictures[0]);
+  const [current, setCurrent] = useState(0);
+  const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
-  const thumbnails = pictures.map(({src, name}, i) => (
-    <Grid key={i} item xs>
-      <img src={src} alt={name} className={styles.thumbnail}/>
+  const thumbnails = pictures.map(({src, name}, i) => i < 5 && (
+    <Grid key={i} item xs className={styles.thumbnail}>
+      <img src={src} alt={name}/>
     </Grid>)
   );
+
+  const handleNext = () => {
+    setCurrent(current + 1);
+  };
+
+  const handleBack = () => {
+    setCurrent(current - 1);
+  };
+
+  const dots = (<MobileStepper
+    variant="dots"
+    steps={pictures.length}
+    position="static"
+    activeStep={current}
+    className={styles.dots}
+    nextButton={
+      <Button size="small" onClick={handleNext} disabled={current === pictures.length - 1}>
+        Next
+        <KeyboardArrowRight />
+      </Button>
+    }
+    backButton={
+      <Button size="small" onClick={handleBack} disabled={current === 0}>
+        <KeyboardArrowLeft />
+          Back
+      </Button>
+    }
+  />);
+
+  const controls = matchesSm ? thumbnails : dots;
 
   return (
     <Grid container direction='column' className={styles.root}>
       <Grid item xs className={styles.currentPhoto}>
-        <img src={current.src} alt={current.name} />
+        <img src={pictures[current].src} alt={pictures[current].name} />
       </Grid>
       { pictures.length > 0 && <Grid item container direction='row' spacing={2}>
-        {thumbnails}
+        {controls}
       </Grid>}
     </Grid>
   );

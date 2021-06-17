@@ -13,10 +13,34 @@
       object-fit: cover;
     }
   }
-  .thumbnail {
-    height: 100px;
+
+  .dots {
+    margin-top: -$base-size;
+    margin-left: $base-size/2;
+    margin-right: $base-size/2;
     width: 100%;
-    object-fit: cover;
-    border-radius: $radius;
+  }
+
+  .thumbnail {
+    position: relative;
+
+    img {
+      height: 100px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: $radius;
+    }
+
+    &:hover {
+      &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: red;
+    }
+    }
   }
 }
