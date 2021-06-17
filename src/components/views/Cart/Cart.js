@@ -45,7 +45,7 @@ const Cart = () => {
     dispatch(commentProduct({ id, comment }));
   };
 
-  const emptyCart = <Alert severity='info' variant='outlined'>
+  const emptyCart = <Alert severity='warning' variant='outlined'>
     <strong>Your cart is empty!</strong> You must do something about it ;-)
   </Alert>;
 

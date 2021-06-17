@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrent, fetchOne } from '../../../redux/productsRedux';
+import { getCurrent, fetchOne, getRequest } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
 import { addProduct } from '../../../redux/orderRedux';
 
@@ -21,6 +21,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
   const product = useSelector(state => getCurrent(state, id));
+  const request = useSelector(getRequest);
   const [amount, setAmount] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -28,6 +29,9 @@ const Product = () => {
     dispatch(fetchOne(id));
   }, [dispatch, id]);
 
+  if (request.type === 'GET_ONE' && request.error) {
+    return <Alert severity='error' variant='outlined'>Connection error, please try again</Alert >;
+  }
   if (!product) return <LinearProgress />;
   const {name, description, defaultPrice, photos} = product;
 

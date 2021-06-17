@@ -27,10 +27,15 @@ const ContactForm = () =>{
   const [isWarning, setIsWarning] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (isSending && request.type === 'POST' && !request.error && !request.active) {
       setIsSuccess(true);
+      setIsSending(false);
+    }
+    if (isSending && request.type === 'POST' && request.error) {
+      setIsError(true);
       setIsSending(false);
     }
   }, [request]);
@@ -175,14 +180,21 @@ const ContactForm = () =>{
         autoHideDuration={3000}
         onClose={() => setIsWarning(false)}
       >
-        <Alert severity="warning" variant='filled'>Some fields are missing or incorrect</Alert>
+        <Alert severity='warning' variant='filled'>Some fields are missing or incorrect</Alert>
       </Snackbar>
       <Snackbar
         open={isSuccess}
         autoHideDuration={3000}
         onClose={() => setIsSuccess(false)}
       >
-        <Alert severity="success" variant='filled'><strong>Congratulations!</strong> Your order has been send</Alert>
+        <Alert severity='success' variant='filled'><strong>Congratulations!</strong> Your order has been send</Alert>
+      </Snackbar>
+      <Snackbar
+        open={isError}
+        autoHideDuration={3000}
+        onClose={() => setIsError(false)}
+      >
+        <Alert severity='error' variant='filled'>Connection error. <strong>Please try again</strong></Alert>
       </Snackbar>
     </Paper>
   );
