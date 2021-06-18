@@ -23,6 +23,7 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import Container from '@material-ui/core/Container';
 import {Link as RouterLink} from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import styles from './Cart.module.scss';
 
@@ -100,11 +101,15 @@ const Cart = () => {
                     </TableCell>
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
                     <TableCell align="right">
-                      {!comment && <IconButton aria-label="expand row" onClick={() => toggleVisibility(id)}>
-                        {visibleComments.includes(id) ? <KeyboardArrowUpIcon /> : <AddCommentIcon />}
-                      </IconButton>}
+                      {!comment &&
+                        <IconButton onClick={() => toggleVisibility(id)}>
+                          {visibleComments.includes(id) ? <Tooltip title='Hide comment'><KeyboardArrowUpIcon />
+                          </Tooltip> : <Tooltip title='Add comment'><AddCommentIcon /></Tooltip>}
+                        </IconButton>}
                       <IconButton onClick={() => dispatch(removeProduct(id))}>
-                        <DeleteIcon />
+                        <Tooltip title='Remove product'>
+                          <DeleteIcon />
+                        </Tooltip>
                       </IconButton>
                     </TableCell>
                   </TableRow>
