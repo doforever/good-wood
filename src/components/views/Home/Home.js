@@ -6,6 +6,7 @@ import { getAll, getRequest } from '../../../redux/productsRedux';
 import ProductList from '../../features/ProductList/ProductList';
 import Alert from '@material-ui/lab/Alert';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Intro from '../../features/Intro/Intro';
 
 import styles from './Home.module.scss';
 
@@ -25,6 +26,7 @@ const Home = () => {
 
   return (
     <div className={styles.root}>
+      <Intro/>
       <ProductList products={products} />
     </div>
   );
