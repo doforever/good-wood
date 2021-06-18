@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import { NavLink } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import styles from './Nav.module.scss';
 
@@ -16,15 +17,17 @@ const Nav = ({className}) => {
 
   return (
     <nav className={clsx(className, styles.root)}>
-      <IconButton
-        component={NavLink}
-        to='/cart'
-        color='inherit'
-      >
-        <Badge badgeContent={count} color='primary'>
-          <ShoppingCartIcon />
-        </Badge>
-      </IconButton>
+      <Tooltip title='Go to cart'>
+        <IconButton
+          component={NavLink}
+          to='/cart'
+          color='inherit'
+        >
+          <Badge badgeContent={count} color='primary'>
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+      </Tooltip>
     </nav>
   );};
 
