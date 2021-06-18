@@ -42,20 +42,20 @@ const ContactForm = () =>{
 
   const validators = {
     firstName: {
-      validator: value => value && 3 <= value.length && value.length <= 15,
-      message: 'Invalid length',
+      validator: value => value && 3 <= value.length,
+      message: 'Too short',
     },
     lastName: {
-      validator: value => value && 3 <= value.length && value.length <= 30,
-      message: 'Invalid length',
+      validator: value => value && 3 <= value.length,
+      message: 'Too short',
     },
     email: {
       validator: value => value && value.match(new RegExp(/^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z]{1,6}))$/i)),
       message: 'Invalid email',
     },
     address: {
-      validator: value => value && 5 <= value.length && value.length <= 60,
-      message: 'Invalid length',
+      validator: value => value && 5 <= value.length,
+      message: 'Too short',
     },
   };
 
@@ -110,6 +110,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              inputProps={{ maxlength: 15 }}
               value={order.firstName}
               onChange={handleChange}
               error={!!errors.firstName}
@@ -123,6 +124,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
+              inputProps={{ maxlength: 30 }}
               value={order.lastName}
               onChange={handleChange}
               error={!!errors.lastName}
@@ -159,6 +161,7 @@ const ContactForm = () =>{
               required
               inputProps={{
                 autoComplete: 'new-password',
+                maxlength: 60,
               }}
             />
           </Grid>
