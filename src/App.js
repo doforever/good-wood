@@ -23,6 +23,13 @@ const theme = createMuiTheme({
     success: { main: '#91C499'},
     background: { paper: '#F9F6F0', default: '#F3EDE2' },
   },
+  typography: {
+    fontFamily: [
+      'Poppins',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+  },
 });
 
 const App = () => (

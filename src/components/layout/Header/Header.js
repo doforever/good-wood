@@ -16,7 +16,7 @@ const Header = () => {
           <Link
             component={RouterLink}
             to='/'
-            variant="h6"
+            variant="h3"
             className={styles.title}
             color='inherit'
             underline='none'
