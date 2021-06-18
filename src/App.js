@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { AnimatedSwitch, spring } from 'react-router-transition';
+import { AnimatedSwitch, spring, AnimatedRoute } from 'react-router-transition';
 import { Provider } from 'react-redux';
 
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
@@ -47,18 +47,38 @@ const App = () => (
           <CssBaseline />
           <MainLayout>
             <AnimatedSwitch
-              atEnter={{ offset: -100 }}
-              atLeave={{ offset: 120 }}
-              atActive={{ offset: spring(0, { stiffness: 100, damping: 30 }) }}
+              atEnter={{ offset: 100 }}
+              atLeave={{ offset: -120 }}
+              atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
               mapStyles={mapStyles}
               wrapperComponent='div'
-              className={styles.switchWrapper}
+              className={styles.transitionWrapper}
             >
               <Route exact path='/' component={Home} />
               <Route exact path='/products/:id' component={Product} />
               <ShoppingStepper>
-                <Route exact path='/cart' component={Cart} />
-                <Route exact path='/order' component={Order} />
+                <AnimatedRoute
+                  exact
+                  path='/cart'
+                  component={Cart}
+                  atEnter={{ offset: 100 }}
+                  atLeave={{ offset: -120 }}
+                  atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+                  mapStyles={mapStyles}
+                  wrapperComponent='div'
+                  className={styles.transitionWrapper}
+                />
+                <AnimatedRoute
+                  exact
+                  path='/order'
+                  component={Order}
+                  atEnter={{ offset: 100 }}
+                  atLeave={{ offset: -120 }}
+                  atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+                  mapStyles={mapStyles}
+                  wrapperComponent='div'
+                  className={styles.transitionWrapper}
+                />
               </ShoppingStepper>
             </AnimatedSwitch>
           </MainLayout>

@@ -1,13 +1,12 @@
 @import './styles/settings.scss';
 
-.switchWrapper {
+.transitionWrapper {
   position: relative;
 
-  > :first-child ~ * {
+  > * {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
   }
 }
-
