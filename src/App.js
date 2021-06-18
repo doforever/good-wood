@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { AnimatedSwitch, spring } from 'react-router-transition';
 import { Provider } from 'react-redux';
 
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
@@ -13,6 +14,8 @@ import Home from './components/views/Home/Home';
 import Product from './components/views/Product/Product';
 import Cart from './components/views/Cart/Cart';
 import Order from './components/views/Order/Order';
+
+import styles from './App.module.scss';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,6 +35,10 @@ const theme = createMuiTheme({
   },
 });
 
+const mapStyles = (styles) => ({
+  transform: `translateX(${styles.offset}%)`,
+});
+
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
@@ -39,14 +46,21 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <MainLayout>
-            <Switch>
+            <AnimatedSwitch
+              atEnter={{ offset: -100 }}
+              atLeave={{ offset: 120 }}
+              atActive={{ offset: spring(0, { stiffness: 100, damping: 30 }) }}
+              mapStyles={mapStyles}
+              wrapperComponent='div'
+              className={styles.switchWrapper}
+            >
               <Route exact path='/' component={Home} />
               <Route exact path='/products/:id' component={Product} />
               <ShoppingStepper>
                 <Route exact path='/cart' component={Cart} />
                 <Route exact path='/order' component={Order} />
               </ShoppingStepper>
-            </Switch>
+            </AnimatedSwitch>
           </MainLayout>
         </ThemeProvider>
       </StylesProvider>
