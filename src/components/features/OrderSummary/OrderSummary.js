@@ -9,12 +9,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 import styles from './OrderSummary.module.scss';
 
 const OrderSummary = ({products}) => {
   const noProducts = <Alert severity='warning' variant='outlined'>
-    There are <strong>no products</strong> in your cart
+    Your cart is empty. <Link color='inherit' variant='subtitle2' component={RouterLink} to='/'>Go back to shop</Link>
   </Alert>;
 
   const totalPrice = products => {
