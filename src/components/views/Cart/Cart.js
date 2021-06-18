@@ -24,6 +24,7 @@ import Alert from '@material-ui/lab/Alert';
 import Container from '@material-ui/core/Container';
 import {Link as RouterLink} from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
+import Link from '@material-ui/core/Link';
 
 import styles from './Cart.module.scss';
 
@@ -47,7 +48,7 @@ const Cart = () => {
   };
 
   const emptyCart = <Alert severity='warning' variant='outlined'>
-    <strong>Your cart is empty!</strong> You must do something about it ;-)
+    Your cart is empty. <Link color='inherit' variant='subtitle2' component={RouterLink} to='/'>Go back to shop</Link>
   </Alert>;
 
   return (
