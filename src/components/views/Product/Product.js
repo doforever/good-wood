@@ -93,8 +93,8 @@ const Product = () => {
             <Button
               component={RouterLink}
               to='/cart'
-              color="inherit"
-              size="small"
+              color='inherit'
+              size='small'
             >
               VIEW CART
             </Button>

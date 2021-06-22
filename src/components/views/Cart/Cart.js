@@ -91,11 +91,11 @@ const Cart = () => {
                       </Typography></TableCell>}
                     <TableCell align="center" colSpan={matchesSm ? 1 : 2}>
                       <div className={styles.amount}>
-                        <IconButton size='small' onClick={() => dispatch(minusOne(id))}>
+                        <IconButton aria-label='minus' size='small' onClick={() => dispatch(minusOne(id))}>
                           <RemoveIcon />
                         </IconButton>
                         {` ${amount} `}
-                        <IconButton size='small' onClick={() => dispatch(plusOne(id))}>
+                        <IconButton aria-label='plus' size='small' onClick={() => dispatch(plusOne(id))}>
                           <AddIcon />
                         </IconButton>
                       </div>
@@ -103,11 +103,11 @@ const Cart = () => {
                     <TableCell align="center">$ {amount*defaultPrice}</TableCell>
                     <TableCell align="right">
                       {!comment &&
-                        <IconButton onClick={() => toggleVisibility(id)}>
+                        <IconButton aria-label='toggle comment' onClick={() => toggleVisibility(id)}>
                           {visibleComments.includes(id) ? <Tooltip title='Hide comment'><KeyboardArrowUpIcon />
                           </Tooltip> : <Tooltip title='Add comment'><AddCommentIcon /></Tooltip>}
                         </IconButton>}
-                      <IconButton onClick={() => dispatch(removeProduct(id))}>
+                      <IconButton aria-label='remove' onClick={() => dispatch(removeProduct(id))}>
                         <Tooltip title='Remove product'>
                           <DeleteIcon />
                         </Tooltip>

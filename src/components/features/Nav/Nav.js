@@ -19,6 +19,7 @@ const Nav = ({className}) => {
     <nav className={clsx(className, styles.root)}>
       <Tooltip title='Go to cart'>
         <IconButton
+          aria-label='cart'
           component={NavLink}
           to='/cart'
           color='inherit'
