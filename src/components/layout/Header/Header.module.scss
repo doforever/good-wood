@@ -1,0 +1,14 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .title {
+    text-transform: uppercase;
+    margin-right: auto;
+    font-family: 'Staatliches', cursive;
+  }
+}

@@ -13,6 +13,12 @@ const loadInitialData = async () => {
       },{
         name: 'Back of the chair',
         src: 'https://images.pexels.com/photos/7402624/pexels-photo-7402624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Chair close-up',
+        src: 'https://images.pexels.com/photos/7402621/pexels-photo-7402621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Back of the chair',
+        src: 'https://images.pexels.com/photos/7402624/pexels-photo-7402624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       }],
     },
     {
@@ -22,6 +28,9 @@ const loadInitialData = async () => {
       photos: [{
         name: 'Chair close-up',
         src: 'https://images.pexels.com/photos/116907/pexels-photo-116907.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Side-view',
+        src: 'https://images.pexels.com/photos/116915/pexels-photo-116915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       }, {
         name: 'Side-view',
         src: 'https://images.pexels.com/photos/116915/pexels-photo-116915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -64,6 +73,12 @@ const loadInitialData = async () => {
       }, {
         name: 'Detail',
         src: 'https://images.pexels.com/photos/6480209/pexels-photo-6480209.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Seen from the distance',
+        src: 'https://images.pexels.com/photos/6480210/pexels-photo-6480210.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Detail',
+        src: 'https://images.pexels.com/photos/6480209/pexels-photo-6480209.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       }],
     },
     {
@@ -76,6 +91,9 @@ const loadInitialData = async () => {
       }, {
         name: 'Detail',
         src: 'https://images.pexels.com/photos/3661198/pexels-photo-3661198.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'Side-view',
+        src: 'https://images.pexels.com/photos/3661202/pexels-photo-3661202.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       }],
     },
     {
@@ -83,6 +101,12 @@ const loadInitialData = async () => {
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 30,
       photos: [{
+        name: 'Close-up',
+        src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
+        name: 'In a room',
+        src: 'https://images.pexels.com/photos/4846114/pexels-photo-4846114.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      }, {
         name: 'Close-up',
         src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       }, {
