@@ -116,7 +116,7 @@ const Cart = () => {
                   </TableRow>
                   <TableRow >
                     <TableCell className={styles.collapsible_cell} colSpan={4}>
-                      <Collapse in={comment || visibleComments.includes(id)} timeout="auto">
+                      <Collapse in={!!comment || visibleComments.includes(id)} timeout="auto">
                         <TextField
                           autoComplete='off'
                           id={id}
