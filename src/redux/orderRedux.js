@@ -12,6 +12,11 @@ export const getCount = ({order}) => {
   }
   return count;
 };
+export const canAddProducts = ({order}, id, amount) => {
+  const product = order.data.products.find(p => p.id === id);
+  if (product) return product.amount + amount <= 50;
+  else return true;
+};
 
 /* action name creator */
 const reducerName = 'order';
@@ -79,7 +84,7 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case PLUS: {
       const newProducts = statePart.data.products
-        .map(p => p.id === action.payload && p.amount < 10 ? ({ ...p, amount: p.amount + 1 }) : p);
+        .map(p => p.id === action.payload && p.amount < 50 ? ({ ...p, amount: p.amount + 1 }) : p);
       return {
         ...statePart,
         data: {

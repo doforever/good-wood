@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, fetchOne, getRequest } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
-import { addProduct } from '../../../redux/orderRedux';
+import { addProduct, canAddProducts } from '../../../redux/orderRedux';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +23,7 @@ const Product = () => {
   const product = useSelector(state => getCurrent(state, id));
   const request = useSelector(getRequest);
   const [amount, setAmount] = useState(1);
+  const canAdd = useSelector(state => canAddProducts(state, id, amount));
   const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
@@ -72,11 +73,16 @@ const Product = () => {
                 className={styles.input}
                 value={amount}
                 onChange={({target}) => setAmount(parseInt(target.value))}
-                inputProps={{min: 1, max: 10}}
+                inputProps={{min: 1, max: 50}}
               />
             </Grid>
             <Grid item>
-              <Button variant='outlined' onClick={handleAdd} size='large'>Add to cart</Button>
+              <Button
+                variant='outlined'
+                onClick={handleAdd}
+                size='large'
+                disabled={!canAdd}
+              >Add to cart</Button>
             </Grid>
           </Grid>
         </Grid>
