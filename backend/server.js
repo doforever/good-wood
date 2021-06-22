@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
@@ -6,10 +7,18 @@ const connectToDB = require('./db');
 const { dbURI } = require('./config');
 const productsRoutes = require('./routes/products.routes');
 const ordersRoutes = require('./routes/orders.routes');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
+/* CONNECT TO DB */
+connectToDB(dbURI);
+
 /* ADD MIDDLEWARE */
+app.use(session({
+  secret: 'kkdmerjwi94rslmflksdmr43',
+  store: MongoStore.create({ mongoUrl: dbURI }),
+}));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,9 +38,6 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });
-
-/* CONNECT TO DB */
-connectToDB(dbURI);
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
