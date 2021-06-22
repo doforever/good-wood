@@ -125,7 +125,7 @@ const Cart = () => {
                           fullWidth
                           multiline
                           variant='outlined'
-                          inputProps={{ maxlength: 200 }}
+                          inputProps={{ maxLength: 200 }}
                           value={comment}
                           onChange={handleCommentChange}
                         >

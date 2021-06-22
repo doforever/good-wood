@@ -110,7 +110,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              inputProps={{ maxlength: 15 }}
+              inputProps={{ maxLength: 15 }}
               value={order.firstName}
               onChange={handleChange}
               error={!!errors.firstName}
@@ -124,7 +124,7 @@ const ContactForm = () =>{
               variant='outlined'
               fullWidth
               margin='normal'
-              inputProps={{ maxlength: 30 }}
+              inputProps={{ maxLength: 30 }}
               value={order.lastName}
               onChange={handleChange}
               error={!!errors.lastName}
@@ -161,7 +161,7 @@ const ContactForm = () =>{
               required
               inputProps={{
                 autoComplete: 'new-password',
-                maxlength: 60,
+                maxLength: 60,
               }}
             />
           </Grid>
