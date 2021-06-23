@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 
-const { OrderItem } = require('../orderItem.model.js');
+const { CartItem } = require('../cartItem.model');
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
 
 
-describe('OrderItem', () => {
+describe('CartItem', () => {
   after(() => {
     mongoose.models = {};
   });
 
   it('should throw an error if product is missing', () => {
-    const orderItem = new OrderItem({amount: 1, comment: 'test comment'});
-    orderItem.validate(err => {
+    const cartItem = new CartItem({amount: 1, comment: 'test comment'});
+    cartItem.validate(err => {
       expect(err.errors).to.exist;
     });
 
@@ -23,9 +23,9 @@ describe('OrderItem', () => {
 
     const cases = [{}, [], 11, 'test'];
     for (let product of cases) {
-      const orderItem = new OrderItem({ product, amount: 1, comment: 'test' });
+      const cartItem = new CartItem({ product, amount: 1, comment: 'test' });
 
-      orderItem.validate(err => {
+      cartItem.validate(err => {
         expect(err.errors.product).to.exist;
       });
     }
@@ -35,9 +35,9 @@ describe('OrderItem', () => {
 
     const cases = [{}, [], 'test'];
     for (let amount of cases) {
-      const orderItem = new OrderItem({ amount, product: '5d9f1140f10a81216cfd4408', comment: 'test' });
+      const cartItem = new CartItem({ amount, product: '5d9f1140f10a81216cfd4408', comment: 'test' });
 
-      orderItem.validate(err => {
+      cartItem.validate(err => {
         expect(err.errors.amount).to.exist;
       });
     }
@@ -47,18 +47,18 @@ describe('OrderItem', () => {
 
     const cases = [{}, []];
     for (let comment of cases) {
-      const orderItem = new OrderItem({ amount: 1, product: '5d9f1140f10a81216cfd4408', comment });
+      const cartItem = new CartItem({ amount: 1, product: '5d9f1140f10a81216cfd4408', comment });
 
-      orderItem.validate(err => {
+      cartItem.validate(err => {
         expect(err.errors.comment).to.exist;
       });
     }
   });
 
   it('should not throw an error when properties are correct', () => {
-    const orderItem = new OrderItem({ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' });
+    const cartItem = new CartItem({ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' });
 
-    orderItem.validate(err => {
+    cartItem.validate(err => {
       expect(err).to.not.exist;
     });
   });

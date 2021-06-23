@@ -16,42 +16,30 @@ describe('Order', () => {
         lastName: 'Doe',
         email: 'john@gmail.com',
         address: 'Home 5 5',
-        status: 'ordered',
       },
       {
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         lastName: 'Doe',
         email: 'john@gmail.com',
         address: 'Home 5 5',
-        status: 'ordered',
       },
       {
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         email: 'john@gmail.com',
         address: 'Home 5 5',
-        status: 'ordered',
       },
       {
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         lastName: 'Doe',
         address: 'Home 5 5',
-        status: 'ordered',
       },
       {
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
-        status: 'ordered',
-      },
-      {
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@gmail.com',
-        address: 'Home 5 5',
       },
     ];
 
@@ -70,11 +58,10 @@ describe('Order', () => {
     for (let firstName of cases) {
       const order = new Order({
         firstName,
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         lastName: 'Doe',
         email: 'john@gmail.com',
         address: 'Home 5',
-        status: 'ordered',
       });
 
       order.validate(err => {
@@ -89,11 +76,10 @@ describe('Order', () => {
     for (let lastName of cases) {
       const order = new Order({
         lastName,
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         email: 'john@gmail.com',
         address: 'Home 5',
-        status: 'ordered',
       });
 
       order.validate(err => {
@@ -108,11 +94,10 @@ describe('Order', () => {
     for (let address of cases) {
       const order = new Order({
         address,
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         email: 'john@gmail.com',
         lastName: 'Doe',
-        status: 'ordered',
       });
 
       order.validate(err => {
@@ -127,11 +112,10 @@ describe('Order', () => {
     for (let email of cases) {
       const order = new Order({
         address: 'Home 5',
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
+        cart: '5d9f1140f10a81216cfd4408',
         firstName: 'John',
         email,
         lastName: 'Doe',
-        status: 'ordered',
       });
 
       order.validate(err => {
@@ -140,40 +124,20 @@ describe('Order', () => {
     }
   });
 
-  it('should throw an error if "products" is not a non-empty array', () => {
+  it('should throw an error if "cart" is not an object id', () => {
 
     const cases = ['test', 6, []];
-    for (let products of cases) {
+    for (let cart of cases) {
       const order = new Order({
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@gmail.com',
         address: 'Home 5',
-        products,
-        status: 'ordered',
+        cart,
       });
 
       order.validate(err => {
-        expect(err.errors.products).to.exist;
-      });
-    }
-  });
-
-  it('should throw an error if "status" is not an allowed string', () => {
-
-    const cases = ['test', 6, [], {}];
-    for (let status of cases) {
-      const order = new Order({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@gmail.com',
-        address: 'Home 5',
-        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
-        status,
-      });
-
-      order.validate(err => {
-        expect(err.errors.status).to.exist;
+        expect(err.errors.cart).to.exist;
       });
     }
   });
@@ -184,8 +148,7 @@ describe('Order', () => {
       lastName: 'Doe',
       email: 'john@gmail.com',
       address: 'Home 5 5',
-      products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
-      status: 'ordered',
+      cart: '5d9f1140f10a81216cfd4408',
     });
 
     order.validate(err => {

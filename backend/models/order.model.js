@@ -1,12 +1,9 @@
 const { Schema, model } = require('mongoose');
-const { orderItemSchema } = require('./orderItem.model');
 
 const orderSchema = new Schema({
-  products: {
-    type: [orderItemSchema],
-    validate: {
-      validator: v => Array.isArray(v) && v.length > 0,
-    },
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: 'Cart',
     required: true,
   },
   firstName: {
@@ -31,11 +28,6 @@ const orderSchema = new Schema({
     required: true,
     minLength: 5,
     maxLength: 60,
-  },
-  status: {
-    type: String,
-    required: true,
-    enum: ['ordered', 'new'],
   },
 });
 
