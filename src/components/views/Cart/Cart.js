@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProducts, plusOne, minusOne, removeProduct, commentProduct } from '../../../redux/orderRedux';
+import { getProducts, plusOne, minusOne, removeProduct, commentProduct } from '../../../redux/cartRedux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Table from '@material-ui/core/Table';

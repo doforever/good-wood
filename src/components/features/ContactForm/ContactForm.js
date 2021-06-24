@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOrder, storeInput, getOrder, getRequest } from '../../../redux/orderRedux';
 
@@ -12,7 +13,7 @@ import Alert from '@material-ui/lab/Alert';
 
 import styles from './ContactForm.module.scss';
 
-const ContactForm = () =>{
+const ContactForm = ({products}) => {
   const dispatch = useDispatch();
   const order = useSelector(getOrder);
   const request = useSelector(getRequest);
@@ -84,16 +85,16 @@ const ContactForm = () =>{
         if (errors[error]) hasErrors = true;
       }
     }
-    return isComplete && !hasErrors && order.products.length > 0;
+    return isComplete && !hasErrors && products.length > 0;
   };
 
   const submit = () => {
     if (validateOrder()) {
       setIsWarning(false);
       setIsSending(true);
-      const orderProducts = order.products
+      const orderProducts = products
         .map(({id, amount, comment}) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
-      dispatch(sendOrder({ ...order, status: 'ordered', products: orderProducts}));
+      dispatch(sendOrder({ ...order, products: orderProducts}));
     } else setIsWarning(true);
   };
 
@@ -201,6 +202,10 @@ const ContactForm = () =>{
       </Snackbar>
     </Paper>
   );
+};
+
+ContactForm.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ContactForm;

@@ -8,9 +8,19 @@ export const initialState = {
       error: false,
     },
   },
+  cart: {
+    data: {
+      id: '',
+      products: [],
+    },
+    request: {
+      type: '',
+      active: false,
+      error: false,
+    },
+  },
   order: {
     data: {
-      products: [],
       firstName: '',
       lastName: '',
       email: '',

@@ -12,9 +12,9 @@ import Paper from '@material-ui/core/Paper';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-import styles from './OrderSummary.module.scss';
+import styles from './CartSummary.module.scss';
 
-const OrderSummary = ({products}) => {
+const CartSummary = ({products}) => {
   const noProducts = <Alert severity='warning' variant='outlined'>
     Your cart is empty. <Link color='inherit' variant='subtitle2' component={RouterLink} to='/'>Go back to shop</Link>
   </Alert>;
@@ -54,8 +54,8 @@ const OrderSummary = ({products}) => {
   );
 };
 
-OrderSummary.propTypes = {
+CartSummary.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default OrderSummary;
+export default CartSummary;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getCount } from '../../../redux/orderRedux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCount, fetchCart } from '../../../redux/cartRedux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -13,6 +13,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import styles from './Nav.module.scss';
 
 const Nav = ({className}) => {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchCart()), []);
   const count = useSelector(getCount);
 
   return (

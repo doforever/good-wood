@@ -28,7 +28,7 @@ router.post('/carts', async (req, res) => {
     try {
       const newCart = new Cart({ products: sanitize(products) });
       const saved = await newCart.save();
-      session.cartId = saved._id;
+      req.session.cartId = saved._id;
       res.status(201).json(saved);
     }
     catch (err) {
