@@ -10,7 +10,6 @@
     "start:react": "react-scripts start",
     "start-and-test": "run-p start-silent test ",
     "start-server": "cd backend && nodemon server.js",
-    "start-test-server": "cd backend && NODE_ENV=test nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --noStackTrace",
     "test-all": "react-scripts test --watchAll=false --noStackTrace",
