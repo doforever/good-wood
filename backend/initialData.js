@@ -9,16 +9,16 @@ const loadInitialData = async () => {
       defaultPrice: 20,
       photos: [{
         name: 'Chair close-up',
-        src: 'https://images.pexels.com/photos/7402621/pexels-photo-7402621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-7402621.jpeg',
       },{
         name: 'Back of the chair',
-        src: 'https://images.pexels.com/photos/7402624/pexels-photo-7402624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-7402624.jpeg',
       }, {
         name: 'Chair close-up',
-        src: 'https://images.pexels.com/photos/7402621/pexels-photo-7402621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-7402621.jpeg',
       }, {
         name: 'Back of the chair',
-        src: 'https://images.pexels.com/photos/7402624/pexels-photo-7402624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-7402624.jpeg',
       }],
     },
     {
@@ -27,13 +27,13 @@ const loadInitialData = async () => {
       defaultPrice: 50,
       photos: [{
         name: 'Chair close-up',
-        src: 'https://images.pexels.com/photos/116907/pexels-photo-116907.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-116907.jpeg',
       }, {
         name: 'Side-view',
-        src: 'https://images.pexels.com/photos/116915/pexels-photo-116915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-116915.jpeg',
       }, {
         name: 'Side-view',
-        src: 'https://images.pexels.com/photos/116915/pexels-photo-116915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-116915.jpeg',
       }],
     },
     {
@@ -42,13 +42,13 @@ const loadInitialData = async () => {
       defaultPrice: 60,
       photos: [{
         name: 'Top of the table',
-        src: 'https://images.pexels.com/photos/3184430/pexels-photo-3184430.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3184430.jpeg',
       }, {
         name: 'In use',
-        src: 'https://images.pexels.com/photos/3183172/pexels-photo-3183172.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3183172.jpeg',
       }, {
         name: 'Home office',
-        src: 'https://images.pexels.com/photos/1297611/pexels-photo-1297611.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-1297611.jpeg',
       }],
     },
     {
@@ -57,10 +57,10 @@ const loadInitialData = async () => {
       defaultPrice: 50,
       photos: [{
         name: 'Top of the table',
-        src: 'https://images.pexels.com/photos/3230010/pexels-photo-3230010.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3230010.jpeg',
       }, {
         name: 'Detail',
-        src: 'https://images.pexels.com/photos/3371220/pexels-photo-3371220.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3371220.jpeg',
       }],
     },
     {
@@ -69,16 +69,16 @@ const loadInitialData = async () => {
       defaultPrice: 50,
       photos: [{
         name: 'Seen from the distance',
-        src: 'https://images.pexels.com/photos/6480210/pexels-photo-6480210.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-6480210.jpeg',
       }, {
         name: 'Detail',
-        src: 'https://images.pexels.com/photos/6480209/pexels-photo-6480209.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-6480209.jpeg',
       }, {
         name: 'Seen from the distance',
-        src: 'https://images.pexels.com/photos/6480210/pexels-photo-6480210.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-6480210.jpeg',
       }, {
         name: 'Detail',
-        src: 'https://images.pexels.com/photos/6480209/pexels-photo-6480209.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-6480209.jpeg',
       }],
     },
     {
@@ -87,13 +87,13 @@ const loadInitialData = async () => {
       defaultPrice: 50,
       photos: [{
         name: 'Side-view',
-        src: 'https://images.pexels.com/photos/3661202/pexels-photo-3661202.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3661202.jpeg',
       }, {
         name: 'Detail',
-        src: 'https://images.pexels.com/photos/3661198/pexels-photo-3661198.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3661198.jpeg',
       }, {
         name: 'Side-view',
-        src: 'https://images.pexels.com/photos/3661202/pexels-photo-3661202.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-3661202.jpeg',
       }],
     },
     {
@@ -102,16 +102,16 @@ const loadInitialData = async () => {
       defaultPrice: 30,
       photos: [{
         name: 'Close-up',
-        src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-4857781.jpeg',
       }, {
         name: 'In a room',
-        src: 'https://images.pexels.com/photos/4846114/pexels-photo-4846114.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-4846114.jpeg',
       }, {
         name: 'Close-up',
-        src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-4857781.jpeg',
       }, {
         name: 'In a room',
-        src: 'https://images.pexels.com/photos/4846114/pexels-photo-4846114.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        src: '/images/pexels-photo-4846114.jpeg',
       }],
     },
   ];
