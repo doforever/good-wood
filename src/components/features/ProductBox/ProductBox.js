@@ -17,6 +17,7 @@ const ProductBox = ({ product: {id, name, mainPhoto, defaultPrice} }) => (
         className={styles.media}
         src={mainPhoto.src}
         component='img'
+        alt={mainPhoto.name}
       />
       <CardContent className={styles.content}>
         <Typography variant="h5" component="h2" noWrap>
