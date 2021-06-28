@@ -1,14 +1,33 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  .toolbar {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .title {
+   .title {
     text-transform: uppercase;
-    margin-right: auto;
     font-family: 'Staatliches', cursive;
+    width: 75vw;
+  }
+}
+
+@media (min-width: 600px) {
+  .root {
+    .title {
+      width: 83vw;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .root {
+    .title {
+      width: 88vw;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    .title {
+      width: 92vw;
+    }
   }
 }
