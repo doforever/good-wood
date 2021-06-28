@@ -1,9 +1,15 @@
 # GoodWood store app
 Store app created with React, Redux and Material UI framework.
-Backend in node.js and MongoDB with Mongoose.
+-- Backend in node.js and MongoDB with Mongoose.
 
 ## Deployed on Heroku
 https://evening-dusk-70267.herokuapp.com/
+
+## Run project locally
+1. `yarn install`
+2. run local mongo db with `mongod`
+3. `yarn start-server` => you'll get built app at http://localhost:8000
+4. `yarn start` => you'll get app in development mode at http://localhost:3000
 
 ## Available Scripts
 
