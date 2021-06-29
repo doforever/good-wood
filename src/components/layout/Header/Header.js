@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
-import Nav from '../../features/Nav/Nav';
+import CartWidget from '../../features/CartWidget/CartWidget';
 
 import styles from './Header.module.scss';
 
@@ -23,7 +23,7 @@ const Header = () => {
           >
             Good-Wood
           </Link>
-          <Nav className={styles.nav}/>
+          <CartWidget/>
         </Toolbar>
       </AppBar>
       <Toolbar />

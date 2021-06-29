@@ -19,10 +19,8 @@ connectToDB(dbURI);
 app.use(session({
   secret: 'kkdmerjwi94rslmflksdmr43',
   store: MongoStore.create({ mongoUrl: dbURI }),
-  saveUninitialized: false,
   cookie: { maxAge: 1000 * 60 * 60 * 48, secure: false, httpOnly: false },
   resave: false,
-  proxy: false,
 }));
 app.use(cors({
   origin: [

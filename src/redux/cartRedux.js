@@ -4,6 +4,7 @@ import { API_URL } from '../config.js';
 /* selectors */
 export const getCart = ({ cart }) => cart;
 export const getProducts = ({ cart }) => cart.data.products;
+export const getCartId = ({ cart }) => cart.data.id;
 export const getRequest = ({ cart }) => cart.request;
 export const getCount = ({ cart }) => {
   let count = 0;
@@ -39,12 +40,13 @@ export const add = payload => ({ payload, type: ADD });
 export const remove = payload => ({ payload, type: REMOVE });
 export const plus = payload => ({ payload, type: PLUS });
 export const minus = payload => ({ payload, type: MINUS });
+export const comment = payload => ({ payload, type: COMMENT });
+
 export const startRequest = payload => ({ payload, type: START_REQUEST });
 export const requestError = payload => ({ payload, type: REQUEST_ERROR });
 export const cartSaved = payload => ({ payload, type: SAVED });
 export const cartFetched = payload => ({ payload, type: FETCHED });
 export const cartUpdated = payload => ({ payload, type: UPDATED });
-export const comment = payload => ({ payload, type: COMMENT });
 
 /* thunk creators */
 export const addProduct = (cartProduct) => {
@@ -61,16 +63,16 @@ export const removeProduct = id => {
   };
 };
 
-export const plusOne = () => {
+export const plusOne = id => {
   return async dispatch => {
-    dispatch(plus());
+    dispatch(plus(id));
     dispatch(saveCart());
   };
 };
 
-export const minusOne = () => {
+export const minusOne = id => {
   return async dispatch => {
-    dispatch(minus());
+    dispatch(minus(id));
     dispatch(saveCart());
   };
 };
@@ -198,7 +200,7 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case FETCHED: {
       return {
-        data: action.payload,
+        data: action.payload.map(({_id, ...other}) => ({id: _id, ...other})),
         request: {
           ...statePart.request,
           active: false,
