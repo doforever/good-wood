@@ -268,7 +268,7 @@ export const reducer = (statePart = [], action = {}) => {
           products: [],
         },
         request: {
-          ...statePart.request,
+          type: 'DELETE',
           active: false,
           error: false,
         },

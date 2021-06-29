@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config.js';
+import { cartDeleted } from './cartRedux';
 
 /* selectors */
 export const getOrder = ({ order }) => order.data;
@@ -28,6 +29,7 @@ export const sendOrder = (orderData) => {
     try {
       const res = await axios.post(`${API_URL}/orders`, orderData, { withCredentials: true });
       dispatch(orderSaved(res.data));
+      dispatch(cartDeleted());
     } catch (e) {
       dispatch(requestError(e.message || true));
     }
