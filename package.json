@@ -15,7 +15,7 @@
     "test": "react-scripts test --noStackTrace",
     "test-all": "react-scripts test --watchAll=false --noStackTrace",
     "test-related": "react-scripts test --watchAll=false --noStackTrace --findRelatedTests",
-    "test-backend": "mocha \"backend/**/*.test.js\"",
+    "test-backend": "cross-env NODE_ENV=test mocha \"backend/**/*.test.js\"",
     "test-backend:watch": "onchange \"backend/**/*.js\" -i -k -- yarn test-backend",
     "eject": "react-scripts eject"
   },
