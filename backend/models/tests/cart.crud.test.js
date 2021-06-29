@@ -3,10 +3,10 @@
 
 const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
 const mongoose = require('mongoose');
-const Order = require('../order.model');
+const Cart = require('../cart.model');
 const expect = require('chai').expect;
 
-describe('Order', () => {
+describe('Cart', () => {
   before(async () => {
     try {
       const fakeDB = new MongoMemoryServer();
@@ -23,19 +23,15 @@ describe('Order', () => {
 
   describe('Creating data', () => {
     after(async () => {
-      await Order.deleteMany();
+      await Cart.deleteMany();
     });
 
     it('should insert new document with "save" method', async () => {
-      const order = new Order({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@gmail.com',
-        address: 'Home 5',
-        cart: '5d9f1140f10a81216cfd4408',
+      const cart = new Cart({
+        products: [{ amount: 1, product: '5d9f1140f10a81216cfd4408', comment: 'test' }],
       });
-      await order.save();
-      expect(order.isNew).to.be.false;
+      await cart.save();
+      expect(cart.isNew).to.be.false;
     });
   });
 });

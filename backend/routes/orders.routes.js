@@ -1,5 +1,6 @@
 const express = require('express');
 const Order = require('../models/order.model');
+const Cart = require('../models/cart.model');
 const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
@@ -20,7 +21,7 @@ router.get('/orders', async (req, res) => {
 
 router.get('/orders/:id', async (req, res) => {
   try {
-    const result = await Order.findById(req.params.id).populate('products.product');
+    const result = await Order.findById(req.params.id).populate('cart');
     if (!result) res.status(404).json({ product: 'Not found' });
     else res.json(result);
   }
@@ -31,9 +32,10 @@ router.get('/orders/:id', async (req, res) => {
 });
 
 router.post('/orders', async (req, res) => {
-  const { firstName, lastName, email, address, products, status} = req.body;
+  const { firstName, lastName, email, address, products } = req.body;
+  const cartId = !!req.session && req.session.cartId;
 
-  if (firstName && lastName && email && address && products && products.length > 0 && status) {
+  if (firstName && lastName && email && address && products && products.length > 0) {
     try {
       const newOrder = new Order({
         firstName: sanitize(firstName),
@@ -41,9 +43,12 @@ router.post('/orders', async (req, res) => {
         email,
         address: sanitize(address),
         products: sanitize(products),
-        status,
       });
       const saved = await newOrder.save();
+      if (cartId) {
+        await Cart.findByIdAndRemove(cartId);
+        req.session.cartId = null;
+      }
       res.status(201).json(saved);
     }
     catch (err) {

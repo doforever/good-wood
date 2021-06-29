@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getCount } from '../../../redux/orderRedux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCount, getCart, fetchCart } from '../../../redux/cartRedux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -10,10 +10,17 @@ import Badge from '@material-ui/core/Badge';
 import { NavLink } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import styles from './Nav.module.scss';
+import styles from './CartWidget.module.scss';
 
-const Nav = ({className}) => {
+const CartWidget = ({className}) => {
+  const dispatch = useDispatch();
   const count = useSelector(getCount);
+  const {data: {id}, request } = useSelector(getCart);
+
+  useEffect(() => {
+    if (!id && !request.active && !request.error && request.type !== 'DELETE') dispatch(fetchCart());
+  }, [id, request]);
+
 
   return (
     <nav className={clsx(className, styles.root)}>
@@ -32,9 +39,9 @@ const Nav = ({className}) => {
     </nav>
   );};
 
-Nav.propTypes = {
+CartWidget.propTypes = {
   className: PropTypes.string,
 };
 
-export default Nav;
+export default CartWidget;
 

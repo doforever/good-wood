@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getProducts } from '../../../redux/orderRedux';
+import { getProducts } from '../../../redux/cartRedux';
 
-import OrderSummary from '../../features/OrderSummary/OrderSummary';
-import ContactForm from '../../features/ContactForm/ContactForm';
+import CartSummary from '../../features/CartSummary/CartSummary';
+import OrderForm from '../../features/OrderForm/OrderForm';
 import Grid from '@material-ui/core/Grid';
 
 import styles from './Order.module.scss';
@@ -14,10 +14,10 @@ const Order = () => {
   return (
     <Grid container spacing={2} className={styles.root}>
       <Grid item component='section' xs={12} md={5}>
-        <OrderSummary products={products}/>
+        <CartSummary products={products}/>
       </Grid>
       <Grid item component='section' xs={12} md={7}>
-        <ContactForm/>
+        <OrderForm products={products}/>
       </Grid>
     </Grid>
   );

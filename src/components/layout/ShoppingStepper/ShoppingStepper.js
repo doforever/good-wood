@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getOrder } from '../../../redux/orderRedux';
+import { getProducts } from '../../../redux/cartRedux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Stepper from '@material-ui/core/Stepper';
@@ -14,7 +14,7 @@ import styles from './ShoppingStepper.module.scss';
 
 const ShoppingStepper = ({children}) => {
   let location = useLocation();
-  const order = useSelector(getOrder);
+  const products = useSelector(getProducts);
   const [completed, setCompleted] = useState();
   const matchesSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
@@ -25,11 +25,11 @@ const ShoppingStepper = ({children}) => {
   ];
 
   useEffect(() => {
-    if (order.products.length > 0 ) {
+    if (products.length > 0 ) {
       if (location.pathname === '/cart') setCompleted(0);
       else setCompleted(1);
     } else setCompleted(-1);
-  }, [location, order]);
+  }, [location, products]);
 
   const getPosition = () => {
     if (location.pathname ==='/order') return 2;
