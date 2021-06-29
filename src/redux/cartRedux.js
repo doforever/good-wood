@@ -92,7 +92,7 @@ export const saveCart = () => {
     if (cart.data.id) {
       dispatch(startRequest('PUT'));
       try {
-        const res = await axios.put(`${API_URL}/carts/stored`, { ...cart.data, products: dbProducts }, { withCredentials: true });
+        const res = await axios.put(`${API_URL}/carts/stored`, { products: dbProducts }, { withCredentials: true });
         dispatch(cartUpdated(res.data));
       } catch (e) {
         dispatch(requestError(e.message || true));
@@ -199,9 +199,12 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCHED: {
-      const { _id, ...other } = action.payload;
+      const { _id: cartId, products } = action.payload;
+      const cartProducts = products.map(({ amount, comment, product: {_id, name, defaultPrice} }) => ({
+        id: _id, name, defaultPrice, amount, comment,
+      }));
       return {
-        data: { id: _id, ...other },
+        data: { id: cartId, products: cartProducts },
         request: {
           ...statePart.request,
           active: false,
