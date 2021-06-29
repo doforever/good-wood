@@ -28,12 +28,13 @@ const ADD = createActionName('ADD');
 const REMOVE = createActionName('REMOVE');
 const PLUS = createActionName('PLUS');
 const MINUS = createActionName('MINUS');
+const COMMENT = createActionName('COMMENT');
 const START_REQUEST = createActionName('START_REQUEST');
 const REQUEST_ERROR = createActionName('REQUEST_ERROR');
 const SAVED = createActionName('SAVED');
 const FETCHED = createActionName('FETCHED');
 const UPDATED = createActionName('UPDATED');
-const COMMENT = createActionName('COMMENT');
+const DELETED = createActionName('DELETED');
 
 /* action creators */
 export const add = payload => ({ payload, type: ADD });
@@ -47,6 +48,7 @@ export const requestError = payload => ({ payload, type: REQUEST_ERROR });
 export const cartSaved = payload => ({ payload, type: SAVED });
 export const cartFetched = payload => ({ payload, type: FETCHED });
 export const cartUpdated = payload => ({ payload, type: UPDATED });
+export const cartDeleted = payload => ({ payload, type: DELETED });
 
 /* thunk creators */
 export const addProduct = (cartProduct) => {
@@ -90,14 +92,27 @@ export const saveCart = () => {
     const dbProducts = cart.data.products
       .map(({ id, amount, comment }) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
     if (cart.data.id) {
-      dispatch(startRequest('PUT'));
-      try {
-        const res = await axios.put(`${API_URL}/carts/stored`, { products: dbProducts }, { withCredentials: true });
-        dispatch(cartUpdated(res.data));
-      } catch (e) {
-        dispatch(requestError(e.message || true));
+      if(dbProducts.length>0){
+        // update stored cart
+        dispatch(startRequest('PUT'));
+        try {
+          const res = await axios.put(`${API_URL}/carts/stored`, { products: dbProducts }, { withCredentials: true });
+          dispatch(cartUpdated(res.data));
+        } catch (e) {
+          dispatch(requestError(e.message || true));
+        }
+      } else {
+        // delete stored cart
+        dispatch(startRequest('DELETE'));
+        try {
+          await axios.delete(`${API_URL}/carts/stored`, { withCredentials: true });
+          dispatch(cartDeleted());
+        } catch (e) {
+          dispatch(requestError(e.message || true));
+        }
       }
     } else {
+      // store new cart
       dispatch(startRequest('POST'));
       try {
         const res = await axios.post(`${API_URL}/carts`, { products: dbProducts }, { withCredentials: true });
@@ -160,6 +175,17 @@ export const reducer = (statePart = [], action = {}) => {
     case MINUS: {
       const newProducts = statePart.data.products
         .map(p => p.id === action.payload && p.amount > 1 ? ({ ...p, amount: p.amount - 1 }) : p);
+      return {
+        ...statePart,
+        data: {
+          ...statePart.data,
+          products: newProducts,
+        },
+      };
+    }
+    case COMMENT: {
+      const newProducts = statePart.data.products
+        .map(p => p.id === action.payload.id ? { ...p, comment: action.payload.comment } : p);
       return {
         ...statePart,
         data: {
@@ -235,14 +261,16 @@ export const reducer = (statePart = [], action = {}) => {
         },
       };
     }
-    case COMMENT: {
-      const newProducts = statePart.data.products
-        .map(p => p.id === action.payload.id ? { ...p, comment: action.payload.comment } : p);
+    case DELETED: {
       return {
-        ...statePart,
         data: {
-          ...statePart.data,
-          products: newProducts,
+          id: '',
+          products: [],
+        },
+        request: {
+          ...statePart.request,
+          active: false,
+          error: false,
         },
       };
     }

@@ -4,7 +4,7 @@ import CartWidget from './CartWidget';
 
 jest.mock('../../../redux/cartRedux', () => ({
   ...jest.requireActual('../../../redux/cartRedux'),
-  getCartId: () => ('id'),
+  getCart: () => ({ data: {id: '', products: []}, request: {active: false, type: '', error: false }}),
   getCount: () => 2,
 }));
 

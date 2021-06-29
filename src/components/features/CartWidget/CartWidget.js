@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCount, getCartId, fetchCart } from '../../../redux/cartRedux';
+import { getCount, getCart, fetchCart } from '../../../redux/cartRedux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -15,11 +15,11 @@ import styles from './CartWidget.module.scss';
 const CartWidget = ({className}) => {
   const dispatch = useDispatch();
   const count = useSelector(getCount);
-  const id = useSelector(getCartId);
+  const {data: {id}, request } = useSelector(getCart);
 
   useEffect(() => {
-    if (!id) dispatch(fetchCart());
-  }, [id]);
+    if (!id && !request.active && !request.error && request.type !== 'DELETE') dispatch(fetchCart());
+  }, [id, request]);
 
 
   return (

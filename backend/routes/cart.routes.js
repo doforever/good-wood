@@ -27,12 +27,10 @@ router.post('/carts', async (req, res) => {
   const session = req.session;
 
   if (products && products.length > 0 && session) {
-    console.log('post products', products);
     try {
       const newCart = new Cart({ products: sanitize(products) });
       const saved = await newCart.save();
       req.session.cartId = saved._id;
-      console.log('saved', saved);
       res.status(201).json(saved);
     }
     catch (err) {
@@ -49,14 +47,12 @@ router.put('/carts/stored', async (req, res) => {
   const cartId = !!req.session && req.session.cartId;
 
   if (products && cartId) {
-    console.log('put products', products);
     try {
       const storedCart = await Cart.findById(cartId);
       if (!storedCart) res.status(404).json({ message: 'Not found' });
       else {
         storedCart.products = products;
         const updatedCart = await storedCart.save();
-        console.log('updated', updatedCart);
         res.json(updatedCart);
       }
     }
@@ -69,7 +65,7 @@ router.put('/carts/stored', async (req, res) => {
   }
 });
 
-router.delete('/cart/stored', async (req, res) => {
+router.delete('/carts/stored', async (req, res) => {
   const cartId = !!req.session && req.session.cartId;
 
   if (cartId) {
