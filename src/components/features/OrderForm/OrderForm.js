@@ -11,9 +11,9 @@ import Grid from '@material-ui/core/Grid';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
-import styles from './ContactForm.module.scss';
+import styles from './OrderForm.module.scss';
 
-const ContactForm = ({products}) => {
+const OrderForm = ({products}) => {
   const dispatch = useDispatch();
   const order = useSelector(getOrder);
   const request = useSelector(getRequest);
@@ -204,8 +204,8 @@ const ContactForm = ({products}) => {
   );
 };
 
-ContactForm.propTypes = {
+OrderForm.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default ContactForm;
+export default OrderForm;

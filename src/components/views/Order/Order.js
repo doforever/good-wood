@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getProducts } from '../../../redux/cartRedux';
 
 import CartSummary from '../../features/CartSummary/CartSummary';
-import ContactForm from '../../features/ContactForm/ContactForm';
+import OrderForm from '../../features/OrderForm/OrderForm';
 import Grid from '@material-ui/core/Grid';
 
 import styles from './Order.module.scss';
@@ -17,7 +17,7 @@ const Order = () => {
         <CartSummary products={products}/>
       </Grid>
       <Grid item component='section' xs={12} md={7}>
-        <ContactForm products={products}/>
+        <OrderForm products={products}/>
       </Grid>
     </Grid>
   );

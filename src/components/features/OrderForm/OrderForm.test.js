@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ContactForm from './ContactForm';
+import OrderForm from './OrderForm';
 
 jest.mock('../../../redux/orderRedux', () => ({
   ...jest.requireActual('../../../redux/orderRedux'),
@@ -19,10 +19,10 @@ jest.mock('react-redux', () => ({
   useSelector: cb => cb(),
 }));
 
-describe('Component ContactForm', () => {
+describe('Component OrderForm', () => {
 
   it('should render without crashing', () => {
-    const component = shallow(<ContactForm />);
+    const component = shallow(<OrderForm />);
     expect(component).toBeTruthy();
   });
 });
