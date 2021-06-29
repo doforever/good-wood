@@ -89,10 +89,10 @@ export const saveCart = () => {
     const { cart } = getState();
     const dbProducts = cart.data.products
       .map(({ id, amount, comment }) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
-    if (cart.id) {
+    if (cart.data.id) {
       dispatch(startRequest('PUT'));
       try {
-        const res = await axios.put(`${API_URL}/api/carts/stored`, { ...cart.data, products: dbProducts }, { withCredentials: true });
+        const res = await axios.put(`${API_URL}/carts/stored`, { ...cart.data, products: dbProducts }, { withCredentials: true });
         dispatch(cartUpdated(res.data));
       } catch (e) {
         dispatch(requestError(e.message || true));
@@ -100,7 +100,7 @@ export const saveCart = () => {
     } else {
       dispatch(startRequest('POST'));
       try {
-        const res = await axios.post(`${API_URL}/api/carts`, { products: dbProducts }, { withCredentials: true });
+        const res = await axios.post(`${API_URL}/carts`, { products: dbProducts }, { withCredentials: true });
         dispatch(cartSaved(res.data));
       } catch (e) {
         dispatch(requestError(e.message || true));
@@ -113,7 +113,7 @@ export const fetchCart = () => {
   return async dispatch => {
     dispatch(startRequest('GET'));
     try {
-      let res = await axios.get(`${API_URL}/api/carts/stored`, { withCredentials: true });
+      let res = await axios.get(`${API_URL}/carts/stored`, { withCredentials: true });
       dispatch(cartFetched(res.data));
     } catch (e) {
       dispatch(requestError(e.message || true));
@@ -199,8 +199,9 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCHED: {
+      const { _id, ...other } = action.payload;
       return {
-        data: action.payload.map(({_id, ...other}) => ({id: _id, ...other})),
+        data: { id: _id, ...other },
         request: {
           ...statePart.request,
           active: false,

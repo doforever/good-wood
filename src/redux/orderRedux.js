@@ -26,7 +26,7 @@ export const sendOrder = (orderData) => {
   return async dispatch => {
     dispatch(startRequest('POST'));
     try {
-      const res = await axios.post(`${API_URL}/api/orders`, orderData, { withCredentials: true });
+      const res = await axios.post(`${API_URL}/orders`, orderData, { withCredentials: true });
       dispatch(orderSaved(res.data));
     } catch (e) {
       dispatch(requestError(e.message || true));
