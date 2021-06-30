@@ -1,38 +1,21 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  height: 70vh;
+  height: 50vh;
   .photo_wrapper {
     overflow: hidden;
-    border-radius: $radius;
-    position: relative;
+    display: flex;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      position: absolute;
-    }
-
-    .current_img {
-      opacity: 1;
-      transition: 1s $t-function;
-    }
-
-    .incoming_img {
-      opacity: 1;
-    }
-
-    &.changing {
-      .current_img{
-        opacity: 0;
-        transition: 1s $t-function;
-      }
     }
   }
 
   .dots {
     width: 100%;
-    border-radius: $radius;
   }
 }
