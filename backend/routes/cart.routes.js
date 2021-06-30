@@ -9,7 +9,7 @@ router.get('/carts/stored', async (req, res) => {
 
   if (cartId) {
     try {
-      const storedCart = await Cart.findById(cartId).populate('products.product');
+      const storedCart = await Cart.findById(cartId).populate({path: 'products.product', select: 'name defaultPrice'});
       if (!storedCart) res.status(404).json({ message: 'Not found' });
       else {
         res.json(storedCart);

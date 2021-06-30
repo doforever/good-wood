@@ -43,7 +43,7 @@ const mapStyles = (styles) => ({
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <ScrollToTop/>
+      <ScrollToTop />
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
