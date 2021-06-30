@@ -43,6 +43,10 @@
     background-color: $secondary;
     border-radius: $radius;
 
+    button {
+      width: 100%;
+    }
+
     &:hover {
       img {
         opacity: 1;
