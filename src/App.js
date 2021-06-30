@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AnimatedSwitch, spring, AnimatedRoute } from 'react-router-transition';
 import { Provider } from 'react-redux';
+import ScrollToTop from './components/common/ScrollToTop/ScrollToTop';
 
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
@@ -42,6 +43,7 @@ const mapStyles = (styles) => ({
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
+      <ScrollToTop/>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
