@@ -35,41 +35,4 @@
     width: 100%;
     border-radius: $radius;
   }
-
-  .thumbnail {
-    position: relative;
-    margin-top: $base-size/2;
-    margin-bottom: 0;
-    background-color: $secondary;
-    border-radius: $radius;
-
-    button {
-      width: 100%;
-    }
-
-    &:hover {
-      img {
-        opacity: 1;
-      }
-    }
-
-    img {
-      height: 100px;
-      width: 100%;
-      object-fit: cover;
-      border-radius: $radius;
-      opacity: 0.6;
-      transition: 0.4s $t-function;
-    }
-
-    &.active {
-      img {
-        opacity: 1;
-      }
-    }
-  }
-
-  .thumbnail + .thumbnail {
-    margin-left: $base-size/2;
-  }
 }
