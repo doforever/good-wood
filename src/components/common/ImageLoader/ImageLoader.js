@@ -16,6 +16,7 @@ const ImageLoader = ({children, className}) => {
 
   return (
     <div className={styles.root}>
+      { !isLoaded && <div className={styles.loader}>Loading...</div> }
       { React.Children.map(children, (child) =>
         React.cloneElement(child, {onLoad, className: clsx(className, loaderClass)})) }
     </div>
