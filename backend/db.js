@@ -11,7 +11,11 @@ const connectToDB = (dbUri) => {
     loadInitialData();
   });
 
-  db.on('error', (err) => console.log('DB connection error: ' + err));
+  db.on('error', (err) => {
+    console.log('DB connection error: ' + err);
+    connectToDB(dbUri);
+    process.exit();
+  });
 };
 
 module.exports = connectToDB;
