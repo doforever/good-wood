@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AnimatedSwitch, spring, AnimatedRoute } from 'react-router-transition';
 import { Provider } from 'react-redux';
 import ScrollToTop from './components/common/ScrollToTop/ScrollToTop';
-
-import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
-
 import { store } from './redux/store';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
-import ShoppingStepper from './components/layout/ShoppingStepper/ShoppingStepper';
-import Home from './components/views/Home/Home';
-import Product from './components/views/Product/Product';
-import Cart from './components/views/Cart/Cart';
-import Order from './components/views/Order/Order';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
+import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import styles from './App.module.scss';
+
+const ShoppingStepper = lazy(() => import('./components/layout/ShoppingStepper/ShoppingStepper'));
+const Home = lazy(() => import('./components/views/Home/Home'));
+const Product = lazy(() => import('./components/views/Product/Product'));
+const Cart = lazy(() => import('./components/views/Cart/Cart'));
+const Order = lazy(() => import('./components/views/Order/Order'));
 
 const theme = createMuiTheme({
   palette: {
@@ -48,41 +48,43 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <MainLayout>
-            <AnimatedSwitch
-              atEnter={{ offset: 100 }}
-              atLeave={{ offset: -120 }}
-              atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
-              mapStyles={mapStyles}
-              wrapperComponent='div'
-              className={styles.transitionWrapper}
-            >
-              <Route exact path='/' component={Home} />
-              <Route exact path='/products/:id' component={Product} />
-              <ShoppingStepper>
-                <AnimatedRoute
-                  exact
-                  path='/cart'
-                  component={Cart}
-                  atEnter={{ offset: 100 }}
-                  atLeave={{ offset: -120 }}
-                  atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
-                  mapStyles={mapStyles}
-                  wrapperComponent='div'
-                  className={styles.transitionWrapper}
-                />
-                <AnimatedRoute
-                  exact
-                  path='/order'
-                  component={Order}
-                  atEnter={{ offset: 100 }}
-                  atLeave={{ offset: -120 }}
-                  atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
-                  mapStyles={mapStyles}
-                  wrapperComponent='div'
-                  className={styles.transitionWrapper}
-                />
-              </ShoppingStepper>
-            </AnimatedSwitch>
+            <Suspense fallback={<LinearProgress/>}>
+              <AnimatedSwitch
+                atEnter={{ offset: 100 }}
+                atLeave={{ offset: -120 }}
+                atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+                mapStyles={mapStyles}
+                wrapperComponent='div'
+                className={styles.transitionWrapper}
+              >
+                <Route exact path='/' component={Home} />
+                <Route exact path='/products/:id' component={Product} />
+                <ShoppingStepper>
+                  <AnimatedRoute
+                    exact
+                    path='/cart'
+                    component={Cart}
+                    atEnter={{ offset: 100 }}
+                    atLeave={{ offset: -120 }}
+                    atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+                    mapStyles={mapStyles}
+                    wrapperComponent='div'
+                    className={styles.transitionWrapper}
+                  />
+                  <AnimatedRoute
+                    exact
+                    path='/order'
+                    component={Order}
+                    atEnter={{ offset: 100 }}
+                    atLeave={{ offset: -120 }}
+                    atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+                    mapStyles={mapStyles}
+                    wrapperComponent='div'
+                    className={styles.transitionWrapper}
+                  />
+                </ShoppingStepper>
+              </AnimatedSwitch>
+            </Suspense>
           </MainLayout>
         </ThemeProvider>
       </StylesProvider>

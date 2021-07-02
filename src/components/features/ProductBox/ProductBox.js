@@ -19,6 +19,7 @@ const ProductBox = ({ product: {id, name, mainPhoto, defaultPrice} }) => (
         height={270}
         debounce={false}
         offsetVertical={400}
+        offsetHorizontal={400}
       >
         <ImageLoader className={styles.media}>
           <CardMedia

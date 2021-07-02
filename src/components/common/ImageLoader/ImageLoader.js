@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
+import Spinner from '../Spinner/Spinner';
+
 import styles from './ImageLoader.module.scss';
 
 const ImageLoader = ({children, className}) => {
@@ -16,7 +18,7 @@ const ImageLoader = ({children, className}) => {
 
   return (
     <div className={styles.root}>
-      { !isLoaded && <div className={styles.loader}>Loading...</div> }
+      { !isLoaded && <Spinner/> }
       { React.Children.map(children, (child) =>
         React.cloneElement(child, {onLoad, className: clsx(className, loaderClass)})) }
     </div>
