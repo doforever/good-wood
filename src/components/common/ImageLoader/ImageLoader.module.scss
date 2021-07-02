@@ -1,0 +1,24 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .loading{
+    opacity: 0;
+    transition: all
+  }
+
+  .loaded {
+    animation: 1s fadeInImg $t-function;
+    opacity: 1;
+    transition: 1s $t-function;
+  }
+}
+
+@keyframes fadeInImg {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+

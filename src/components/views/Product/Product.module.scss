@@ -6,12 +6,4 @@
   .input {
     width: $button-width;
   }
-
-  input[type=number] {
-    -moz-appearance: textfield;
-
-    &:focus, &:hover {
-      -moz-appearance: initial;
-    }
-  }
 }
