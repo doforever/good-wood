@@ -9,6 +9,7 @@ import ProductBox from '../ProductBox/ProductBox';
 import styles from './ProductList.module.scss';
 
 const ProductList = ({className, products}) => {
+
   if (!products || products.length < 1) {
     return (< Alert severity="info" variant='outlined'> No products</Alert >);
   } else {
