@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
+import ImageLoader from '../../common/ImageLoader/ImageLoader';
 
 
 import styles from './MobileGallery.module.scss';
@@ -24,7 +25,9 @@ const MobileGallery = ({ pictures, current = 0, setCurrent }) => {
           containerStyle={{ height: '100%' }}
         >
           { pictures.map((picture, index) => (
-            <img key={index} src={picture.src} alt={picture.name} />
+            <ImageLoader key={index}>
+              <img src={picture.src} alt={picture.name} />
+            </ImageLoader>
           ))}
         </SwipeableViews>
       </Grid>
