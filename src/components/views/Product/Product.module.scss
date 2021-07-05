@@ -9,9 +9,13 @@
   .sidebar {
     height: 100%;
   }
+}
 
-  .rollOut {
-    animation: rollout 0.8s $t-function;
+@media (min-width: 960px) {
+  .root {
+    .rollOut {
+      animation: rollout 0.8s $t-function;
+    }
   }
 }
 
