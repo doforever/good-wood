@@ -31,9 +31,9 @@ const Product = () => {
   else productView = <ProductDetails {...product} />;
 
   return (
-    <Grid container spacing={2} className={styles.root}>
-      <Hidden xsDown>
-        <Grid item>
+    <Grid container spacing={2} className={styles.root} alignItems='stretch' >
+      <Hidden smDown>
+        <Grid item className={styles.sidebar}>
           <ProductNav products={allProducts}/>
         </Grid>
       </Hidden>

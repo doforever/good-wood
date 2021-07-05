@@ -28,7 +28,7 @@ const DesktopGallery = ({ pictures, current = 0, setCurrent }) => {
       className={clxs(styles.thumbnail, (incoming >= 0 ? i === incoming : i === current) && styles.active)}
     >
       <ButtonBase onClick={() => changePic(i)}>
-        <ImageLoader><img src={src} alt={name} /></ImageLoader>
+        <img src={src} alt={name} />
       </ButtonBase>
     </Grid>)
   );

@@ -48,6 +48,7 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <MainLayout>
+
             <AnimatedSwitch
               atEnter={{ offset: 100 }}
               atLeave={{ offset: -120 }}
