@@ -6,6 +6,18 @@
   scrollbar-width: auto;
   scrollbar-color: transparentize($secondary, 0.5) $white;
 
+  .item {
+    white-space: nowrap;
+
+    span {
+      font-size: 0.8rem;
+    }
+
+    &.active {
+      background-color: $primary;
+    }
+  }
+
   &::-webkit-scrollbar {
     width: 11px;
   }
