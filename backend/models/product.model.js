@@ -20,6 +20,11 @@ const productSchema = new Schema({
     min: 1,
     max: 10000,
   },
+  category: {
+    type: String,
+    required: true,
+    enum: ['beds', 'tables', 'chairs', 'storage'],
+  },
   photos: {
     type: [photoSchema],
     validate: {

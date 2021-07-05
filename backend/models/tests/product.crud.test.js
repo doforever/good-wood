@@ -27,6 +27,7 @@ describe('Product', () => {
         name: 'Product1',
         description: 'Test',
         defaultPrice: 5,
+        category: 'tables',
         photos: [{
           name: 'Close-up',
           src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -38,6 +39,7 @@ describe('Product', () => {
         name: 'Product2',
         description: 'Test',
         defaultPrice: 5,
+        category: 'tables',
         photos: [{
           name: 'Close-up',
           src: 'https://images.pexels.com/photos/4857781/pexels-photo-4857781.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',

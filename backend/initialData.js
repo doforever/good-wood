@@ -7,6 +7,7 @@ const loadInitialData = async () => {
       name: 'Simple Chair',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 20,
+      category: 'chairs',
       photos: [{
         name: 'Chair close-up',
         src: '/images/pexels-photo-7402621.jpeg',
@@ -25,6 +26,7 @@ const loadInitialData = async () => {
       name: 'Vintage Chair',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 50,
+      category: 'chairs',
       photos: [{
         name: 'Chair close-up',
         src: '/images/pexels-photo-116907.jpeg',
@@ -40,6 +42,7 @@ const loadInitialData = async () => {
       name: 'Wooden Table',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 60,
+      category: 'tables',
       photos: [{
         name: 'Top of the table',
         src: '/images/pexels-photo-3184430.jpeg',
@@ -55,6 +58,7 @@ const loadInitialData = async () => {
       name: 'Coffee Table',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 50,
+      category: 'tables',
       photos: [{
         name: 'Top of the table',
         src: '/images/pexels-photo-3230010.jpeg',
@@ -67,6 +71,7 @@ const loadInitialData = async () => {
       name: 'Comfortable double bed',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 50,
+      category: 'beds',
       photos: [{
         name: 'Seen from the distance',
         src: '/images/pexels-photo-6480210.jpeg',
@@ -85,6 +90,7 @@ const loadInitialData = async () => {
       name: 'Lovely bed for kids',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 50,
+      category: 'beds',
       photos: [{
         name: 'Side-view',
         src: '/images/pexels-photo-3661202.jpeg',
@@ -100,6 +106,7 @@ const loadInitialData = async () => {
       name: 'Simple bookshelf',
       description: 'In bibendum tincidunt sem, ut gravida elit. Proin non tristique arcu. Nunc elit orci, blandit eget mauris quis, lacinia laoreet neque. Nullam aliquet purus sed metus scelerisque semper. Sed aliquam.',
       defaultPrice: 30,
+      category: 'storage',
       photos: [{
         name: 'Close-up',
         src: '/images/pexels-photo-4857781.jpeg',
