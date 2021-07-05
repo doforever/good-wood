@@ -1,5 +1,20 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  .filters {
+    padding-top: $base-size/2;
+    padding-bottom: $base-size/2;
+    position: sticky;
+    top: 64px;
+    z-index: 1;
+    background-color: $background;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 
+  .search {
+    width: 250px;
+  }
 }
+

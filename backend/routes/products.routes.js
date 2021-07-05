@@ -9,11 +9,12 @@ router.get('/products', async (req, res) => {
       if(err) res.status(500).json(err);
       if (products) {
         res.header('Cache-Control', 'max-age=720, stale-while-revalidate=7200')
-          .json(products.map(({_id, name, defaultPrice, photos}) => (
+          .json(products.map(({_id, name, defaultPrice, category, photos}) => (
             {
               _id,
               name,
               defaultPrice,
+              category,
               mainPhoto: {
                 name: photos[0].name,
                 src: photos[0].src,
