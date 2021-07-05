@@ -24,13 +24,17 @@ export const requestError = payload => ({ payload, type: REQUEST_ERROR });
 
 /* thunk creators */
 export const fetchAll = () => {
-  return async (dispatch) => {
-    dispatch(startRequest('GET_ALL'));
-    try {
-      let res = await axios.get(`${API_URL}/products`, { withCredentials: true });
-      dispatch(allFetched(res.data));
-    } catch (e) {
-      dispatch(requestError(e.message || true));
+  return async (dispatch, getState) => {
+    const {products: {lastFetchAll}} = getState();
+    const maxFreshness = 1000 * 60 * 60 * 2;
+    if (Date.now() - lastFetchAll > maxFreshness){
+      dispatch(startRequest('GET_ALL'));
+      try {
+        let res = await axios.get(`${API_URL}/products`, { withCredentials: true });
+        dispatch(allFetched(res.data));
+      } catch (e) {
+        dispatch(requestError(e.message || true));
+      }
     }
   };
 };
@@ -70,6 +74,7 @@ export const reducer = (statePart = [], action = {}) => {
           error: false,
         },
         data: products,
+        lastFetchAll: Date.now(),
       };
     }
     case ONE_FETCHED: {
