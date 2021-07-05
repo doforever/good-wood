@@ -1,6 +1,7 @@
 export const initialState = {
   products: {
     data: [],
+    lastFetchAll: null,
     current: null,
     request: {
       type: '',

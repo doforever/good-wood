@@ -7,14 +7,14 @@ import { store } from './redux/store';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ShoppingStepper from './components/layout/ShoppingStepper/ShoppingStepper';
+import Home from './components/views/Home/Home';
+import Product from './components/views/Product/Product';
 
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import styles from './App.module.scss';
 
-const ShoppingStepper = lazy(() => import('./components/layout/ShoppingStepper/ShoppingStepper'));
-const Home = lazy(() => import('./components/views/Home/Home'));
-const Product = lazy(() => import('./components/views/Product/Product'));
 const Cart = lazy(() => import('./components/views/Cart/Cart'));
 const Order = lazy(() => import('./components/views/Order/Order'));
 
@@ -48,18 +48,19 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <MainLayout>
-            <Suspense fallback={<LinearProgress/>}>
-              <AnimatedSwitch
-                atEnter={{ offset: 100 }}
-                atLeave={{ offset: -120 }}
-                atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
-                mapStyles={mapStyles}
-                wrapperComponent='div'
-                className={styles.transitionWrapper}
-              >
-                <Route exact path='/' component={Home} />
-                <Route exact path='/products/:id' component={Product} />
-                <ShoppingStepper>
+
+            <AnimatedSwitch
+              atEnter={{ offset: 100 }}
+              atLeave={{ offset: -120 }}
+              atActive={{ offset: spring(0, { stiffness: 70, damping: 40 }) }}
+              mapStyles={mapStyles}
+              wrapperComponent='div'
+              className={styles.transitionWrapper}
+            >
+              <Route exact path='/' component={Home} />
+              <Route exact path='/products/:id' component={Product} />
+              <ShoppingStepper>
+                <Suspense fallback={<LinearProgress />}>
                   <AnimatedRoute
                     exact
                     path='/cart'
@@ -82,9 +83,9 @@ const App = () => (
                     wrapperComponent='div'
                     className={styles.transitionWrapper}
                   />
-                </ShoppingStepper>
-              </AnimatedSwitch>
-            </Suspense>
+                </Suspense>
+              </ShoppingStepper>
+            </AnimatedSwitch>
           </MainLayout>
         </ThemeProvider>
       </StylesProvider>

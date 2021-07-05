@@ -1,9 +1,27 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  padding: $base-size*2;
+  height: calc(100vh - 80px);
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 
-  .input {
-    width: $button-width;
+  .sidebar {
+    height: 100%;
   }
+
+  .rollOut {
+    animation: rollout 0.8s $t-function;
+  }
+}
+
+@keyframes rollout {
+    0% {
+      transform: translateY(-80px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
 }
