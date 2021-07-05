@@ -9,4 +9,19 @@
   .sidebar {
     height: 100%;
   }
+
+  .rollOut {
+    animation: rollout 0.8s $t-function;
+  }
+}
+
+@keyframes rollout {
+    0% {
+      transform: translateY(-80px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
 }

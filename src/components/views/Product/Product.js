@@ -37,7 +37,7 @@ const Product = () => {
           <ProductNav products={allProducts}/>
         </Grid>
       </Hidden>
-      <Grid item xs>
+      <Grid key={id} className={styles.rollOut} item xs>
         {productView}
       </Grid>
     </Grid>
