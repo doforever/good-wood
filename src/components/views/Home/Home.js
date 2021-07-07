@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAll } from '../../../redux/productsRedux';
 import { useLocation } from 'react-router-dom';
 import { getAll, getRequest } from '../../../redux/productsRedux';
+import { withStyles } from '@material-ui/core/styles';
 
 import ProductList from '../../features/ProductList/ProductList';
 import Alert from '@material-ui/lab/Alert';
@@ -45,6 +46,20 @@ const Home = () => {
     setSearchString(event.target.value);
   };
 
+  const NavTabs = withStyles({
+    root: {
+      flex: '1 0 auto',
+      'max-width': '100%',
+      margin: '0 16px',
+    },
+    indicator: {
+      height: '4px',
+    },
+    flexContainer: {
+      height: '100%',
+    },
+  })(Tabs);
+
   let productsList = '';
   if (request.type === 'GET_ALL' && request.error) {
     productsList = <Alert severity='error' variant='outlined'>Connection error, please try again</Alert >;
@@ -72,17 +87,13 @@ const Home = () => {
           type='search'
           startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
         />
-        <Tabs
+        <NavTabs
           value={categories.indexOf(category)+1}
           aria-label="choose-category"
           indicatorColor="primary"
           className={styles.tabs}
           variant="scrollable"
-          TabIndicatorProps={{
-            style: {
-              height: '4px',
-            },
-          }}
+          scrollButtons="off"
         >
           <Tab component={RouterLink} to={{ search: '' }} className={styles.tab} label="All" id="all" />
           { categories.map((category, i) => (
@@ -94,7 +105,7 @@ const Home = () => {
               label={category}
             />
           ))}
-        </Tabs>
+        </NavTabs>
       </Toolbar>
       <Divider/>
       {productsList}
