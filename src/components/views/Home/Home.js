@@ -12,14 +12,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
-import FilledInput from '@material-ui/core/FilledInput';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import styles from './Home.module.scss';
 
@@ -32,20 +29,15 @@ const Home = () => {
     dispatch(fetchAll());
   }, [dispatch]);
 
-  const [state, setState] = useState({
-    beds: true,
-    chairs: true,
-    storage: true,
-    tables: true,
-    search: '',
-  });
+  const [tabIndex, setTabIndex] = useState(0);
+  const [searchString, setSearchString] = useState('');
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const handleTabChange = (event, value) => {
+    setTabIndex(value);
   };
 
   const handleSearchChange = (event) => {
-    setState({...state, search: event.target.value});
+    setSearchString(event.target.value);
   };
 
   let productsList = '';
@@ -60,41 +52,40 @@ const Home = () => {
       <Intro/>
       <Divider/>
       <Toolbar className={styles.filters}>
-        <FormGroup row>
-          <FormControlLabel
-            control={<Checkbox checked={state.tables} onChange={handleChange} name="tables" color="primary"/>}
-            label="Tables"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={state.chairs} onChange={handleChange} name="chairs" color="primary"/>}
-            label="Chairs"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={state.beds} onChange={handleChange} name="beds" color="primary"/>}
-            label="Beds"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={state.storage} onChange={handleChange} name="storage" color="primary"/>}
-            label="Storage"
-          />
-        </FormGroup>
         <OutlinedInput
           className={styles.search}
           id="search"
-          value={state.search}
+          value={searchString}
           onChange={handleSearchChange}
           autoComplete='off'
           margin='dense'
           placeholder='Search...'
           name='search'
           type='search'
-          startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+          startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
         />
+        <Tabs
+          value={tabIndex}
+          onChange={handleTabChange}
+          aria-label="choose-category"
+          indicatorColor="primary"
+          className={styles.tabs}
+          variant="scrollable"
+          TabIndicatorProps={{
+            style: {
+              height: '4px',
+            },
+          }}
+        >
+          <Tab className={styles.tab} label="All" id="all" />
+          <Tab className={styles.tab} label="Chairs" id="chairs" />
+          <Tab className={styles.tab} label="Tables" id="tables" />
+          <Tab className={styles.tab} label="Beds" id="beds"  />
+          <Tab className={styles.tab} label="Storage" id="storage" />
+        </Tabs>
       </Toolbar>
       <Divider/>
-      { productsList }
+      {productsList}
     </div>
   );
 };

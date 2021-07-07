@@ -2,8 +2,6 @@
 
 .root {
   .filters {
-    padding-top: $base-size/2;
-    padding-bottom: $base-size/2;
     position: sticky;
     top: 64px;
     z-index: 1;
@@ -11,10 +9,26 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .tabs {
+    flex: 1 0 auto;
+    max-width: 100%;
+    margin: 0 $base-size;
+  }
+
+  .tab {
+    min-width: 100px;
+    flex-grow: 1;
   }
 
   .search {
     width: 250px;
+    align-self: center;
+    margin: $base-size/2 0;
+    margin-left: auto;
+    flex: 0 0 auto;
   }
 }
-
