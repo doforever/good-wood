@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAll } from '../../../redux/productsRedux';
+import { useLocation } from 'react-router-dom';
 import { getAll, getRequest } from '../../../redux/productsRedux';
 
 import ProductList from '../../features/ProductList/ProductList';
 import Alert from '@material-ui/lab/Alert';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Intro from '../../features/Intro/Intro';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -17,6 +15,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import {Link as RouterLink} from 'react-router-dom';
 
 import styles from './Home.module.scss';
 
@@ -24,17 +23,23 @@ const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector(getAll);
   const request = useSelector(getRequest);
+  const location = useLocation();
+
+  const categories = ['chairs', 'tables', 'beds', 'storage'];
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     dispatch(fetchAll());
   }, [dispatch]);
 
-  const [tabIndex, setTabIndex] = useState(0);
-  const [searchString, setSearchString] = useState('');
+  useEffect(() => {
+    if (location.search.includes('?category=')) {
+      const category = location.search.replace('?category=', '');
+      setCategory(category);
+    } else setCategory('');
+  }, [location]);
 
-  const handleTabChange = (event, value) => {
-    setTabIndex(value);
-  };
+  const [searchString, setSearchString] = useState('');
 
   const handleSearchChange = (event) => {
     setSearchString(event.target.value);
@@ -65,8 +70,7 @@ const Home = () => {
           startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
         />
         <Tabs
-          value={tabIndex}
-          onChange={handleTabChange}
+          value={categories.indexOf(category)+1}
           aria-label="choose-category"
           indicatorColor="primary"
           className={styles.tabs}
@@ -77,11 +81,16 @@ const Home = () => {
             },
           }}
         >
-          <Tab className={styles.tab} label="All" id="all" />
-          <Tab className={styles.tab} label="Chairs" id="chairs" />
-          <Tab className={styles.tab} label="Tables" id="tables" />
-          <Tab className={styles.tab} label="Beds" id="beds"  />
-          <Tab className={styles.tab} label="Storage" id="storage" />
+          <Tab component={RouterLink} to={{ search: '' }} className={styles.tab} label="All" id="all" />
+          { categories.map((category, i) => (
+            <Tab
+              key={i}
+              component={RouterLink}
+              to={{ search: `category=${category}` }}
+              className={styles.tab}
+              label={category}
+            />
+          ))}
         </Tabs>
       </Toolbar>
       <Divider/>
