@@ -50,7 +50,10 @@ const Home = () => {
     productsList = <Alert severity='error' variant='outlined'>Connection error, please try again</Alert >;
   } else if (request.type === 'GET_ALL' && request.active) {
     productsList = <LinearProgress />;
-  } else productsList = <ProductList products={products} />;
+  } else {
+    const filteredProducts = products.filter(p => category ? p.category === category : p);
+    productsList = <ProductList products={filteredProducts} />;
+  }
 
   return (
     <div className={styles.root}>
