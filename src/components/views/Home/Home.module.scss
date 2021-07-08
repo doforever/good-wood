@@ -3,7 +3,7 @@
 .root {
   .filters {
     position: sticky;
-    top: 64px;
+    top: 56px;
     z-index: 1;
     background-color: $background;
     display: flex;
@@ -12,6 +12,7 @@
     flex-direction: row-reverse;
     align-items: stretch;
     min-height: 60px;
+    background: linear-gradient(90deg, $background 0%, rgba($white, 0.96) 15%, rgba($white, 0.96) 85%, $background 100%);
   }
 
   .tab {
@@ -26,4 +27,12 @@
   //   margin-left: auto;
   //   flex: 0 0 auto;
   // }
+}
+
+@media (min-width: 600px) {
+  .root {
+    .filters {
+      top: 64px;
+    }
+  }
 }
