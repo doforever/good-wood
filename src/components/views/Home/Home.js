@@ -75,7 +75,7 @@ const Home = () => {
       <Intro/>
       <Divider/>
       <Toolbar className={styles.filters}>
-        <OutlinedInput
+        {/* <OutlinedInput
           className={styles.search}
           id="search"
           value={searchString}
@@ -86,7 +86,7 @@ const Home = () => {
           name='search'
           type='search'
           startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
-        />
+        /> */}
         <NavTabs
           value={categories.indexOf(category)+1}
           aria-label="choose-category"
