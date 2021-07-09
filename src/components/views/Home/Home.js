@@ -72,7 +72,9 @@ const Home = () => {
   } else if (request.type === 'GET_ALL' && request.active) {
     productsList = <LinearProgress />;
   } else {
-    const filteredProducts = products.filter(p => category ? p.category === category : p);
+    const regExp = new RegExp(searchString, 'gi');
+    const filteredProducts = products
+      .filter(p => category ? p.category === category && regExp.test(p.name) : regExp.test(p.name));
     productsList = <ProductList products={filteredProducts} />;
   }
 
