@@ -11,9 +11,9 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Intro from '../../features/Intro/Intro';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
+// import OutlinedInput from '@material-ui/core/OutlinedInput';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import SearchIcon from '@material-ui/icons/Search';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {Link as RouterLink} from 'react-router-dom';
@@ -40,11 +40,11 @@ const Home = () => {
     } else setCategory('');
   }, [location]);
 
-  const [searchString, setSearchString] = useState('');
+  // const [searchString, setSearchString] = useState('');
 
-  const handleSearchChange = (event) => {
-    setSearchString(event.target.value);
-  };
+  // const handleSearchChange = (event) => {
+  //   setSearchString(event.target.value);
+  // };
 
   const NavTabs = withStyles({
     root: {
