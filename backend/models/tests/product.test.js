@@ -16,21 +16,31 @@ describe('Product', () => {
         name: 'test',
         description: 'Lorem ipsum',
         photos: [{name: 'abc', src: 'abc.jpg'}],
+        category: 'tables',
       },
       {
         name: 'test',
         defaultPrice: 50,
         photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category: 'tables',
       },
       {
         description: 'Lorem ipsum',
         defaultPrice: 50,
         photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category: 'tables',
       },
       {
         name: 'test',
         description: 'Lorem ipsum',
         defaultPrice: 50,
+        category: 'tables',
+      },
+      {
+        name: 'test',
+        description: 'Lorem ipsum',
+        defaultPrice: 50,
+        photos: [{ name: 'abc', src: 'abc.jpg' }],
       },
     ];
 
@@ -52,6 +62,7 @@ describe('Product', () => {
         description: 'Lorem ipsum',
         defaultPrice: 50,
         photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category: 'tables',
       });
 
       product.validate(err => {
@@ -69,6 +80,7 @@ describe('Product', () => {
         name: 'test',
         defaultPrice: 50,
         photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category: 'tables',
       });
 
       product.validate(err => {
@@ -86,6 +98,7 @@ describe('Product', () => {
         name: 'test',
         description: 'Lorem ipsum',
         photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category: 'tables',
       });
 
       product.validate(err => {
@@ -103,10 +116,29 @@ describe('Product', () => {
         name: 'test',
         description: 'Lorem ipsum',
         photos,
+        category: 'tables',
       });
 
       product.validate(err => {
         expect(err.errors.photos).to.exist;
+      });
+    }
+  });
+
+  it('should throw an error if "category" is not an allowed string', () => {
+
+    const cases = [{}, [], 'dog'];
+    for (let category of cases) {
+      const product = new Product({
+        description: 'Lorem ipsum',
+        name: 'test',
+        defaultPrice: 50,
+        photos: [{ name: 'abc', src: 'abc.jpg' }],
+        category,
+      });
+
+      product.validate(err => {
+        expect(err.errors.category).to.exist;
       });
     }
   });
@@ -117,6 +149,7 @@ describe('Product', () => {
       description: 'Lorem ipsum',
       defaultPrice: 50,
       photos: [{ name: 'abc', src: 'abc.jpg' }],
+      category: 'tables',
     });
 
     product.validate(err => {
