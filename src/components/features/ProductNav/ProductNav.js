@@ -28,7 +28,8 @@ const ProductNav = ({ className, products, open }) => {
   }, [open]);
 
   const handleClick = (category) => {
-    setOpenCategory(category);
+    if (category === openCategory) setOpenCategory('');
+    else setOpenCategory(category);
   };
 
   const CategoryIcon = ({category}) => {
@@ -55,7 +56,7 @@ const ProductNav = ({ className, products, open }) => {
                 <CategoryIcon category={category}/>
               </ListItemIcon>
               <ListItemText primary={category} />
-              {category === openCategory ? <ExpandLess /> : <ExpandMore />}
+              { category === openCategory ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={category === openCategory} timeout="auto">
               <List disablePadding>
