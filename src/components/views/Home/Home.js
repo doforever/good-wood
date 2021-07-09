@@ -19,6 +19,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {Link as RouterLink} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 import styles from './Home.module.scss';
 
@@ -46,38 +47,10 @@ const Home = () => {
 
   const [searchString, setSearchString] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
-  const [waiting, setWaiting] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchString(event.target.value);
   };
-
-  const openSearch = () => {
-    setSearchOpen(true);
-    setWaiting(true);
-  };
-
-  useEffect(() => {
-    let closing;
-    if (searchString === '') {
-      closing = setTimeout(() => {
-        setSearchOpen(false);
-      }, 5000);
-    } else clearTimeout(closing);
-  }, [searchString]);
-
-  useEffect (() => {
-    let closing;
-    if (waiting) {
-      closing = setTimeout(() => {
-        setSearchOpen(false);
-        clearTimeout(closing);
-      }, 10000);
-    }
-    if (searchString) {
-      clearTimeout(closing);
-    }
-  }, [waiting, searchString]);
 
   const NavTabs = withStyles({
     root: {
@@ -117,8 +90,11 @@ const Home = () => {
           margin='dense'
           placeholder='Search...'
           name='search'
-          type='search'
-          startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
+          endAdornment={(!matchesMd || searchString) && <InputAdornment position="end">
+            <IconButton onClick={() => {setSearchOpen(false); setSearchString('');}} size='small'>
+              <CloseIcon />
+            </IconButton>
+          </InputAdornment>}
         />}
         <NavTabs
           value={categories.indexOf(category)+1}
@@ -138,7 +114,7 @@ const Home = () => {
               label={category}
             />
           ))}
-          { !matchesMd && !searchOpen && <IconButton onClick={openSearch} className={styles.searchButton}>
+          { !matchesMd && !searchOpen && <IconButton onClick={() => setSearchOpen(true)} className={styles.searchButton}>
             <SearchIcon />
           </IconButton>}
         </NavTabs>
