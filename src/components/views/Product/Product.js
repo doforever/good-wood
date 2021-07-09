@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, getAll, fetchOne, getRequest, fetchAll } from '../../../redux/productsRedux';
 import { useParams } from 'react-router-dom';
@@ -18,11 +18,16 @@ const Product = () => {
   const product = useSelector(state => getCurrent(state, id));
   const allProducts = useSelector(getAll);
   const request = useSelector(getRequest);
+  const [currentCategory, setCurrentCategory] = useState('');
 
   useEffect(() => {
     dispatch(fetchOne(id));
     dispatch(fetchAll());
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (product) setCurrentCategory(product.category);
+  }, [product]);
 
   let productView;
   if (request.type === 'GET_ONE' && request.error) {
@@ -34,7 +39,7 @@ const Product = () => {
     <Grid container spacing={2} className={styles.root} alignItems='stretch' >
       <Hidden smDown>
         <Grid item className={styles.sidebar}>
-          <ProductNav products={allProducts}/>
+          <ProductNav open={currentCategory} products={allProducts}/>
         </Grid>
       </Hidden>
       <Grid key={id} className={styles.rollOut} item xs>
