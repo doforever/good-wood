@@ -4,6 +4,7 @@ import { fetchAll } from '../../../redux/productsRedux';
 import { useLocation } from 'react-router-dom';
 import { getAll, getRequest } from '../../../redux/productsRedux';
 import { withStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import ProductList from '../../features/ProductList/ProductList';
 import Alert from '@material-ui/lab/Alert';
@@ -11,12 +12,13 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Intro from '../../features/Intro/Intro';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
-// import OutlinedInput from '@material-ui/core/OutlinedInput';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import SearchIcon from '@material-ui/icons/Search';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {Link as RouterLink} from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
 
 import styles from './Home.module.scss';
 
@@ -25,6 +27,8 @@ const Home = () => {
   const products = useSelector(getAll);
   const request = useSelector(getRequest);
   const location = useLocation();
+  const matchesMd = useMediaQuery(theme => theme.breakpoints.up('md'));
+
 
   const categories = ['chairs', 'tables', 'beds', 'storage'];
   const [category, setCategory] = useState('');
@@ -40,11 +44,40 @@ const Home = () => {
     } else setCategory('');
   }, [location]);
 
-  // const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
-  // const handleSearchChange = (event) => {
-  //   setSearchString(event.target.value);
-  // };
+  const handleSearchChange = (event) => {
+    setSearchString(event.target.value);
+  };
+
+  const openSearch = () => {
+    setSearchOpen(true);
+    setWaiting(true);
+  };
+
+  useEffect(() => {
+    let closing;
+    if (searchString === '') {
+      closing = setTimeout(() => {
+        setSearchOpen(false);
+      }, 5000);
+    } else clearTimeout(closing);
+  }, [searchString]);
+
+  useEffect (() => {
+    let closing;
+    if (waiting) {
+      closing = setTimeout(() => {
+        setSearchOpen(false);
+        clearTimeout(closing);
+      }, 10000);
+    }
+    if (searchString) {
+      clearTimeout(closing);
+    }
+  }, [waiting, searchString]);
 
   const NavTabs = withStyles({
     root: {
@@ -75,7 +108,7 @@ const Home = () => {
       <Intro/>
       <Divider/>
       <Toolbar className={styles.filters}>
-        {/* <OutlinedInput
+        { (matchesMd || searchOpen) && <OutlinedInput
           className={styles.search}
           id="search"
           value={searchString}
@@ -86,7 +119,7 @@ const Home = () => {
           name='search'
           type='search'
           startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
-        /> */}
+        />}
         <NavTabs
           value={categories.indexOf(category)+1}
           aria-label="choose-category"
@@ -105,6 +138,9 @@ const Home = () => {
               label={category}
             />
           ))}
+          { !matchesMd && !searchOpen && <IconButton onClick={openSearch} className={styles.searchButton}>
+            <SearchIcon />
+          </IconButton>}
         </NavTabs>
       </Toolbar>
       <Divider/>

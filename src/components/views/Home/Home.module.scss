@@ -13,6 +13,7 @@
     align-items: stretch;
     min-height: 60px;
     background: linear-gradient(90deg, $background 0%, rgba($white, 0.96) 15%, rgba($white, 0.96) 85%, $background 100%);
+    max-width: 100%;
   }
 
   .tab {
@@ -20,13 +21,18 @@
     flex-grow: 1;
   }
 
-  // .search {
-  //   width: 250px;
-  //   align-self: center;
-  //   margin: $base-size/2 0;
-  //   margin-left: auto;
-  //   flex: 0 0 auto;
-  // }
+  .search {
+    max-width: 250px;
+    align-self: center;
+    margin: $base-size/2 0;
+    margin-left: auto;
+    flex: 0 1 auto;
+  }
+
+  .searchButton {
+    flex: 0 0 auto;
+    align-self: center;
+  }
 }
 
 @media (min-width: 600px) {
