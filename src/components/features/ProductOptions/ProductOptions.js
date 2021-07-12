@@ -11,7 +11,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import styles from './ProductOptions.module.scss';
 
 const ProductOptions = ({options}) => {
-  const [productOptions, setProductOptions] = useState({});
+  const [productOptions, setProductOptions]
+    = useState(Object.assign({}, ...options.map(opt => ({[opt.name]: opt.values[0].name}))));
+  console.log(productOptions);
 
   const handleChange = ({target}) => {
     setProductOptions({...productOptions, [target.name]: target.value});
@@ -21,7 +23,7 @@ const ProductOptions = ({options}) => {
     <div className={styles.root}>
       <Typography variant='h5' component='h2'>Choose from available options</Typography>
       { options.map(({name, values}) => (
-        <FormControl key={name} component="fieldset">
+        <FormControl key={name} component="fieldset" margin='dense' fullWidth>
           <FormLabel component="legend">{name}</FormLabel>
           <RadioGroup
             aria-label={name}
@@ -34,7 +36,7 @@ const ProductOptions = ({options}) => {
               <FormControlLabel
                 key={name}
                 value={name}
-                control={<Radio />}
+                control={<Radio size='small'/>}
                 label={name}
               />
             ))}

@@ -126,8 +126,8 @@ const loadInitialData = async () => {
   const getOptions = category => {
     const option = (name, price) => ({name, price});
 
-    const colors = [{name: 'white', price: 0}, {name: 'black', price: 0}, {name: 'natural', price: 0}];
-    const woods = [{name: 'oak', price: 20}, {name: 'birch', price: 0}];
+    const colors = [{ name: 'natural', price: 0 }, {name: 'white', price: 0}, {name: 'black', price: 0}];
+    const woods = [{ name: 'birch', price: 0 }, {name: 'oak', price: 20}];
     const defaultOptions = [{name: 'colors', values: colors}, {name: 'woods', values: woods}];
 
     switch (category) {
