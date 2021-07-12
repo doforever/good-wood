@@ -123,6 +123,43 @@ const loadInitialData = async () => {
     },
   ];
 
+  const getOptions = category => {
+    const option = (name, price) => ({name, price});
+
+    const colors = [{name: 'white', price: 0}, {name: 'black', price: 0}, {name: 'natural', price: 0}];
+    const woods = [{name: 'oak', price: 20}, {name: 'birch', price: 0}];
+    const defaultOptions = [{name: 'colors', values: colors}, {name: 'woods', values: woods}];
+
+    switch (category) {
+      case 'tables':
+        return [
+          ...defaultOptions,
+          {
+            name: 'sizes',
+            values: [option('75 x 105', 0), option('80 x 160', 10), option('90 x 180', 20), option('100 x 200', 30)],
+          },
+        ];
+      case 'beds':
+        return [
+          ...defaultOptions,
+          {
+            name: 'sizes',
+            values: [option('90 x 200', 0), option('140 x 200', 10), option('160 x 200', 20), option('200 x 200', 30)],
+          },
+        ];
+      case 'storage':
+        return [
+          ...defaultOptions,
+          {
+            name: 'widths',
+            values: [option('120', 0), option('160', 20)],
+          },
+        ];
+      default:
+        return defaultOptions;
+    }
+  };
+
   const multiplyData = (data, factor) => {
     const result = [];
     for (let i=1; i <= factor; i++) {
@@ -135,7 +172,7 @@ const loadInitialData = async () => {
     let counter = await Product.countDocuments();
     if (counter === 0) {
       console.log('No products. Loading example data...');
-      await Product.create(multiplyData(data, 5));
+      await Product.create(multiplyData(data.map(p => ({...p, options: getOptions(p.category)})), 5));
       console.log('Test data has been successfully loaded');
     }
   } catch (err) {
