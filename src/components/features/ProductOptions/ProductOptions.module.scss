@@ -1,5 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .root {
-
+  .legend {
+    text-transform: capitalize;
+  }
 }

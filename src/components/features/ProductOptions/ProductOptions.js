@@ -24,7 +24,7 @@ const ProductOptions = ({options}) => {
       <Typography variant='h5' component='h2'>Choose from available options</Typography>
       { options.map(({name, values}) => (
         <FormControl key={name} component="fieldset" margin='dense' fullWidth>
-          <FormLabel component="legend">{name}</FormLabel>
+          <FormLabel component="legend" className={styles.legend} color='secondary'>{name}</FormLabel>
           <RadioGroup
             aria-label={name}
             name={name}
