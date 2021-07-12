@@ -2,6 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Home from './Home';
 import { getRequest, getAll } from '../../../redux/productsRedux';
+import { getSearchString } from '../../../redux/searchStringRedux';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+jest.mock('@material-ui/core/useMediaQuery', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -12,6 +19,11 @@ jest.mock('../../../redux/productsRedux', () => ({
   ...jest.requireActual('../../../redux/productsRedux'),
   getAll: jest.fn(),
   getRequest: jest.fn(),
+}));
+
+jest.mock('../../../redux/searchStringRedux', () => ({
+  ...jest.requireActual('../../../redux/searchStringRedux'),
+  getSearchString: () => '',
 }));
 
 jest.mock('react-redux', () => ({
@@ -59,6 +71,7 @@ const products = [{
 describe('Component Home', () => {
 
   it('should render without crashing with data ready', () => {
+    useMediaQuery.mockReturnValueOnce(true);
     getRequest.mockReturnValueOnce({ active: false, error: false, type: 'GET_ALL'});
     getAll.mockReturnValue(products);
     const component = shallow(<Home />);

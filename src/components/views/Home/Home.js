@@ -60,16 +60,19 @@ const Home = () => {
     },
   })(Tabs);
 
+  const applyFilters = products => {
+    const regExp = new RegExp(searchString, 'gi');
+    return products
+      .filter(p => regExp.test(p.name) && (category ? p.category === category : p));
+  };
+
   let productsList = '';
   if (request.type === 'GET_ALL' && request.error) {
     productsList = <Alert severity='error' variant='outlined'>Connection error, please try again</Alert >;
   } else if (request.type === 'GET_ALL' && request.active) {
     productsList = <LinearProgress />;
   } else {
-    const regExp = new RegExp(searchString, 'gi');
-    const filteredProducts = products
-      .filter(p => category ? p.category === category && regExp.test(p.name) : regExp.test(p.name));
-    productsList = <ProductList products={filteredProducts} />;
+    productsList = <ProductList products={applyFilters(products)} />;
   }
 
   return (
@@ -82,7 +85,7 @@ const Home = () => {
           className={styles.search}
           searchString={searchString}
           setSearchString={v => dispatch(setSearchString(v))}
-          close={!matchesMd && (() => setSearchOpen(false))}
+          close={!matchesMd ? (() => setSearchOpen(false)) : undefined}
         />}
         <NavTabs
           value={categories.indexOf(category)+1}
