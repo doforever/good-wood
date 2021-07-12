@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Gallery from '../Gallery/Gallery';
+import ProductOptions from '../ProductOptions/ProductOptions';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
@@ -15,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import styles from './ProductDetails.module.scss';
 
-const ProductDetails = ({ id, name, description, defaultPrice, photos }) => {
+const ProductDetails = ({ id, name, description, defaultPrice, photos, options }) => {
   const [amount, setAmount] = useState(1);
   const canAdd = useSelector(state => canAddProducts(state, id, amount));
   const [isAdded, setIsAdded] = useState(false);
@@ -44,10 +45,13 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos }) => {
             </Typography>
           </Grid>
           <Grid item>
+            <ProductOptions options={options} />
+          </Grid>
+          <Grid item>
             <Typography variant='h5' component='h2'>
-              Price starting from <strong>${defaultPrice}</strong>.
+              Our price <strong>${defaultPrice}</strong>.
             </Typography>
-            <Typography paragraph>To get individual offer, please make an enquiry.</Typography>
+            <Typography paragraph variant='body2'>To get individual offer, please make an enquiry.</Typography>
           </Grid>
           <Grid item container alignItems='stretch' spacing={2}>
             <Grid item>
@@ -102,6 +106,7 @@ ProductDetails.propTypes = {
   description: PropTypes.string,
   defaultPrice: PropTypes.number,
   photos: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ProductDetails;
