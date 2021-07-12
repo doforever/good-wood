@@ -33,4 +33,5 @@ export const initialState = {
       error: false,
     },
   },
+  searchString: '',
 };

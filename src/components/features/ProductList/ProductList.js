@@ -11,7 +11,7 @@ import styles from './ProductList.module.scss';
 const ProductList = ({className, products}) => {
 
   if (!products || products.length < 1) {
-    return (< Alert severity="info" variant='outlined'> No products</Alert >);
+    return (< Alert severity="info" variant='outlined' className={styles.alert}> No products</Alert >);
   } else {
     return (
       <Grid component='section' container spacing={2} className={clsx(className, styles.root)}>
