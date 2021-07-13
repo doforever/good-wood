@@ -44,7 +44,7 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
       name,
       amount,
       comment: '',
-      options: options.map(({name, chosen}) => ({name, value: chosen})),
+      options: optionsState.map(({name, chosen}) => ({name, value: chosen})),
       itemPrice: calculatePrice(),
     }));
   };
@@ -52,8 +52,8 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
   return (
     <div className={styles.root}>
       <ProductOptions options={optionsState} setOptions={setOptionsState}/>
-      <Typography variant='h6' component='h3'>
-        Our price <strong>${calculatePrice()}</strong>
+      <Typography variant='h6' component='h3' paragraph>
+        Price for this option: <strong>${calculatePrice()}</strong>
       </Typography>
       <Grid container alignItems='stretch' spacing={2}>
         <Grid item>

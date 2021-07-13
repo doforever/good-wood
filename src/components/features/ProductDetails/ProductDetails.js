@@ -13,7 +13,7 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
 
   return (
     <Paper component='article' className={styles.root}>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justify='center'>
         <Grid item xs={12}>
           <Typography variant='h4' component='h1' align='center'>
             { name }
@@ -23,15 +23,16 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
           <Gallery pictures={photos}></Gallery>
         </Grid>
         <Grid item xs={12} md={6} container spacing={4} direction='column' justify='flex-end'>
-          <Grid item>
+          <Grid item component='section'>
             <Typography paragraph>
               { description }
             </Typography>
           </Grid>
-          <Grid item xs>
+          <Grid item xs component='section' className={styles.orderSection}>
+            <Typography variant='h5' component='h2'>Choose from available options</Typography>
             <ProductOrderForm {...{id, name, defaultPrice, options}}/>
           </Grid>
-          <Grid item>
+          <Grid item component='section'>
             <Typography variant='h5' component='h2' align='right'>...or make an enquiry and get an individual offer.</Typography>
           </Grid>
         </Grid>

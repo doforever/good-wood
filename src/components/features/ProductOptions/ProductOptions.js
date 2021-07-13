@@ -18,7 +18,6 @@ const ProductOptions = ({options, setOptions}) => {
 
   return (
     <div className={styles.root}>
-      <Typography variant='h5' component='h2'>Choose from available options</Typography>
       { options.map(({name, values, chosen}) => (
         <FormControl key={name} component="fieldset" margin='dense' fullWidth>
           <FormLabel component="legend" className={styles.legend} color='secondary'>{name}</FormLabel>
