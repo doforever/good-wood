@@ -12,6 +12,14 @@ const cartItemSchema = new Schema({
     type: String,
     maxLength: 200,
   },
+  options: {
+    type: [{ name: String, value: String }],
+  },
+  itemPrice: {
+    type: Number,
+    min: 0,
+    required: true,
+  },
 });
 
 module.exports = {

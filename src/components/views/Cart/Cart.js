@@ -66,7 +66,7 @@ const Cart = () => {
                   <TableCell align="center" >Actions</TableCell>
                 </TableRow>
               </TableHead>}
-              {products.map(({id, name, defaultPrice, amount, comment}) => (
+              {products.map(({id, name, itemPrice, amount, comment}) => (
                 <TableBody key={id}>
                   { !matchesSm && <TableRow className={styles.name_row}>
                     <TableCell colSpan={4}>
@@ -100,7 +100,7 @@ const Cart = () => {
                         </IconButton>
                       </div>
                     </TableCell>
-                    <TableCell align="center">$ {amount*defaultPrice}</TableCell>
+                    <TableCell align="center">$ {amount*itemPrice}</TableCell>
                     <TableCell align="right">
                       {!comment &&
                         <IconButton aria-label='toggle comment' onClick={() => toggleVisibility(id)}>

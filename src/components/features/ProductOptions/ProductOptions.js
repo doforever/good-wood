@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -10,25 +10,22 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import styles from './ProductOptions.module.scss';
 
-const ProductOptions = ({options}) => {
-  const [productOptions, setProductOptions]
-    = useState(Object.assign({}, ...options.map(opt => ({[opt.name]: opt.values[0].name}))));
-  console.log(productOptions);
+const ProductOptions = ({options, setOptions}) => {
 
-  const handleChange = ({target}) => {
-    setProductOptions({...productOptions, [target.name]: target.value});
+  const handleChange = ({ target }) => {
+    setOptions(options.map(opt => opt.name === target.name ? {...opt, chosen: target.value} : opt ));
   };
 
   return (
     <div className={styles.root}>
       <Typography variant='h5' component='h2'>Choose from available options</Typography>
-      { options.map(({name, values}) => (
+      { options.map(({name, values, chosen}) => (
         <FormControl key={name} component="fieldset" margin='dense' fullWidth>
           <FormLabel component="legend" className={styles.legend} color='secondary'>{name}</FormLabel>
           <RadioGroup
             aria-label={name}
             name={name}
-            value={productOptions[name]}
+            value={chosen}
             onChange={handleChange}
             row
           >
@@ -38,6 +35,7 @@ const ProductOptions = ({options}) => {
                 value={name}
                 control={<Radio size='small'/>}
                 label={name}
+                className={styles.label}
               />
             ))}
           </RadioGroup>
@@ -51,7 +49,9 @@ ProductOptions.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     values: PropTypes.arrayOf(PropTypes.object),
+    chosen: PropTypes.string,
   })),
+  setOptions: PropTypes.func,
 };
 
 export default ProductOptions;
