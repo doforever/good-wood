@@ -93,7 +93,9 @@ const OrderForm = ({products}) => {
       setIsWarning(false);
       setIsSending(true);
       const orderProducts = products
-        .map(({id, amount, comment}) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
+        .map(({productId, amount, comment, itemPrice, options}) => comment
+          ? ({ product: productId, amount, comment, itemPrice, options })
+          : ({ product: productId, amount, itemPrice, options }));
       dispatch(sendOrder({ ...order, products: orderProducts}));
     } else setIsWarning(true);
   };
