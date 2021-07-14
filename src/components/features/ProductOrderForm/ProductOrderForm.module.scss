@@ -1,6 +1,10 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  background-color: $background;
+  border-radius: $radius;
+  padding: $base-size;
+
   .input {
     width: $button-width;
   }

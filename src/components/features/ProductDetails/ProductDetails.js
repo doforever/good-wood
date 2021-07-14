@@ -22,18 +22,14 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
         <Grid item xs={12} md={6}>
           <Gallery pictures={photos}></Gallery>
         </Grid>
-        <Grid item xs={12} md={6} container spacing={4} direction='column' justify='flex-end'>
+        <Grid item xs={12} md={6} container spacing={2} direction='column' justify='space-between'>
           <Grid item component='section'>
             <Typography paragraph>
               { description }
             </Typography>
           </Grid>
-          <Grid item xs component='section' className={styles.orderSection}>
-            <Typography variant='h5' component='h2'>Choose from available options</Typography>
-            <ProductOrderForm {...{id, name, defaultPrice, options}}/>
-          </Grid>
           <Grid item component='section'>
-            <Typography variant='h5' component='h2' align='right'>...or make an enquiry and get an individual offer.</Typography>
+            <ProductOrderForm {...{id, name, defaultPrice, options}}/>
           </Grid>
         </Grid>
       </Grid>

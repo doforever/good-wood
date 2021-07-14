@@ -53,6 +53,7 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
 
   return (
     <div className={styles.root}>
+      <Typography variant='h5' component='h2'>Choose from available options</Typography>
       <ProductOptions options={optionsState} setOptions={setOptionsState}/>
       <Typography variant='h6' component='h3' paragraph>
         Price for this option: <strong>${calculatePrice()}</strong>
