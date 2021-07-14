@@ -1,5 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .root {
-
+  .input {
+    width: $button-width;
+  }
 }
