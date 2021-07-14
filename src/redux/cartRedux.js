@@ -152,7 +152,7 @@ export const reducer = (statePart = [], action = {}) => {
           ...statePart,
           data: {
             ...statePart.data,
-            products: [...statePart.data.products, { id: new ObjectID(), productId, ...other}],
+            products: [...statePart.data.products, { id: new ObjectID().toHexString(), productId, ...other}],
           },
         };
       } else {
