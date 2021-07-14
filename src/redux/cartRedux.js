@@ -13,11 +13,6 @@ export const getCount = ({ cart }) => {
   }
   return count;
 };
-export const canAddProducts = ({ cart }, id, amount) => {
-  const product = cart.data.products.find(p => p.id === id);
-  if (product) return product.amount + amount <= 50;
-  else return true;
-};
 
 /* action name creator */
 const reducerName = 'cart';

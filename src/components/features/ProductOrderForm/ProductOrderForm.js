@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, canAddProducts } from '../../../redux/cartRedux';
+import { addProduct, getCount } from '../../../redux/cartRedux';
 
 import ProductOptions from '../ProductOptions/ProductOptions';
 import TextField from '@material-ui/core/TextField';
@@ -15,11 +15,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import styles from './ProductOrderForm.module.scss';
 
 const ProductOrderForm = ({id, name, defaultPrice, options}) => {
-  const [amount, setAmount] = useState(1);
-  const canAdd = useSelector(state => canAddProducts(state, id, amount));
-  const [isAdded, setIsAdded] = useState(false);
+  const cartCount = useSelector(getCount);
   const dispatch = useDispatch();
 
+  const [amount, setAmount] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
   const [optionsState, setOptionsState]
     = useState(options.map(({name, values}) => {
       return ({
@@ -36,6 +36,8 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
     }
     return price;
   };
+
+  const canAdd = () => (amount + cartCount <= 50);
 
   const handleAdd = () => {
     setIsAdded(true);
@@ -71,7 +73,7 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
             variant='outlined'
             onClick={handleAdd}
             size='large'
-            disabled={!canAdd}
+            disabled={!canAdd()}
           >Add to cart</Button>
         </Grid>
       </Grid>
