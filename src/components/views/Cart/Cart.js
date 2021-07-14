@@ -68,7 +68,7 @@ const Cart = () => {
                   <TableCell align="center" >Actions</TableCell>
                 </TableRow>
               </TableHead>}
-              {products.map(({id, name, itemPrice, amount, comment, options}) => (
+              {products.map(({id, name, itemPrice, amount, comment, options, productId}) => (
                 <TableBody key={id}>
                   { !matchesSm && <TableRow className={styles.name_row}>
                     <TableCell colSpan={4}>
@@ -76,7 +76,7 @@ const Cart = () => {
                         <Typography
                           variant='h6'
                           component={RouterLink}
-                          to={`/products/`}
+                          to={`/products/${productId}`}
                           className={styles.product_name}
                         >
                           {name}
@@ -91,7 +91,7 @@ const Cart = () => {
                         <Typography
                           variant='subtitle2'
                           component={RouterLink}
-                          to={`/products/`}
+                          to={`/products/${productId}`}
                           className={styles.product_name}
                         >
                           {name}

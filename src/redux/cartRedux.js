@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { API_URL } from '../config.js';
+import { v4 as uuidv4 } from 'uuid';
+
+/* helpers */
+const countProducts = products => {
+  let count = 0;
+  products.forEach(p => { count += p.amount; });
+  return count;
+};
 
 /* selectors */
 export const getCart = ({ cart }) => cart;
 export const getProducts = ({ cart }) => cart.data.products;
 export const getCartId = ({ cart }) => cart.data.id;
 export const getRequest = ({ cart }) => cart.request;
-export const getCount = ({ cart }) => {
-  let count = 0;
-  for (let p of cart.data.products) {
-    count += p.amount;
-  }
-  return count;
-};
+export const getCount = ({ cart }) => countProducts(cart.data.products);
 
 /* action name creator */
 const reducerName = 'cart';
@@ -135,13 +137,15 @@ export const fetchCart = () => {
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
     case ADD: {
-      const isNew = !statePart.data.products.some(p => p.id === action.payload.id);
+      const isProductEqual = (p1, p2) => p1.id === p2.id && JSON.stringify(p1.options) === JSON.stringify(p2.options);
+      const isNew = !statePart.data.products.some(p => isProductEqual(p, action.payload));
       if (isNew) {
+        const { id: productId, ...other } = action.payload;
         return {
           ...statePart,
           data: {
             ...statePart.data,
-            products: [...statePart.data.products, action.payload],
+            products: [...statePart.data.products, {id: uuidv4(), productId, ...other}],
           },
         };
       } else {
@@ -158,7 +162,9 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case PLUS: {
       const newProducts = statePart.data.products
-        .map(p => p.id === action.payload && p.amount < 50 ? ({ ...p, amount: p.amount + 1 }) : p);
+        .map((p, i, products) => p.id === action.payload && countProducts(products) < 50
+          ? ({ ...p, amount: p.amount + 1 })
+          : p);
       return {
         ...statePart,
         data: {
