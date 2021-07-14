@@ -39,6 +39,19 @@
     padding-top: 0;
   }
 
+  .flex_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+
+    >* {
+      flex: 0 1 auto;
+      margin: 0 $base-size/2 0 0;
+    }
+  }
+
   .button {
     display: block;
     margin-left: auto;
