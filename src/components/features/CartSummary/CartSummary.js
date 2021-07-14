@@ -22,7 +22,7 @@ const CartSummary = ({products}) => {
   const totalPrice = products => {
     let total = 0;
     for (let p of products) {
-      total += (p.amount * p.defaultPrice);
+      total += (p.amount * p.itemPrice);
     }
     return total;
   };
@@ -34,13 +34,13 @@ const CartSummary = ({products}) => {
         <TableContainer >
           <Table>
             <TableBody>
-              {products.map(({ id, name, defaultPrice, amount }) => (
+              {products.map(({ id, name, itemPrice, amount }) => (
                 <TableRow key={id}>
                   <TableCell component="th" scope="row">
                     {name}
                   </TableCell>
                   <TableCell align="right" className={styles.amount}>x {amount}</TableCell>
-                  <TableCell align="right" className={styles.price}>$ {amount * defaultPrice}</TableCell>
+                  <TableCell align="right" className={styles.price}>$ {amount * itemPrice}</TableCell>
                 </TableRow>
               ))}
               <TableRow >

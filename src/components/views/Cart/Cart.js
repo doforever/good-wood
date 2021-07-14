@@ -47,6 +47,8 @@ const Cart = () => {
     dispatch(commentProduct({ id, comment }));
   };
 
+  const parseOptions = options => Array.isArray(options) ? options.map(opt => opt.value).join(', ') : '';
+
   const emptyCart = <Alert severity='warning' variant='outlined'>
     Your cart is empty. <Link color='inherit' variant='subtitle2' component={RouterLink} to='/'>Go back to shop</Link>
   </Alert>;
@@ -66,29 +68,37 @@ const Cart = () => {
                   <TableCell align="center" >Actions</TableCell>
                 </TableRow>
               </TableHead>}
-              {products.map(({id, name, defaultPrice, amount, comment}) => (
+              {products.map(({id, name, itemPrice, amount, comment, options, productId}) => (
                 <TableBody key={id}>
                   { !matchesSm && <TableRow className={styles.name_row}>
                     <TableCell colSpan={4}>
-                      <Typography
-                        variant='h6'
-                        component={RouterLink}
-                        to={`/products/${id}`}
-                        className={styles.product_name}
-                      >
-                        {name}
-                      </Typography></TableCell>
+                      <div className={styles.flex_container}>
+                        <Typography
+                          variant='h6'
+                          component={RouterLink}
+                          to={`/products/${productId}`}
+                          className={styles.product_name}
+                        >
+                          {name}
+                        </Typography>
+                        <Typography variant='body2'>({parseOptions(options)} )</Typography>
+                      </div>
+                    </TableCell>
                   </TableRow> }
                   <TableRow className={styles.product_row}>
-                    { matchesSm && <TableCell>
-                      <Typography
-                        variant='subtitle2'
-                        component={RouterLink}
-                        to={`/products/${id}`}
-                        className={styles.product_name}
-                      >
-                        {name}
-                      </Typography></TableCell>}
+                    {matchesSm && <TableCell>
+                      <div className={styles.flex_container}>
+                        <Typography
+                          variant='subtitle2'
+                          component={RouterLink}
+                          to={`/products/${productId}`}
+                          className={styles.product_name}
+                        >
+                          {name}
+                        </Typography>
+                        <Typography variant='body2'>({parseOptions(options)} )</Typography>
+                      </div>
+                    </TableCell>}
                     <TableCell align="center" colSpan={matchesSm ? 1 : 2}>
                       <div className={styles.amount}>
                         <IconButton aria-label='minus' size='small' onClick={() => dispatch(minusOne(id))}>
@@ -100,7 +110,7 @@ const Cart = () => {
                         </IconButton>
                       </div>
                     </TableCell>
-                    <TableCell align="center">$ {amount*defaultPrice}</TableCell>
+                    <TableCell align="center">$ {amount*itemPrice}</TableCell>
                     <TableCell align="right">
                       {!comment &&
                         <IconButton aria-label='toggle comment' onClick={() => toggleVisibility(id)}>

@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { photoSchema } = require('./photo.model');
+const { optionSchema } = require('./option.model');
 
 const productSchema = new Schema({
   name: {
@@ -31,6 +32,9 @@ const productSchema = new Schema({
       validator: v => Array.isArray(v) && v.length > 0,
     },
     required: true,
+  },
+  options: {
+    type: [{name: String, values: [optionSchema]}],
   },
 });
 

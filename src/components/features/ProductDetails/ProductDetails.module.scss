@@ -4,7 +4,8 @@
   padding: $base-size*2;
   height: 100%;
 
-  .input {
-    width: $button-width;
+  .orderSection {
+    background-color: $background;
+    border-radius: $radius;
   }
 }
