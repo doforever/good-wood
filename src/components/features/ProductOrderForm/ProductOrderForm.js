@@ -42,7 +42,7 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
   const handleAdd = () => {
     setIsAdded(true);
     dispatch(addProduct({
-      id,
+      productId: id,
       name,
       amount,
       comment: '',

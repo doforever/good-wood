@@ -87,7 +87,10 @@ export const saveCart = () => {
   return async (dispatch, getState) => {
     const { cart } = getState();
     const dbProducts = cart.data.products
-      .map(({ id, amount, comment }) => comment ? ({ product: id, amount, comment }) : ({ product: id, amount }));
+      .map(({ productId, amount, comment, itemPrice, options }) => comment
+        ? ({ product: productId, amount, comment, itemPrice, options })
+        : ({ product: productId, amount, itemPrice, options })
+      );
     if (cart.data.id) {
       if(dbProducts.length>0){
         // update stored cart
@@ -137,7 +140,10 @@ export const fetchCart = () => {
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
     case ADD: {
-      const isProductEqual = (p1, p2) => p1.id === p2.id && JSON.stringify(p1.options) === JSON.stringify(p2.options);
+      const isProductEqual = (p1, p2) => {
+        return p1.productId === p2.productId
+        && JSON.stringify(p1.options) === JSON.stringify(p2.options);
+      };
       const isNew = !statePart.data.products.some(p => isProductEqual(p, action.payload));
       if (isNew) {
         const { id: productId, ...other } = action.payload;
@@ -150,7 +156,7 @@ export const reducer = (statePart = [], action = {}) => {
         };
       } else {
         const newProducts = statePart.data.products
-          .map(p => p.id === action.payload.id ? ({ ...p, amount: p.amount + action.payload.amount }) : p);
+          .map(p => isProductEqual(p, action.payload) ? ({ ...p, amount: p.amount + action.payload.amount }) : p);
         return {
           ...statePart,
           data: {
@@ -227,8 +233,8 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case FETCHED: {
       const { _id: cartId, products } = action.payload;
-      const cartProducts = products.map(({ amount, comment, product: {_id, name, defaultPrice} }) => ({
-        id: _id, name, defaultPrice, amount, comment,
+      const cartProducts = products.map(({ _id, amount, comment, product: {_id: productId, name}, itemPrice, options }) => ({
+        id: _id, productId, name, itemPrice, amount, comment, options: options.map(({name, value}) => ({name, value})),
       }));
       return {
         data: { id: cartId, products: cartProducts },

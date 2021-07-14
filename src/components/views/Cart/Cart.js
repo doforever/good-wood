@@ -47,7 +47,7 @@ const Cart = () => {
     dispatch(commentProduct({ id, comment }));
   };
 
-  const parseOptions = options => options.map(opt => opt.value).join(', ');
+  const parseOptions = options => Array.isArray(options) ? options.map(opt => opt.value).join(', ') : '';
 
   const emptyCart = <Alert severity='warning' variant='outlined'>
     Your cart is empty. <Link color='inherit' variant='subtitle2' component={RouterLink} to='/'>Go back to shop</Link>
