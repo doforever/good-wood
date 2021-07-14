@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config.js';
-import { v4 as uuidv4 } from 'uuid';
+import { ObjectID } from 'mongodb';
+
 
 /* helpers */
 const countProducts = products => {
@@ -87,9 +88,9 @@ export const saveCart = () => {
   return async (dispatch, getState) => {
     const { cart } = getState();
     const dbProducts = cart.data.products
-      .map(({ productId, amount, comment, itemPrice, options }) => comment
-        ? ({ product: productId, amount, comment, itemPrice, options })
-        : ({ product: productId, amount, itemPrice, options })
+      .map(({ id, productId, amount, comment, itemPrice, options }) => comment
+        ? ({ _id: id, product: productId, amount, comment, itemPrice, options })
+        : ({ _id: id, product: productId, amount, itemPrice, options })
       );
     if (cart.data.id) {
       if(dbProducts.length>0){
@@ -151,7 +152,7 @@ export const reducer = (statePart = [], action = {}) => {
           ...statePart,
           data: {
             ...statePart.data,
-            products: [...statePart.data.products, {id: uuidv4(), productId, ...other}],
+            products: [...statePart.data.products, { id: new ObjectID(), productId, ...other}],
           },
         };
       } else {
