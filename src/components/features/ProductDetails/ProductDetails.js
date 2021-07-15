@@ -13,7 +13,7 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
 
   return (
     <Paper component='article' className={styles.root}>
-      <Grid container spacing={4} justify='center'>
+      <Grid container spacing={4} justify='center' alignContent='stretch'>
         <Grid item xs={12}>
           <Typography variant='h4' component='h1' align='center'>
             { name }
