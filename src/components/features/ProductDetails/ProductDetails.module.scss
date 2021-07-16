@@ -1,6 +1,12 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  padding: $base-size;
+  padding: $base-size 0;
   height: 100%;
+}
+
+@media (min-width: 960px) {
+  .root {
+    padding: $base-size;
+  }
 }

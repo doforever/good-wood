@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -11,10 +12,11 @@ import ProductOrderForm from '../ProductOrderForm/ProductOrderForm.js';
 import styles from './ProductDetails.module.scss';
 
 const ProductDetails = ({ description, className, name, photos, ...otherProps }) => {
+  const matchesMd = useMediaQuery(theme => theme.breakpoints.up('md'));
 
   return (
     <Paper component='article' className={clsx(styles.root, className)}>
-      <Grid container spacing={4} justify='center' alignContent='stretch'>
+      <Grid container spacing={matchesMd ? 4 : 2} justify='center' alignContent='stretch'>
         <Grid item xs={12}>
           <Typography variant='h4' component='h1' align='center'>
             { name }
