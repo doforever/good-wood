@@ -2,7 +2,15 @@
 
 .root {
   .stepper {
-  background-color: transparent;
+    background-color: transparent;
+    padding-bottom: $base-size;
   }
 }
 
+@media (min-width: 960px) {
+  .root {
+    .stepper {
+      padding-bottom: 24px;
+    }
+  }
+}

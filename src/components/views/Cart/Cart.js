@@ -110,18 +110,22 @@ const Cart = () => {
                         </IconButton>
                       </div>
                     </TableCell>
-                    <TableCell align="center">$ {amount*itemPrice}</TableCell>
+                    <TableCell align="center">
+                      <Typography noWrap variant='body2'>$ {amount*itemPrice}</Typography>
+                    </TableCell>
                     <TableCell align="right">
-                      {!comment &&
-                        <IconButton aria-label='toggle comment' onClick={() => toggleVisibility(id)}>
-                          {visibleComments.includes(id) ? <Tooltip title='Hide comment'><KeyboardArrowUpIcon />
-                          </Tooltip> : <Tooltip title='Add comment'><AddCommentIcon /></Tooltip>}
-                        </IconButton>}
-                      <IconButton aria-label='remove' onClick={() => dispatch(removeProduct(id))}>
-                        <Tooltip title='Remove product'>
-                          <DeleteIcon />
-                        </Tooltip>
-                      </IconButton>
+                      <div className={styles.actions}>
+                        {!comment &&
+                          <IconButton aria-label='toggle comment' onClick={() => toggleVisibility(id)}>
+                            {visibleComments.includes(id) ? <Tooltip title='Hide comment'><KeyboardArrowUpIcon />
+                            </Tooltip> : <Tooltip title='Add comment'><AddCommentIcon /></Tooltip>}
+                          </IconButton>}
+                        <IconButton aria-label='remove' onClick={() => dispatch(removeProduct(id))}>
+                          <Tooltip title='Remove product'>
+                            <DeleteIcon />
+                          </Tooltip>
+                        </IconButton>
+                      </div>
                     </TableCell>
                   </TableRow>
                   <TableRow >

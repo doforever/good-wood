@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, getCount } from '../../../redux/cartRedux';
+import { useSelector } from 'react-redux';
+import { getCount } from '../../../redux/cartRedux';
 
 import ProductOptions from '../ProductOptions/ProductOptions';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
-import { Link as RouterLink } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
 
 import styles from './ProductOrderForm.module.scss';
 
-const ProductOrderForm = ({id, name, defaultPrice, options}) => {
+const ProductOrderForm = ({defaultPrice, options, add}) => {
   const cartCount = useSelector(getCount);
-  const dispatch = useDispatch();
-
   const [amount, setAmount] = useState(1);
-  const [isAdded, setIsAdded] = useState(false);
+
+  const canAdd = () => (amount + cartCount <= 50);
+
   const [optionsState, setOptionsState]
-    = useState(options.map(({name, values}) => {
+    = useState(options.map(({ name, values }) => {
       return ({
         name,
         values,
@@ -37,28 +35,15 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
     return price;
   };
 
-  const canAdd = () => (amount + cartCount <= 50);
-
-  const handleAdd = () => {
-    setIsAdded(true);
-    dispatch(addProduct({
-      productId: id,
-      name,
-      amount,
-      comment: '',
-      options: optionsState.map(({name, chosen}) => ({name, value: chosen})),
-      itemPrice: calculatePrice(),
-    }));
-  };
-
   return (
     <div className={styles.root}>
-      <Typography variant='h5' component='h2'>Choose from available options</Typography>
+      <Typography variant='h5' component='h2'>Choose from available options:</Typography>
       <ProductOptions options={optionsState} setOptions={setOptionsState}/>
-      <Typography variant='h6' component='h3' paragraph>
+      <Divider/>
+      <Typography variant='h6' component='h3' align='right' className={styles.price}>
         Price for this option: <strong>${calculatePrice()}</strong>
       </Typography>
-      <Grid container alignItems='stretch' spacing={2}>
+      <Grid container alignItems='stretch' justify='flex-end' spacing={2} >
         <Grid item>
           <TextField
             variant='outlined'
@@ -72,41 +57,20 @@ const ProductOrderForm = ({id, name, defaultPrice, options}) => {
         <Grid item>
           <Button
             variant='outlined'
-            onClick={handleAdd}
+            onClick={() => add(amount, calculatePrice(), optionsState)}
             size='large'
             disabled={!canAdd()}
           >Add to cart</Button>
         </Grid>
       </Grid>
-      <Snackbar
-        open={isAdded}
-        autoHideDuration={3000}
-        onClose={() => setIsAdded(false)}
-      >
-        <Alert
-          severity='success'
-          variant='filled'
-          action={
-            <Button
-              component={RouterLink}
-              to='/cart'
-              color='inherit'
-              size='small'
-            >
-              VIEW CART
-            </Button>
-          }
-        >Added to cart</Alert>
-      </Snackbar>
     </div>
   );
 };
 
 ProductOrderForm.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
   defaultPrice: PropTypes.number,
   options: PropTypes.arrayOf(PropTypes.object),
+  add: PropTypes.func,
 };
 
 export default ProductOrderForm;

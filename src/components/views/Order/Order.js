@@ -12,14 +12,16 @@ const Order = () => {
   const products = useSelector(getProducts);
 
   return (
-    <Grid container spacing={2} className={styles.root}>
-      <Grid item component='section' xs={12} md={5}>
-        <CartSummary products={products}/>
+    <div className={styles.root}>
+      <Grid container spacing={2}>
+        <Grid item component='section' xs={12} md={5}>
+          <CartSummary products={products}/>
+        </Grid>
+        <Grid item component='section' xs={12} md={7}>
+          <OrderForm products={products}/>
+        </Grid>
       </Grid>
-      <Grid item component='section' xs={12} md={7}>
-        <OrderForm products={products}/>
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 
