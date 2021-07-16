@@ -3,6 +3,7 @@
 .root {
   min-height: 66vh;
   max-width: 100%;
+  display: flex;
 }
 
 @media (min-width: 600px) {
