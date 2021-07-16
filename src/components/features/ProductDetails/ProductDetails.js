@@ -17,8 +17,8 @@ const ProductDetails = ({ description, className, name, photos, ...otherProps })
   return (
     <Paper component='article' className={clsx(styles.root, className)}>
       <Grid container spacing={matchesMd ? 4 : 2} justify='center' alignContent='stretch'>
-        <Grid item xs={12}>
-          <Typography variant='h4' component='h1' align='center'>
+        <Grid item xs={12} component='header'>
+          <Typography variant='h4' component='h1' align='center' className={styles.textParagraph}>
             { name }
           </Typography>
         </Grid>
@@ -26,7 +26,7 @@ const ProductDetails = ({ description, className, name, photos, ...otherProps })
           <Gallery pictures={photos}></Gallery>
         </Grid>
         <Grid item xs={12} md={6} container spacing={2} direction='column' justify='space-between'>
-          <Grid item component='section'>
+          <Grid item component='section' className={styles.textParagraph}>
             <Typography paragraph>
               { description }
             </Typography>

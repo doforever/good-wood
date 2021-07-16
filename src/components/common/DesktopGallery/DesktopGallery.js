@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import clxs from 'clsx';
+import clsx from 'clsx';
 
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -8,7 +8,7 @@ import ImageLoader from '../../common/ImageLoader/ImageLoader';
 
 import styles from './DesktopGallery.module.scss';
 
-const DesktopGallery = ({ pictures, current = 0, setCurrent }) => {
+const DesktopGallery = ({ pictures, current = 0, setCurrent, className }) => {
   const [incoming, setIncoming] = useState(-1);
   const [isChanging, setIsChanging] = useState(false);
 
@@ -25,7 +25,7 @@ const DesktopGallery = ({ pictures, current = 0, setCurrent }) => {
     <Grid
       key={i}
       item xs
-      className={clxs(styles.thumbnail, (incoming >= 0 ? i === incoming : i === current) && styles.active)}
+      className={clsx(styles.thumbnail, (incoming >= 0 ? i === incoming : i === current) && styles.active)}
     >
       <ButtonBase onClick={() => changePic(i)}>
         <img src={src} alt={name} />
@@ -34,8 +34,8 @@ const DesktopGallery = ({ pictures, current = 0, setCurrent }) => {
   );
 
   return (
-    <Grid container direction='column' className={styles.root}>
-      <Grid item xs className={clxs(styles.photo_wrapper, isChanging && styles.changing)}>
+    <Grid container direction='column' className={clsx(styles.root, className)}>
+      <Grid item xs className={clsx(styles.photo_wrapper, isChanging && styles.changing)}>
         {incoming >= 0
           && <img className={styles.incoming_img} src={pictures[incoming].src} alt={pictures[incoming].name} />}
         <ImageLoader className={styles.current_img}>
@@ -56,6 +56,7 @@ DesktopGallery.propTypes = {
   pictures: PropTypes.arrayOf(PropTypes.object).isRequired,
   current: PropTypes.number,
   setCurrent: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default DesktopGallery;

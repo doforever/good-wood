@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import MobileStepper from '@material-ui/core/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
@@ -7,10 +8,10 @@ import ImageLoader from '../../common/ImageLoader/ImageLoader';
 
 import styles from './MobileGallery.module.scss';
 
-const MobileGallery = ({ pictures, current = 0, setCurrent }) => {
+const MobileGallery = ({ pictures, current = 0, setCurrent, className }) => {
 
   return (
-    <div className={styles.root}>
+    <div className={clsx(styles.root, className)}>
       <SwipeableViews
         index={current}
         onChangeIndex={setCurrent}
@@ -39,6 +40,7 @@ MobileGallery.propTypes = {
   pictures: PropTypes.arrayOf(PropTypes.object).isRequired,
   current: PropTypes.number,
   setCurrent: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default MobileGallery;
