@@ -1,7 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  padding: $base-size;
+  padding: $base-size 0;
   min-height: 66vh;
   margin: $base-size/2 0;
 
@@ -33,6 +33,10 @@
 
   .amount {
     min-width: 92px;
+  }
+
+  .actions {
+    min-width: 96px;
   }
 
   .collapsible_cell {
