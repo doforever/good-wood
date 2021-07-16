@@ -3,7 +3,7 @@
 .root {
   padding: $base-size;
   min-height: 66vh;
-  margin: $base-size/2;
+  margin: $base-size/2 0;
 
   .table {
     margin-bottom: $base-size*2;
@@ -57,5 +57,11 @@
     margin-left: auto;
     max-width: $button-width;
     text-align: center;
+  }
+}
+
+@media (min-width: 600px) {
+  .root {
+    margin: $base-size/2;
   }
 }
