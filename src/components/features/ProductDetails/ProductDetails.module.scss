@@ -4,6 +4,8 @@
   padding: $base-size/2 0;
   height: 100%;
   background-color: $white;
+  max-width: 100%;
+  overflow-x: hidden;
 
   .textParagraph {
     padding-left: $base-size;
