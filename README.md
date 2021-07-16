@@ -1,6 +1,8 @@
 # GoodWood store app
-Store app created with React, Redux and Material UI framework.
--- Backend in node.js and MongoDB with Mongoose.
+Store app created with React, Redux and Material UI framework.\
+Backend in Node.js and MongoDB with Mongoose.\
+Application has a PWA standard.\
+Unordered shopping cart is restored from db using an express session object.
 
 ## Deployed on Heroku
 https://evening-dusk-70267.herokuapp.com/
