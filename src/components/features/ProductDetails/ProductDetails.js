@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,10 +10,10 @@ import ProductOrderForm from '../ProductOrderForm/ProductOrderForm.js';
 
 import styles from './ProductDetails.module.scss';
 
-const ProductDetails = ({ id, name, description, defaultPrice, photos, options }) => {
+const ProductDetails = ({ description, className, name, photos, ...otherProps }) => {
 
   return (
-    <Paper component='article' className={styles.root}>
+    <Paper component='article' className={clsx(styles.root, className)}>
       <Grid container spacing={4} justify='center' alignContent='stretch'>
         <Grid item xs={12}>
           <Typography variant='h4' component='h1' align='center'>
@@ -29,7 +30,7 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
             </Typography>
           </Grid>
           <Grid item component='section'>
-            <ProductOrderForm {...{id, name, defaultPrice, options}}/>
+            <ProductOrderForm {...otherProps}/>
           </Grid>
         </Grid>
       </Grid>
@@ -38,12 +39,10 @@ const ProductDetails = ({ id, name, description, defaultPrice, photos, options }
 };
 
 ProductDetails.propTypes = {
-  id: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
-  defaultPrice: PropTypes.number,
   photos: PropTypes.arrayOf(PropTypes.object),
-  options: PropTypes.arrayOf(PropTypes.object),
+  className: PropTypes.string,
 };
 
 export default ProductDetails;

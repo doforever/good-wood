@@ -1,14 +1,10 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   width: 100%;
   margin-left: 0;
   margin-right: 0;
-
-  .sidebar {
-    height: 100%;
-  }
 }
 
 @media (min-width: 960px) {
