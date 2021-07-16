@@ -5,6 +5,10 @@
   border-radius: $radius;
   padding: $base-size;
 
+  .price {
+    padding: $base-size/2;
+  }
+
   .input {
     width: 70px;
   }

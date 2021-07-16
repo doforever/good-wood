@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 import styles from './ProductOrderForm.module.scss';
 
@@ -36,12 +37,13 @@ const ProductOrderForm = ({defaultPrice, options, add}) => {
 
   return (
     <div className={styles.root}>
-      <Typography variant='h5' component='h2'>Choose from available options</Typography>
+      <Typography variant='h5' component='h2'>Choose from available options:</Typography>
       <ProductOptions options={optionsState} setOptions={setOptionsState}/>
-      <Typography variant='h6' component='h3' paragraph>
+      <Divider/>
+      <Typography variant='h6' component='h3' align='right' className={styles.price}>
         Price for this option: <strong>${calculatePrice()}</strong>
       </Typography>
-      <Grid container alignItems='stretch' spacing={2}>
+      <Grid container alignItems='stretch' justify='flex-end' spacing={2} >
         <Grid item>
           <TextField
             variant='outlined'
