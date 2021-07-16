@@ -3,10 +3,11 @@
 .root {
   padding: $base-size/2 0;
   height: 100%;
+  background-color: $white;
 
   .textParagraph {
-    padding-left: $base-size/2;
-    padding-right: $base-size/2;
+    padding-left: $base-size;
+    padding-right: $base-size;
   }
 }
 

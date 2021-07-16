@@ -1,9 +1,11 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  min-height: calc(100vh - 80px);
-  width: 100%;
-  margin: 0;
+  .grid {
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    margin: 0;
+  }
 }
 
 @media (min-width: 960px) {

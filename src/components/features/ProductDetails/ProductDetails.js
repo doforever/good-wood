@@ -25,7 +25,7 @@ const ProductDetails = ({ description, className, name, photos, ...otherProps })
         <Grid item xs={12} md={6}>
           <Gallery pictures={photos}></Gallery>
         </Grid>
-        <Grid item xs={12} md={6} container spacing={2} direction='column' justify='space-between'>
+        <Grid item xs={12} md={6} container direction='column' justify='space-between'>
           <Grid item component='section' className={styles.textParagraph}>
             <Typography paragraph>
               { description }

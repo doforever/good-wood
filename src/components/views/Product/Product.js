@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrent, getAll, fetchOne, getRequest, fetchAll } from '../../../redux/productsRedux';
 import { addProduct } from '../../../redux/cartRedux';
 import { useParams } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Alert from '@material-ui/lab/Alert';
 import Grid from '@material-ui/core/Grid';
 import ProductDetails from '../../features/ProductDetails/ProductDetails';
 import ProductNav from '../../features/ProductNav/ProductNav';
-import Hidden from '@material-ui/core/Hidden';
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import { Link as RouterLink } from 'react-router-dom';
@@ -24,6 +24,7 @@ const Product = () => {
   const request = useSelector(getRequest);
   const [currentCategory, setCurrentCategory] = useState('');
   const [isAdded, setIsAdded] = useState(false);
+  const matchesMd = useMediaQuery(theme => theme.breakpoints.up('md'));
 
   useEffect(() => {
     dispatch(fetchOne(id));
@@ -54,15 +55,18 @@ const Product = () => {
   else productView = <ProductDetails {...product} className={styles.rollOut} add={addToCart}/>;
 
   return (
-    <Grid container spacing={2} className={styles.root} alignItems='stretch' >
-      <Hidden smDown>
-        <Grid item >
-          <ProductNav open={currentCategory} products={allProducts}/>
+    <div className={styles.root}>
+      {  matchesMd
+        ? <Grid container spacing={2} className={styles.grid} alignItems='stretch' >
+          <Grid item >
+            <ProductNav open={currentCategory} products={allProducts}/>
+          </Grid>
+          <Grid key={id} item xs>
+            {productView}
+          </Grid>
         </Grid>
-      </Hidden>
-      <Grid key={id} item xs>
-        {productView}
-      </Grid>
+        : productView
+      }
       <Snackbar
         open={isAdded}
         autoHideDuration={3000}
@@ -83,7 +87,7 @@ const Product = () => {
           }
         >Added to cart</Alert>
       </Snackbar>
-    </Grid>
+    </div>
   );
 };
 
