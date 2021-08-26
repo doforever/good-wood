@@ -8,7 +8,7 @@ Unit tests on frontend are written with **Jest** and **Enzyme**.
 There are some backend unit tests written in **Mocha** and **Chai**.
 
 ## Deployed on Heroku
-https://evening-dusk-70267.herokuapp.com/
+https://evening-dusk-70267.herokuapp.com/ (**takes some time to load** because I use a free account)
 
 ## Run project locally
 1. `yarn install`
